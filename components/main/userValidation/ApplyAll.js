@@ -32,7 +32,7 @@ function ApplyAll({ navigation }) {
     //Applicant == 1 , basic user that has applied to be a validator
     firebase
       .firestore()
-      .collection("users")
+      .collection("aUsers")
       .where("applicant", "==", "1")
       .get()
       .then((snapshot) => {

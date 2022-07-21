@@ -19,7 +19,7 @@ export default function Landing({ navigation }) {
       </View>
       <View style={styles.subHeader}>
         <Text style={styles.textSubHead}>
-          Alima is data collection app that lets the user contribute to a
+          Kaag is data collection app that lets the user contribute to a
           specific language and connect with the community. It also aims to help
           preserve endangered languages.
         </Text>
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     position: "relative",
     alignSelf: "center",
     top: -30,
+    width: 200,
   },
   header: {
     alignSelf: "center",

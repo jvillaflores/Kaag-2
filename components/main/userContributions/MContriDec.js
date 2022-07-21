@@ -38,7 +38,7 @@ function MContriDec({ currentUser, navigation, props, language }) {
     // status == 2, Declined contribution
     firebase
       .firestore()
-      .collection("languages")
+      .collection("aLanguages")
       .doc(language)
       .collection("dictionary")
       .where("uid", "==", firebase.auth().currentUser.uid)

@@ -31,7 +31,7 @@ function MContriAll({ navigation, language }) {
     //Service to get the data from the server to render
     firebase
       .firestore()
-      .collection("languages")
+      .collection("aLanguages")
       .doc(language)
       .collection("dictionary")
       .where("uid", "==", firebase.auth().currentUser.uid)

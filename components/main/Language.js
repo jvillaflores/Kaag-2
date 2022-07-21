@@ -82,7 +82,7 @@ function Language({ navigation }) {
     <NavigationContainer independent={true}>
       <View style={styles.headLine}>
         <View style={styles.title}>
-          <Text style={styles.textHead}>ALIMA</Text>
+          <Text style={styles.textHead}>KAAG</Text>
           <Text style={styles.textSubHead}>MinNa LProc</Text>
           <TextInput
             style={styles.input}
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "#91B2EB",
+    color: "#ffffff",
   },
   textSubHead: {
     flexDirection: "row",

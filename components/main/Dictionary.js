@@ -97,7 +97,7 @@ function Dictionary({ route, navigation }) {
     <NavigationContainer independent={true}>
       <View style={styles.headLine}>
         <View style={styles.title}>
-          <Text style={styles.textHead}>ALIMA</Text>
+          <Text style={styles.textHead}>KAAG</Text>
           <Text style={styles.textSubHead}>Dictionary</Text>
           <TextInput
             style={styles.input}

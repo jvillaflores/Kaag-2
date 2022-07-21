@@ -55,7 +55,7 @@ export default class Login extends Component {
     return (
       <ScrollView style={styles.container}>
         <View>
-          <Text style={styles.welcome}>Welcome to ALIMA,</Text>
+          <Text style={styles.welcome}>Welcome to Kaag,</Text>
           <Text style={styles.subtitle}>Sign in to continue!</Text>
         </View>
         <View style={styles.loginGroup}>
@@ -63,7 +63,7 @@ export default class Login extends Component {
             <TextInput
               label="Email"
               keyboardType="email-address"
-              activeUnderlineColor="#215A88"
+              activeUnderlineColor="#1f465b"
               onChangeText={(email) => this.setState({ email })}
             />
           </View>
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
   },
   textSignUp: {
     fontSize: 14,
-    color: "#91b2eb",
+    color: "#215a88",
     fontWeight: "bold",
     left: 200,
   },

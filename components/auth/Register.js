@@ -55,7 +55,7 @@ export default class Register extends ValidationComponent {
       .then((result) => {
         firebase
           .firestore()
-          .collection("users")
+          .collection("aUsers")
           .doc(firebase.auth().currentUser.uid)
           .set({
             name,
@@ -80,7 +80,7 @@ export default class Register extends ValidationComponent {
     return (
       <ScrollView style={styles.container}>
         <View>
-          <Text style={styles.welcome}>Welcome to ALIMA,</Text>
+          <Text style={styles.welcome}>Welcome to Kaag,</Text>
           <Text style={styles.subtitle}>Create account to get started!</Text>
         </View>
         <View style={styles.loginGroup}>
@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
   },
   textSignUp: {
     fontSize: 14,
-    color: "#91B2EB",
+    color: "#215a88",
     fontWeight: "bold",
   },
   input: {

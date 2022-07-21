@@ -33,7 +33,7 @@ function MContriConf({ navigation, language }) {
     // status == 1, Confirmed contribution
     firebase
       .firestore()
-      .collection("languages")
+      .collection("aLanguages")
       .doc(language)
       .collection("dictionary")
       .where("uid", "==", firebase.auth().currentUser.uid)
