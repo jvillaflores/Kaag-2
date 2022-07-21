@@ -55,7 +55,7 @@ export default class Register extends ValidationComponent {
       .then((result) => {
         firebase
           .firestore()
-          .collection("aUsers")
+          .collection("users")
           .doc(firebase.auth().currentUser.uid)
           .set({
             name,

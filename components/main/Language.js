@@ -43,6 +43,7 @@ function Language({ navigation }) {
             const id = doc.id;
             return { id, ...data };
           });
+          
 
           //Preparation for the searchFilterFunction
           setDatalist(masterDataSource);
@@ -86,7 +87,7 @@ function Language({ navigation }) {
           <Text style={styles.textSubHead}>MinNa LProc</Text>
           <TextInput
             style={styles.input}
-            placeholder="Search for Langauges..."
+            placeholder="Search for Languages..."
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
           ></TextInput>
