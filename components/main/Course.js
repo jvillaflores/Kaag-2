@@ -36,7 +36,8 @@ function Course({ currentUser, navigation, language }) {
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() =>
-              navigation.navigate("Testpage", { language: language })
+              //navigation.navigate("Testpage", { language: language })
+              alert("This page is not yet available")
             }
           >
             <View style={styles.contextButton}>
@@ -55,7 +56,10 @@ function Course({ currentUser, navigation, language }) {
           {/* Speech.js */}
           <TouchableOpacity
             style={styles.buttonVocab}
-            onPress={() => navigation.navigate("Speech")}
+            onPress={() => 
+             // navigation.navigate("Speech")
+             alert("This page is not yet available")
+            }
           >
             <View style={styles.contextButton}>
               <Image

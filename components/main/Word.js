@@ -56,7 +56,7 @@ const Word = ({ route }) => {
               <MaterialCommunityIcons
                 name="volume-high"
                 size={26}
-                color="white"
+                color="#215a88"
               />
             </View>
           </TouchableOpacity>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     borderRadius: 7,
-    backgroundColor: "#91b2eb",
+    backgroundColor: "white",
   },
   boldText: {
     fontWeight: "bold",

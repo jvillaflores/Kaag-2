@@ -120,7 +120,7 @@ export default function Contribution({ navigation, route }) {
         >
           <MaterialCommunityIcons
             name="image-multiple"
-            color="#263238"
+            color="#215a88"
             size={50}
           />
         </TouchableOpacity>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 100,
-    borderColor: "#263238",
+    borderColor: "#215a88",
     borderWidth: 6,
     alignSelf: "center",
   },

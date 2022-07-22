@@ -55,6 +55,7 @@ function Dictionary({ route, navigation }) {
         .orderBy("word","asc")
         
         .where("status", "==", "1")
+        //add new index so it will limit by status=1
         //filtering all of the data from the cloud and only accepting status == 1, meaning only the accepted words
         .get()
         .then((snapshot) => {

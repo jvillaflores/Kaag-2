@@ -92,6 +92,7 @@ function Language({ navigation }) {
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
           ></TextInput>
+          <Text style={styles.textSubHead}>Select a Language</Text>
         </View>
       </View>
       <FlatList
