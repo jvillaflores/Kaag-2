@@ -34,13 +34,13 @@ function Applications() {
 
           tabBarPressColor: "#8E2835",
           tabBarLabelStyle: {
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: "bold",
           },
         })}
       >
         <Tab.Screen name="all" component={AllScreen} />
-        <Tab.Screen name="confirm" component={ConfirmScreen} />
+        <Tab.Screen name="confirmed" component={ConfirmScreen} />
         <Tab.Screen name="pending" component={PendingScreen} />
         <Tab.Screen name="declined" component={DeclineScreen} />
       </Tab.Navigator>

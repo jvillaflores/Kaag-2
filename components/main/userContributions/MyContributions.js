@@ -43,7 +43,7 @@ function MyContributions({ route }) {
 
           tabBarPressColor: "#8E2835",
           tabBarLabelStyle: {
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: "bold",
           },
         })}
@@ -53,7 +53,7 @@ function MyContributions({ route }) {
           children={(props) => <AllScreen language={language} {...props} />}
         />
         <Tab.Screen
-          name="confirm"
+          name="confirmed"
           children={(props) => <ConfirmScreen language={language} {...props} />}
         />
         <Tab.Screen
