@@ -46,7 +46,7 @@ import LoginScreen from "./components/auth/Login";
 import MainScreen from "./components/Main";
 // import Landing from "./components/auth/Landing";
 import ContributionScreen from "./components/main/Contribution";
-import VocabularyScreen from "./components/main/Vocabulary";
+// import VocabularyScreen from "./components/main/Vocabulary";
 import GrammarScreen from "./components/main/Grammar";
 import WordScreen from "./components/main/Word";
 import SaveScreen from "./components/main/Save";
@@ -59,7 +59,7 @@ import ValidateWordScreen from "./components/main/wordValidation/ValidateWord";
 import DeclineScreen from "./components/main/Decline";
 import ApplicationsScreen from "./components/main/userValidation/Applications";
 import ApplicationConfScreen from "./components/main/ApplicationConf";
-import SpeechScreen from "./components/main/Speech";
+// import SpeechScreen from "./components/main/Speech";
 import UserContributionScreen from "./components/main/UserContribution";
 import CultureScreen from "./components/main/AboutCulture";
 import FoodScreen from "./components/main/AboutFood";
@@ -70,7 +70,7 @@ import AddLanguageScreen from "./components/main/AddLanguage";
 import AddQuiz from "./components/main/AddQuiz";
 import AddQuestion from "./components/main/AddQuestion";
 import EditQuestion from "./components/main/EditQuestion";
-import Testpage from "./components/main/Testpage";
+// import Testpage from "./components/main/Testpage";
 import PlayQuizScreen from "./components/main/PlayQuizScreen";
 import Edit from "./components/main/Edit";
 import Edits from "./components/main/Edits";
@@ -205,7 +205,7 @@ export class App extends Component {
                 },
               }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
               name="Vocabulary"
               component={VocabularyScreen}
               options={{
@@ -215,8 +215,8 @@ export class App extends Component {
                   backgroundColor: "#215A88",
                 },
               }}
-            />
-            <Stack.Screen
+            /> */}
+            {/* <Stack.Screen
               name="Speech"
               component={SpeechScreen}
               options={{
@@ -226,7 +226,7 @@ export class App extends Component {
                   backgroundColor: "#215A88",
                 },
               }}
-            />
+            /> */}
 
             <Stack.Screen
               name="Grammar"
@@ -548,7 +548,7 @@ export class App extends Component {
               }}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="Testpage"
               component={Testpage}
               options={{
@@ -561,7 +561,7 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            />
+            /> */}
 
             <Stack.Screen
               name="PlayQuizScreen"

@@ -101,7 +101,7 @@ function Dictionary({ route, navigation }) {
           <Text style={styles.textSubHead}>Dictionary</Text>
           <TextInput
             style={styles.input}
-            placeholder="Search for Filipino or Local words..."
+            placeholder="Search for Kagan or Local words..."
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
           ></TextInput>
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "#91B2EB",
+    color: "white",
   },
   textSubHead: {
     flexDirection: "row",

@@ -28,9 +28,9 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [word, setWord] = useState("");
   const [name, setName] = useState("Anonymous");
   const [filipino, setFilipino] = useState("");
-  const [sentence, setSentence] = useState("");
+  const [sentence, setSentence] = useState("");filiMeaning
   const [classification, setClassification] = useState("");
-  const [englishMeaning, setEnglishMeaning] = useState("");
+  const [filiMeaning, setFiliMeaning] = useState("");
   const [meaning, setMeaning] = useState("");
   const [pronunciation, setPronunciation] = useState("");
   const [audio, setAudio] = useState(null);
@@ -39,6 +39,7 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { language } = route?.params ?? {};
   console.log(language);
+  console.log(currentUser.email);   
   function makeid() {
     var randomText = "";
     var possible =
@@ -57,11 +58,12 @@ function NewDictionary({ currentUser, route, navigation }) {
   };
 
   const filteredWord = Capitalize(word);
+  const filteredMeaning = Capitalize(meaning);
   const filteredFilipino = Capitalize(filipino);
   const filteredSentence = Capitalize(sentence);
   const filteredClassification = Capitalize(classification);
-  const filteredEnglishMeaning = Capitalize(englishMeaning);
-  const filteredMeaning = Capitalize(meaning);
+  const filteredFiliMeaning = Capitalize(filiMeaning);
+  
   const filteredPronunciation = Capitalize(pronunciation);
 
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
@@ -71,7 +73,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         filipino,
         sentence,
         pronunciation,
-        englishMeaning,
+        filiMeaning,
         meaning,
         audio,
       },
@@ -153,7 +155,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       filipino: { required: true },
       pronunciation: { required: true },
       sentence: { required: true },
-      englishMeaning: { required: true },
+      filiMeaning: { required: true },
       meaning: { required: true },
       audio: { required: true },
     });
@@ -220,7 +222,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         classification: filteredClassification,
         pronunciation: filteredPronunciation,
         sentence: filteredSentence,
-        englishMeaning: filteredEnglishMeaning,
+        filiMeaning: filteredFiliMeaning,
         meaning: filteredMeaning,
         status: "0",
         upload: "1",
@@ -250,7 +252,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         classification: filteredClassification,
         pronunciation: filteredPronunciation,
         sentence: filteredSentence,
-        englishMeaning: filteredEnglishMeaning,
+        filiMeaning: filteredFiliMeaning,
         meaning: filteredMeaning,
         status: "0",
         upload: "1",
@@ -285,6 +287,43 @@ function NewDictionary({ currentUser, route, navigation }) {
         </View>
 
         <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Meaning in Specific Language</Text>
+          <Text style={styles.guidelines}>
+            Define the word you have suggested in specific language.
+          </Text>
+          {isFieldInError("meaning") &&
+            getErrorsInField("meaning").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter the Filipino meaning
+              </Text>
+            ))}
+          <TextInput
+            style={styles.description_input}
+            multiline={true}
+            onChangeText={(meaning) => setMeaning(meaning)}
+          />
+        </View>
+
+        
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Example Sentence</Text>
+          <Text style={styles.guidelines}>
+            Write an example of the word you have suggested.
+          </Text>
+          {isFieldInError("sentence") &&
+            getErrorsInField("sentence").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter an example sentence
+              </Text>
+            ))}
+          <TextInput
+            style={styles.input}
+            multiline={true}
+            onChangeText={(sentence) => setSentence(sentence)}
+          />
+        </View>
+
+        <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>In Filipino </Text>
           <Text style={styles.guidelines}>
             Translate the word you have suggested to Filipino{" "}
@@ -303,9 +342,27 @@ function NewDictionary({ currentUser, route, navigation }) {
         </View>
 
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Classification </Text>
+          <Text style={styles.title_text}>Filipino Meaning</Text>
           <Text style={styles.guidelines}>
-            Classification of the word ex.(Verb, Noun, Pronoun, Adverb){" "}
+            Define the word you have suggested in Filipino.
+          </Text>
+          {isFieldInError("meaning") &&
+            getErrorsInField("meaning").map((errorMessage) => (
+              <Text style={{ color: "red" }}>
+                Please enter the Filipino meaning
+              </Text>
+            ))}
+          <TextInput
+            style={styles.description_input}
+            multiline={true}
+            onChangeText={(filiMeaning) => setFiliMeaning(filiMeaning)}
+          />
+        </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Part of Speech</Text>
+          <Text style={styles.guidelines}>
+            Classify the part of speech ex.(Verb, Noun, Pronoun, Adverb, etc.){" "}
           </Text>
           <Picker
             style={styles.input}
@@ -314,10 +371,14 @@ function NewDictionary({ currentUser, route, navigation }) {
               setClassification(itemValue)
             }
           >
-            <Picker.Item label="Noun" value="Noun" />
-            <Picker.Item label="Verb" value="Verb" />
-            <Picker.Item label="Adverb" value="Adverb" />
-            <Picker.Item label="Adjective" value="Adjective" />
+            <Picker.Item label="Noun" value="Noun"/>
+            <Picker.Item label="Pronoun" value="Pronoun"/>
+            <Picker.Item label="Verb" value="Verb"/>
+            <Picker.Item label="Adverb" value="Adverb"/>
+            <Picker.Item label="Adjective" value="Adjective"/>
+            <Picker.Item label="Preposition" value="Preposition"/>
+            <Picker.Item label="Conjunction" value="Conjunction"/>
+            <Picker.Item label="Article" value="Article"/>
           </Picker>
         </View>
 
@@ -339,27 +400,10 @@ function NewDictionary({ currentUser, route, navigation }) {
           />
         </View>
 
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Example Sentence</Text>
+        {/* <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Kagan Meaning</Text>
           <Text style={styles.guidelines}>
-            Write an example of the word you have suggested.
-          </Text>
-          {isFieldInError("sentence") &&
-            getErrorsInField("sentence").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter an example sentence
-              </Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            onChangeText={(sentence) => setSentence(sentence)}
-          />
-        </View>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>English Meaning </Text>
-          <Text style={styles.guidelines}>
-            Define the word you have suggested in English.
+            Define the word you have suggested in Kagan.
           </Text>
           {isFieldInError("englishMeaning") &&
             getErrorsInField("englishMeaning").map((errorMessage) => (
@@ -371,26 +415,8 @@ function NewDictionary({ currentUser, route, navigation }) {
             style={styles.description_input}
             multiline={true}
             onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
-          />
-        </View>
-
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Meaning </Text>
-          <Text style={styles.guidelines}>
-            Define the word you have suggested in Filipino.
-          </Text>
-          {isFieldInError("meaning") &&
-            getErrorsInField("meaning").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter the Filipino meaning
-              </Text>
-            ))}
-          <TextInput
-            style={styles.description_input}
-            multiline={true}
-            onChangeText={(meaning) => setMeaning(meaning)}
-          />
-        </View>
+          />    
+        </View> */}
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
           <Text style={styles.guidelines}>

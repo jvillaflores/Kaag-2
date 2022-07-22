@@ -68,7 +68,7 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Classification </Text>
+            <Text style={styles.title_text}>Part of Speech</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -78,7 +78,7 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Pronunciation </Text>
+            <Text style={styles.title_text}>Pronunciation</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -89,7 +89,7 @@ function Validation({ currentUser, route, navigation }) {
           </View>
 
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Sentence Example </Text>
+            <Text style={styles.title_text}>Example Sentence</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -98,7 +98,7 @@ function Validation({ currentUser, route, navigation }) {
               editable={false}
             />
           </View>
-          <View style={styles.paddingLeft}>
+          {/* <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>English Meaning </Text>
             <TextInput
               style={[styles.description_input, { color: "black" }]}
@@ -106,7 +106,7 @@ function Validation({ currentUser, route, navigation }) {
               multiline={true}
               editable={false}
             />
-          </View>
+          </View> */}
 
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Filipino Meaning </Text>
