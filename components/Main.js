@@ -32,6 +32,7 @@ import CourseScreen from "./main/Course";
 import DictionaryScreen from "./main/Dictionary";
 import CommunityScreen from "./main/Community";
 import ContributeDictionary from "./main/ContributeDictionary";
+import ContributionWord from "./main/ContributionWord";
 import ProfileScreen from "./main/Settings";
 // import data from "./main/coursepacks/quizdata/Vocabulary/QuizData3";
 // import { FirstScreenNavigator } from "../CustomNavigation";
@@ -127,6 +128,25 @@ export class Main extends Component {
             ),
           }}
         />
+        {/* <Tab.Screen
+          name="ContributionWord"
+          component={ContributionWord}
+          //navigation = {this.props.navigation}
+          //to pass along the props inside it and make it easier the logic from the profile screen perspective
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("ContributionWord", {
+                language: language,
+              });
+            },
+          })}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="upload" color={color} size={26} />
+            ),
+          }}
+        /> */}
         <Tab.Screen
           name="Settings"
           component={ProfileScreen}

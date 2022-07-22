@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,10 +12,16 @@ import Unorderedlist from "react-native-unordered-list";
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 import Checkbox from "expo-checkbox";
 
-export default function Course({ navigation, route }) {
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
+
+function Course({ currentUser, navigation, route }) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { language } = route?.params ?? {};
   const [complianceModal, setComplianceModal] = useState(true);
+  
+
 
   return (
     <ScrollView style={styles.container}>
@@ -34,20 +40,17 @@ export default function Course({ navigation, route }) {
 
         <Text style={styles.description}>
           {" "}
-          • I confirm that I was provided with opportunity to take into 
-          consideration the information and was able to ask all the questions I wanted.
+          • I confirm that I was provided with opportunity to take into consideration the information and was able to ask all the questions I wanted.
         </Text>
 
         <Text style={styles.description}>
           {" "}
-          • I am fully aware of what is expected from me. I understand all the 
-          functionalities of this application and what I can do with it.
+          • I am fully aware of what is expected from me. I understand all the functionalities of this application and what I can do with it.
         </Text>
 
         <Text style={styles.description}>
           {" "}
-          • My decision to participate in this study is fully voluntary. I also understand that I am free to leave at any time without 
-          providing any reason. I understand that my withdrawal will not affect my legal rights.
+          • My decision to participate in this study is fully voluntary. I also understand that I am free to leave at any time without providing any reason. I understand that my withdrawal will not affect my legal rights.
         </Text>
 
         <Text style={styles.description}>
@@ -89,7 +92,7 @@ export default function Course({ navigation, route }) {
     </ScrollView>
   );
 }
-
+export default Course;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
