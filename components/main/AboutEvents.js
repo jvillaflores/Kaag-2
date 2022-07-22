@@ -41,6 +41,7 @@ function AboutEvents  ({ navigation,route }) {
       .collection("languages")
       .doc(language)
       .collection("About")
+      .orderBy("title","asc")
       .get()
       .then((snapshot) => {
         console.log(snapshot, "-=-=-=-=-=-=-=-=");
