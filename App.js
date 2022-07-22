@@ -305,7 +305,7 @@ export class App extends Component {
               name="Traditions"
               component={TraditionScreen}
               options={{
-                title: "Traditions",
+                title: " ",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#215A88",
