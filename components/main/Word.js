@@ -65,7 +65,7 @@ const Word = ({ route }) => {
 
       <View style={styles.container}>
         <View style={{ paddingVertical: 8 }}>
-          <Text style={styles.boldText}>Definition </Text>
+          <Text style={styles.boldText}>Definition in {data?.language} </Text>
           <Text style={styles.contextText}>{data?.meaning} </Text>
         </View>
         <View style={{ paddingVertical: 8 }}>
@@ -73,7 +73,7 @@ const Word = ({ route }) => {
           <View style={{ paddingHorizontal: 10 }}>
             <Text style={{ color: "#215a88" }}>Translation in Filipino</Text>
             <Text style={[styles.contextText]}>{data?.filipino} </Text>
-            <Text style={{ color: "#215a88" }}>Definition</Text>
+            <Text style={{ color: "#215a88" }}>Definition in Filipino</Text>
             <Text style={[styles.contextText]}>{data?.sentence}</Text>
           </View>
         </View>
