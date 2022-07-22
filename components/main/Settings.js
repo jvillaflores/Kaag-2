@@ -60,7 +60,7 @@ function Settings({ currentUser, navigation, route }) {
           >
             <View style={styles.menuItem}>
               <Icon name="folder-account" color="#777777" size={25} />
-              <Text style={styles.menuItemText}>Applications</Text>
+              <Text style={styles.menuItemText}>Validator Applications</Text>
             </View>
           </TouchableRipple>
           {/* Validator Application screen (end)*/}
@@ -97,7 +97,7 @@ function Settings({ currentUser, navigation, route }) {
           <TouchableRipple onPress={() => navigation.navigate("Language")}>
             <View style={styles.menuItem}>
               <Icon name="bookshelf" color="#777777" size={25} />
-              <Text style={styles.menuItemText}>Languages</Text>
+              <Text style={styles.menuItemText}> View Languages</Text>
             </View>
           </TouchableRipple>
           {/* Language List screen (end)*/}
