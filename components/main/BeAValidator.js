@@ -29,25 +29,38 @@ export default function BeAValidator({ navigation, route }) {
       </View>
 
       <View style={styles.header}>
-        <Text style={styles.textHead}>Please first check the following:</Text>
+        <Text style={styles.textHead}>Consent Form:</Text>
 
         <Text style={styles.description}>
           {" "}
-          • I recognize certain type of content are not allowed on the
-          application.
+          • I confirm that I was provided with opportunity to take into 
+          consideration the information and was able to ask all the questions I wanted.
         </Text>
 
         <Text style={styles.description}>
           {" "}
-          • I acknowledge that I will be resposible to the contents I will be
-          validating and will be validating authentic contents.
+          • I am fully aware of what is expected from me. I understand all the 
+          functionalities of this application and what I can do with it.
         </Text>
+
         <Text style={styles.description}>
           {" "}
-          • All information that will be added are purely from the tribe and
-          will help the people from the tribe.
+          • My decision to participate in this study is fully voluntary. I also understand that I am free to leave at any time without 
+          providing any reason. I understand that my withdrawal will not affect my legal rights.
         </Text>
+
+        <Text style={styles.description}>
+          {" "}
+          •  I allow that all my data contribution may be use for whatever purpose of this study.
+        </Text>
+
         <View style={styles.checkboxContainer}>
+          {/* <CheckBox
+            disabled={false}
+            value={toggleCheckBox}
+            
+            style={styles.checkbox}
+          /> */}
           <Checkbox
             style={styles.checkbox}
             value={toggleCheckBox}
@@ -79,7 +92,7 @@ export default function BeAValidator({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 50,
+    top: 30,
     alignItems: "center",
   },
   containerbox: {
@@ -129,7 +142,7 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignSelf: "flex-start",
     marginLeft: 30,
-    marginTop: 20,
+    //marginTop: 5,
     marginBottom: 30,
   },
   button: {
@@ -178,7 +191,7 @@ const styles = StyleSheet.create({
     color: "black",
     marginRight: 35,
     textAlign: "justify",
-    marginTop: 10,
+    //marginTop: 10,
   },
   headLine: {
     top: 15,
