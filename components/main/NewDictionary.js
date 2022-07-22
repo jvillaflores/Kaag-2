@@ -328,12 +328,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             Translate the word you have suggested to Filipino{" "}
           </Text>
-          {isFieldInError("filipino") &&
+          {/* {isFieldInError("filipino") &&
             getErrorsInField("filipino").map((errorMessage) => (
               <Text style={{ color: "red" }}>
                 Please enter the filipino word
               </Text>
-            ))}
+            ))} */}
           <TextInput
             style={styles.input}
             multiline={true}
@@ -346,12 +346,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             Define the word you have suggested in Filipino.
           </Text>
-          {isFieldInError("meaning") &&
+          {/* {isFieldInError("meaning") &&
             getErrorsInField("meaning").map((errorMessage) => (
               <Text style={{ color: "red" }}>
                 Please enter the Filipino meaning
               </Text>
-            ))}
+            ))} */}
           <TextInput
             style={styles.description_input}
             multiline={true}
@@ -387,12 +387,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             How to pronounce the word, Ex. Ka-gan.{" "}
           </Text>
-          {isFieldInError("pronunciation") &&
+          {/* {isFieldInError("pronunciation") &&
             getErrorsInField("pronunciation").map((errorMessage) => (
               <Text style={{ color: "red" }}>
                 Please enter the Pronunciation
               </Text>
-            ))}
+            ))} */}
           <TextInput
             style={styles.input}
             multiline={true}
