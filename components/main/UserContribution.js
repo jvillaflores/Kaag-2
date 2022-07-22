@@ -58,7 +58,27 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>In Filipino </Text>
+            <Text style={styles.title_text}>Meaning in Specific Language</Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.meaning}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Example Sentence</Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.sentence}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>In Filipino</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -67,33 +87,13 @@ function Validation({ currentUser, route, navigation }) {
               editable={false}
             />
           </View>
+
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Part of Speech</Text>
+            <Text style={styles.title_text}>Filipino Meaning</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
-              value={data?.classification}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Pronunciation</Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.pronunciation}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Example Sentence</Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.sentence}
+              value={data?.filiMeaning}
               multiline={true}
               editable={false}
             />
@@ -109,14 +109,25 @@ function Validation({ currentUser, route, navigation }) {
           </View> */}
 
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Filipino Meaning </Text>
+            <Text style={styles.title_text}>Part of Speech</Text>
             <TextInput
               style={[styles.description_input, { color: "black" }]}
-              value={data?.meaning}
+              value={data?.classification}
               multiline={true}
               editable={false}
             />
           </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation</Text>
+            <TextInput
+              style={[styles.description_input, { color: "black" }]}
+              value={data?.pronunciation}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Audio </Text>
             <Text style={styles.guidelines}></Text>
@@ -170,38 +181,17 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>In Filipino </Text>
+            <Text style={styles.title_text}>Meaning in Specific Language </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
-              value={data?.filipino}
+              value={data?.meaning}
               multiline={true}
               editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Classification </Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.classification}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Pronunciation </Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.pronunciation}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Sentence Example </Text>
+            <Text style={styles.title_text}>Example Sentence </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -211,10 +201,11 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>English Meaning </Text>
+            <Text style={styles.title_text}>In Filipino </Text>
+
             <TextInput
-              style={[styles.description_input, { color: "black" }]}
-              value={data?.englishMeaning}
+              style={[styles.input, { color: "black" }]}
+              value={data?.filipino}
               multiline={true}
               editable={false}
             />
@@ -222,9 +213,29 @@ function Validation({ currentUser, route, navigation }) {
 
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Filipino Meaning </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.filiMeaning}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Part of Speech </Text>
             <TextInput
               style={[styles.description_input, { color: "black" }]}
-              value={data?.meaning}
+              value={data?.classification}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation </Text>
+            <TextInput
+              style={[styles.description_input, { color: "black" }]}
+              value={data?.pronunciation}
               multiline={true}
               editable={false}
             />
@@ -273,38 +284,17 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>In Filipino </Text>
+            <Text style={styles.title_text}>Meaning in Specific Language </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
-              value={data?.filipino}
+              value={data?.meaning}
               multiline={true}
               editable={false}
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Classification </Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.classification}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Pronunciation </Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.pronunciation}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Sentence Example </Text>
+            <Text style={styles.title_text}>Example Sentence </Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -314,10 +304,11 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>English Meaning </Text>
+            <Text style={styles.title_text}>In Filipino </Text>
+
             <TextInput
-              style={[styles.description_input, { color: "black" }]}
-              value={data?.englishMeaning}
+              style={[styles.input, { color: "black" }]}
+              value={data?.filipino}
               multiline={true}
               editable={false}
             />
@@ -325,9 +316,29 @@ function Validation({ currentUser, route, navigation }) {
 
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Filipino Meaning </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={data?.filiMeaning}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Part of Speech </Text>
             <TextInput
               style={[styles.description_input, { color: "black" }]}
-              value={data?.meaning}
+              value={data?.classification}
+              multiline={true}
+              editable={false}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation </Text>
+            <TextInput
+              style={[styles.description_input, { color: "black" }]}
+              value={data?.pronunciation}
               multiline={true}
               editable={false}
             />

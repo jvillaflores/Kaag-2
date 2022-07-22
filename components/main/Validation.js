@@ -184,17 +184,52 @@ function Validation({ currentUser, route, navigation }) {
           />
         </View>
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>In Filipino </Text>
-
+          <Text style={styles.title_text}>Meaning in Specific Language </Text>
           <TextInput
             style={styles.input}
-            value={filipino}
+            value={meaning}
+            multiline={true}
+            onChangeText={(meaning) => setFilipino(meaning)}
+          />
+        </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Example Sentence</Text>
+          <Text style={styles.guidelines}>
+            Write an example of the word you have suggested.
+          </Text>
+          <TextInput
+            style={styles.input}
+            multiline={true}
+            onChangeText={(sentence) => setSentence(sentence)}/>
+        </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>In Filipino </Text>
+          <Text style={styles.guidelines}>
+            Translate the word you have suggested to Filipino{" "}
+          </Text>
+          <TextInput
+            style={styles.input}
             multiline={true}
             onChangeText={(filipino) => setFilipino(filipino)}
           />
         </View>
+
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Classification </Text>
+          <Text style={styles.title_text}>Filipino Meaning</Text>
+          <Text style={styles.guidelines}>
+            Define the word you have suggested in Filipino.
+          </Text>
+          <TextInput
+            style={styles.description_input}
+            multiline={true}
+            onChangeText={(filiMeaning) => setFiliMeaning(filiMeaning)}
+          />
+        </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Part of Speech </Text>
 
           <Picker
             style={styles.input}
@@ -203,15 +238,18 @@ function Validation({ currentUser, route, navigation }) {
               setClassification(itemValue)
             }
           >
-            <Picker.Item label="Noun" value="Noun" />
-            <Picker.Item label="Verb" value="Verb" />
-            <Picker.Item label="Adverb" value="Adverb" />
-            <Picker.Item label="Adjective" value="Adjective" />
+            <Picker.Item label="Noun" value="Noun"/>
+            <Picker.Item label="Pronoun" value="Pronoun"/>
+            <Picker.Item label="Verb" value="Verb"/>
+            <Picker.Item label="Adverb" value="Adverb"/>
+            <Picker.Item label="Adjective" value="Adjective"/>
+            <Picker.Item label="Preposition" value="Preposition"/>
+            <Picker.Item label="Conjunction" value="Conjunction"/>
+            <Picker.Item label="Article" value="Article"/>
           </Picker>
         </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Pronunciation </Text>
-
           <TextInput
             style={styles.input}
             value={pronunciation}
@@ -220,41 +258,6 @@ function Validation({ currentUser, route, navigation }) {
           />
         </View>
 
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>{language} Sentence Example </Text>
-
-          <TextInput
-            style={styles.input}
-            value={sentence}
-            multiline={true}
-            onChangeText={(sentence) => setSentence(sentence)}
-          />
-        </View>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>English Meaning </Text>
-          <TextInput
-            style={[
-              styles.description_input,
-              { paddingHorizontal: 10, flexDirection: "row" },
-            ]}
-            value={englishMeaning}
-            multiline={true}
-            onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
-          />
-        </View>
-
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Filipino Meaning </Text>
-          <TextInput
-            style={[
-              styles.description_input,
-              { paddingHorizontal: 10, flexDirection: "row" },
-            ]}
-            value={meaning}
-            multiline={true}
-            onChangeText={(meaning) => setMeaning(meaning)}
-          />
-        </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
           <View>
