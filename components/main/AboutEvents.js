@@ -72,7 +72,7 @@ function AboutEvents  ({ navigation,route }) {
        <Image
           style={{ width: imageWidth, height: imageWidth }}
           source={{ uri: item.image }}/>
-        <View style={{ padding: 30 }}>
+        <View style={{ padding: 25 }}>
           <Text style={styles.textVocab}> {item.desc}</Text>
         </View>
         
@@ -114,7 +114,8 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "flex-start",
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom:20,
     flex: 1,
   },
   button: {
@@ -194,14 +195,7 @@ const styles = StyleSheet.create({
     top: 100,
     left: 40,
   },
-  textKagan: {
-    flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
+  
   Abutton: {
     justifyContent: "center",
     paddingVertical: 8,
@@ -285,11 +279,12 @@ const styles = StyleSheet.create({
   },
   textVocab: {
     fontSize: 13,
-    margin: 10,
+    margin: 0,
     fontStyle: "italic",
     //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    textAlign:'justify'
   },
   textVocabSub: {
     fontSize: 11,
@@ -339,7 +334,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingVertical:5,
     letterSpacing: 0.25,
-    color: "#8E2835",
+    color: "#215a88",
     alignSelf: "center",
   },
 
