@@ -41,7 +41,7 @@ function Traditions({ currentUser, navigation, route }) {
 
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Occasions</Text>
-                      <Text style={styles.textVocabSub}>Events of the Kagan Culture</Text>
+                      <Text style={styles.textVocabSub}>Events of the Culture</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -59,7 +59,7 @@ function Traditions({ currentUser, navigation, route }) {
 
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Food</Text>
-                      <Text style={styles.textVocabSub}>Foods of the Kagan Culture</Text>
+                      <Text style={styles.textVocabSub}>Foods of the Culture</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -77,7 +77,7 @@ function Traditions({ currentUser, navigation, route }) {
 
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Clothing</Text>
-                      <Text style={styles.textVocabSub}>Clothes of the Kagan Culture</Text>
+                      <Text style={styles.textVocabSub}>Clothes of the Culture</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
