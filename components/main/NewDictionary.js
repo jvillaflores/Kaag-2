@@ -493,7 +493,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
-
+ 
 export default connect(mapStateToProps, null)(NewDictionary);
 const styles = StyleSheet.create({
   container: {

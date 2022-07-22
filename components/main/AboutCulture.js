@@ -75,7 +75,6 @@ function AboutCulture  ({ navigation,route }) {
         <View style={{ padding: 30 }}>
           <Text style={styles.textVocab}> {item.desc}</Text>
         </View>
-        
       </View>
     );
   };
@@ -339,7 +338,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingVertical:5,
     letterSpacing: 0.25,
-    color: "#8E2835",
+    color: "#215a88",
     alignSelf: "center",
   },
 

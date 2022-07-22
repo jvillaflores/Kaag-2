@@ -50,7 +50,11 @@ function Language({ navigation }) {
           setFilteredDataSource(masterDataSource);
           setMasterDataSource(masterDataSource);
           console.log(masterDataSource);
+<<<<<<< Updated upstream
           
+=======
+          console.log();
+>>>>>>> Stashed changes
         });
     });
 
