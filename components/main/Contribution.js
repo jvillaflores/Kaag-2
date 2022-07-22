@@ -141,7 +141,7 @@ export default function Contribution({ navigation, route }) {
               navigation.navigate("Save", { image, language: language })
             }
           >
-            <MaterialCommunityIcons name="check" color="#263238" size={100} />
+            <MaterialCommunityIcons name="check" color="#215a88" size={100} />
           </TouchableOpacity>
         )}
       </View>
@@ -181,8 +181,8 @@ const styles = StyleSheet.create({
   },
   flipCam: {
     alignContent: "center",
-    left: 330,
-    alignSelf: "flex-end",
+    //left: 300,
+    alignSelf: "flex-start",
   },
   cameraButtons: {
     position: "relative",
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 3,
     borderRadius: 100,
-    borderColor: "#263238",
+    borderColor: "#215a88",
     borderWidth: 6,
     width: 120,
     height: 120,

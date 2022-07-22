@@ -79,13 +79,14 @@ function Community({ currentUser, route, navigation }) {
         })}
       >
         <Tab.Screen
-          name="Feed"
-          children={(props) => <FeedScreen language={language} {...props} />}
-        />
-        <Tab.Screen
           name="Social"
           children={(props) => <SocialScreen language={language} {...props} />}
         />
+        <Tab.Screen
+          name="Feed"
+          children={(props) => <FeedScreen language={language} {...props} />}
+        />
+        
       </Tab.Navigator>
 
       <Pressable
@@ -137,10 +138,10 @@ const styles = StyleSheet.create({
     borderRadius: 70 / 2,
     alignItems: "center",
     justifyContent: "center",
-    shadowRadius: 10,
-    shadowColor: "#F02A4B",
-    shadowOpacity: 0.3,
-    shadowOffset: { height: 10 },
+    //shadowRadius: 10,
+    //shadowColor: "#F02A4B",
+    //shadowOpacity: 0.3,
+    //shadowOffset: { height: 10 },
     backgroundColor: "#91B2EB",
     bottom: 30,
     right: 30,
