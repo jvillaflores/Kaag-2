@@ -30,24 +30,29 @@ export default function Course({ navigation, route }) {
       </View>
 
       <View style={styles.header}>
-        <Text style={styles.textHead}>Please first check the following:</Text>
+        <Text style={styles.textHead}>Consent Form:</Text>
 
         <Text style={styles.description}>
           {" "}
-          • I own the content rights or have an authorization from the owner, or
-          this content is freely and publicly available.
+          • I confirm that I was provided with opportunity to take into 
+          consideration the information and was able to ask all the questions I wanted.
         </Text>
 
         <Text style={styles.description}>
           {" "}
-          • I recognize certain type of content are not allowed on the
-          application.
+          • I am fully aware of what is expected from me. I understand all the 
+          functionalities of this application and what I can do with it.
         </Text>
 
         <Text style={styles.description}>
           {" "}
-          • I acknowledge that the content I am about to submit may be on
-          dictionary of this application.
+          • My decision to participate in this study is fully voluntary. I also understand that I am free to leave at any time without 
+          providing any reason. I understand that my withdrawal will not affect my legal rights.
+        </Text>
+
+        <Text style={styles.description}>
+          {" "}
+          •  I allow that all my data contribution may be use for whatever purpose of this study.
         </Text>
 
         <View style={styles.checkboxContainer}>
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 40,
-    paddingVertical: 50,
+    paddingVertical: 40,
     alignContent: "center",
   },
   containerbox: {
@@ -134,7 +139,7 @@ const styles = StyleSheet.create({
     margin: 8,
   },
   header: {
-    paddingVertical: 30,
+    paddingVertical: 20,
   },
   button: {
     //flex:1,

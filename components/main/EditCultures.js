@@ -29,8 +29,6 @@ const EditCultures = ({navigation,route}) => {
   const [desc, setDesc] = useState(data?.desc);
   const [credits, setCredits] = useState(data?.credits);
 
-
-
     const submit = async () => {
         saveUserData();
       };
@@ -47,9 +45,10 @@ const EditCultures = ({navigation,route}) => {
             credits,
             desc,
           })
-    
           .then(() => {
+            alert("Language Successfully Added.");
             console.log("Question updated!");
+            navigation.navigate("EditFood");
           });
       };
     
@@ -111,7 +110,7 @@ const EditCultures = ({navigation,route}) => {
           }}
         >
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#bfa42a" }]}
+            style={[styles.button, { backgroundColor: "#215a88" }]}
             onPress={() => submit()}
           >
             <Text style={[styles.text, { fontSize: 16, color: "white" }]}>

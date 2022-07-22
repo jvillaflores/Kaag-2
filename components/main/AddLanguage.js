@@ -130,7 +130,7 @@ function AddLanguage({ currentUser, route, navigation }) {
           }}
         >
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#bfa42a" }]}
+            style={[styles.button, { backgroundColor: "#215a88" }]}
             onPress={() => submit()}
           >
             <Text style={[styles.text, { fontSize: 16, color: "white" }]}>

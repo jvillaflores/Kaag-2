@@ -79,7 +79,7 @@ const EditCulture = ({navigation, route}) => {
          <Pressable
          style={styles.buttonss}
          onPress={() =>
-           navigation.navigate("AddCulture", { language: language })
+           navigation.navigate("AddCultures", { language: language })
          }
          //onPress={() => navigation.navigate("NewContribution")}
        >

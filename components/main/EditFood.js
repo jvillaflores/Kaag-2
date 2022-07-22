@@ -53,7 +53,7 @@ const EditFood = ({navigation, route}) => {
   
   
     return (
-      <ScrollView>
+      <View>
        <FlatList
           nestedScrollEnabled
           keyExtractor={(item, index) => index.toString()}
@@ -63,6 +63,7 @@ const EditFood = ({navigation, route}) => {
           style={{ flex: 1 }}
           renderItem={({ item }) => {
             return (
+              <View>
               <TouchableOpacity
                 style={styles.buttonVocab}
                 onPress={() => navigation.navigate("EditFoods", { data: item , language: language})}
@@ -71,6 +72,7 @@ const EditFood = ({navigation, route}) => {
                   <Text style={styles.inKagan}>{item.title} </Text>
                 </View>
               </TouchableOpacity>
+              </View>
             );
           }}
         />
@@ -83,7 +85,7 @@ const EditFood = ({navigation, route}) => {
       >
         <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
       </Pressable>
-      </ScrollView>
+      </View>
       
     )
 }

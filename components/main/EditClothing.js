@@ -79,7 +79,7 @@ const EditClothing = ({navigation, route}) => {
         <Pressable
         style={styles.buttonss}
         onPress={() =>
-          navigation.navigate("AddClothing", { language: language })
+          navigation.navigate("AddClothings", { language: language })
         }
         //onPress={() => navigation.navigate("NewContribution")}
       >

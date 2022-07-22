@@ -175,7 +175,7 @@ const AddClothings = ({navigation,route}) => {
           <Text style={[styles.text, { fontSize: 16 }]}>
             About
           </Text>
-          <Text>Brief introduction/description about the language.</Text>
+          <Text style={[styles.guidelines]}>Brief introduction/description about the language.</Text>
           <TextInput
             multiline={true}
             style={[
@@ -195,7 +195,7 @@ const AddClothings = ({navigation,route}) => {
           }}
         >
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#bfa42a" }]}
+            style={[styles.button, { backgroundColor: "#215a88" }]}
             onPress={() => submit()}
           >
             <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
@@ -288,6 +288,11 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         elevation: 9,
+      },
+      guidelines: {
+        fontSize: 12,
+        fontStyle: "italic",
+        color: "#707070",
       },
   });
   
