@@ -25,13 +25,12 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAe7hfw7C3yj0d3PxM1aXevnabGcEUA7jc",
-  authDomain: "project-dapok.firebaseapp.com",
-  projectId: "project-dapok",
-  storageBucket: "project-dapok.appspot.com",
-  messagingSenderId: "596406246604",
-  appId: "1:596406246604:web:f37ed79ccf1c3a51f67669",
-  measurementId: "G-GNYJWGX35V"
+  apiKey: "AIzaSyAjzdVDiocEbhoPYZHZu8V2o3jKhrqqXPU",
+  authDomain: "project-kaag-357101.firebaseapp.com",
+  projectId: "project-kaag-357101",
+  storageBucket: "project-kaag-357101.appspot.com",
+  messagingSenderId: "588978127054",
+  appId: "1:588978127054:web:f1b1df43e9e77ef528d09f"
 };
 
 if (firebase.apps.length === 0) {

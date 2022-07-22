@@ -52,6 +52,8 @@ function Dictionary({ route, navigation }) {
         .collection("languages")
         .doc(language)
         .collection("dictionary")
+        .orderBy("word","asc")
+        
         .where("status", "==", "1")
         //filtering all of the data from the cloud and only accepting status == 1, meaning only the accepted words
         .get()
@@ -101,7 +103,7 @@ function Dictionary({ route, navigation }) {
           <Text style={styles.textSubHead}>Dictionary</Text>
           <TextInput
             style={styles.input}
-            placeholder="Search for Kagan or Local words..."
+            placeholder="Search for words..."
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
           ></TextInput>
