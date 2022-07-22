@@ -269,7 +269,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
         {/* Word */}
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Word </Text>
+          <Text style={styles.title_text}>Word<Text style={{color:"red"}}>*</Text></Text>
           <Text style={styles.guidelines}>
             {" "}
             Type the word you want to contribute.{" "}
@@ -288,7 +288,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
           {/* Specific Language Meaning */}
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Specific Language Definition </Text>
+          <Text style={styles.title_text}>Specific Language Definition<Text style={{color:"red"}}>*</Text></Text>
           <Text style={styles.guidelines}>
             Define the word you have suggested in specific language.
           </Text>
@@ -307,7 +307,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
         {/* Example Sentence */}
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Example Sentence</Text>
+          <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
           <Text style={styles.guidelines}>
             Write an example of the word you have suggested.
           </Text>
@@ -326,7 +326,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         
          {/* In Filipino */}
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>In Filipino </Text>
+          <Text style={styles.title_text}>In Filipino</Text>
           <Text style={styles.guidelines}>
             Translate the word you have suggested to Filipino{" "}
           </Text>
@@ -407,7 +407,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
         
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Audio </Text>
+          <Text style={styles.title_text}>Audio<Text style={{color:"red"}}>*</Text></Text>
           <Text style={styles.guidelines}>
             Upload an audio on how to pronounce the word you have contributed.
           </Text>
