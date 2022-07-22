@@ -230,7 +230,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Thanks for contribution!!");
+        alert("Thank you for your contribution!!");
         setLoading(null);
         navigation.navigate("ContributeDictionary");
       });
@@ -261,7 +261,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Thanks for contribution!!");
+        alert("Thank you for your contribution!!");
         setLoading(null);
         navigation.navigate("ContributeDictionary");
       });
@@ -446,6 +446,7 @@ function NewDictionary({ currentUser, route, navigation }) {
             </View>
           </TouchableOpacity>
         </View>
+
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Username </Text>
           {toggleCheckBox == true ? (
@@ -477,10 +478,10 @@ function NewDictionary({ currentUser, route, navigation }) {
       </View>
       {audio ? (
         <Pressable style={styles.button} onPress={() => uploadAudio()}>
-          <Text style={styles.subtitle}>
-            {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
-          </Text>
-        </Pressable>
+        <Text style={styles.subtitle}>
+          {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
+        </Text>
+      </Pressable>
       ) : (
         <Pressable style={styles.button_empty} disabled={true}>
           <Text style={styles.subtitle}>
@@ -488,6 +489,8 @@ function NewDictionary({ currentUser, route, navigation }) {
           </Text>
         </Pressable>
       )}
+
+      
     </ScrollView>
   );
 }
