@@ -75,8 +75,12 @@ const Word = ({ route }) => {
             <Text style={[styles.contextText]}>{data?.filipino} </Text>
             <Text style={{ color: "#215a88" }}>Definition in Filipino</Text>
             <Text style={[styles.contextText]}>{data?.englishMeaning}</Text>
+            <Text style={{ color: "#215a88" }}>Origin</Text>
+            <Text style={[styles.contextText]}>{data?.originated} </Text>
           </View>
         </View>
+
+        
       </View>
     </ScrollView>
   );

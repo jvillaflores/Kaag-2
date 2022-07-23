@@ -30,6 +30,7 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [filipino, setFilipino] = useState("");
   const [sentence, setSentence] = useState("");
   const [classification, setClassification] = useState("");
+  const [originated, setOrigination] = useState("");
   const [englishMeaning, setEnglishMeaning] = useState("");
   const [meaning, setMeaning] = useState("");
   const [pronunciation, setPronunciation] = useState("");
@@ -38,7 +39,6 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [wordID, setWordID] = useState(makeid());
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { language } = route?.params ?? {};
-  console.log(language);
   function makeid() {
     var randomText = "";
     var possible =
@@ -58,6 +58,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
   const filteredWord = Capitalize(word);
   const filteredFilipino = Capitalize(filipino);
+  const filteredOrigin = Capitalize(originated);
   const filteredSentence = Capitalize(sentence);
   const filteredClassification = Capitalize(classification);
   const filteredEnglishMeaning = Capitalize(englishMeaning);
@@ -70,6 +71,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         word,
         filipino,
         sentence,
+        originated,
         pronunciation,
         englishMeaning,
         meaning,
@@ -152,6 +154,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       word: { required: true },
       filipino: { required: true },
       pronunciation: { required: true },
+      originated: { required: true },
       sentence: { required: true },
       englishMeaning: { required: true },
       meaning: { required: true },
@@ -217,6 +220,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         downloadURL,
         word: filteredWord,
         filipino: filteredFilipino,
+        originated: filteredOrigin,
         classification: filteredClassification,
         pronunciation: filteredPronunciation,
         sentence: filteredSentence,
@@ -248,6 +252,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         downloadURL,
         word: filteredWord,
         filipino: filteredFilipino,
+        originated: filteredOrigin,
         classification: filteredClassification,
         pronunciation: filteredPronunciation,
         sentence: filteredSentence,
@@ -307,6 +312,31 @@ function NewDictionary({ currentUser, route, navigation }) {
           />
         </View>
 
+         {/* Parts of Speech */}
+         <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
+          <Text style={styles.guidelines}>
+            Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
+          </Text>
+          <Picker
+            style={styles.input}
+            selectedValue={classification}
+            onValueChange={(itemValue, itemIndex) =>
+              setOrigination(itemValue)
+            }
+          >
+            <Picker.Item label="Pick origin" value="" />
+            <Picker.Item label="Davao del Sur" value="Davao del Sur" />
+            <Picker.Item label="Davao del Norte" value="Davao del Norte" />
+            <Picker.Item label="Davao Occidental" value="Davao Occidental" />
+            <Picker.Item label="Davao Oriental" value="Davao Oriental" />
+            <Picker.Item label="Davao de Oro" value="Davao de Oro" />
+            <Picker.Item label="Davao City" value="Davao City" />
+            <Picker.Item label="N/A" value="N/A" />
+            
+          </Picker>
+        </View>
+
         {/* Example Sentence */}
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
@@ -328,7 +358,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         
          {/* In Filipino */}
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>In Filipino</Text>
+          <Text style={styles.title_text}>In Filipino<Text style={{color:"red"}}>*</Text></Text>
           <Text style={styles.guidelines}>
             Translate the word you have suggested to Filipino{" "}
           </Text>

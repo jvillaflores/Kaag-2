@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   TextInput,
@@ -29,6 +29,7 @@ function Validation({ currentUser, route, navigation }) {
   const { data } = route?.params ?? {};
   const [word, setWord] = useState(data?.word);
   const [filipino, setFilipino] = useState(data?.filipino);
+  const [originated, setOrigination] = useState(data?.originated);
   const [sentence, setSentence] = useState(data?.sentence);
   const [audio, setAudio] = useState(null);
   const [classification, setClassification] = useState(data?.classification);
@@ -36,6 +37,7 @@ function Validation({ currentUser, route, navigation }) {
   const [meaning, setMeaning] = useState(data?.meaning);
   const [pronunciation, setPronunciation] = useState(data?.pronunciation);
   const { language } = route?.params ?? {};
+  const pickerRef = useRef();
 
   const chooseFile = async () => {
     let result = await DocumentPicker.getDocumentAsync({
@@ -127,6 +129,7 @@ function Validation({ currentUser, route, navigation }) {
         status: "1",
         validatedBy: currentUser.name,
         word,
+        originated,
         filipino,
         classification,
         sentence,
@@ -154,6 +157,7 @@ function Validation({ currentUser, route, navigation }) {
         validatedBy: currentUser.name,
         word,
         filipino,
+        originated,
         classification,
         sentence,
         pronunciation,
@@ -189,13 +193,61 @@ function Validation({ currentUser, route, navigation }) {
 
           <TextInput
             style={styles.input}
-            placeholder={word}
+            placeholder={language}
             editable={true}
             multiline={true}
             onChangeText={(meaning) => setMeaning(meaning)}
-            value={word}
+            value={language}
           />
         </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Originated</Text>
+          
+          <Picker
+            style={styles.input}
+            selectedValue={originated}
+            onValueChange={(itemValue, itemIndex) =>
+              setOrigination(itemValue)
+            
+              
+            }
+          >
+            
+            <Picker.Item label="Pick origin" value="" />
+            <Picker.Item label="Davao del Sur" value="Davao del Sur" />
+            <Picker.Item label="Davao del Norte" value="Davao del Norte" />
+            <Picker.Item label="Davao Occidental" value="Davao Occidental" />
+            <Picker.Item label="Davao Oriental" value="Davao Oriental" />
+            <Picker.Item label="Davao de Oro" value="Davao de Oro" />
+            <Picker.Item label="Davao City" value="Davao City" />
+            <Picker.Item label="N/A" value="N/A" />
+          </Picker>
+        </View>
+
+        {/* <View style={styles.placeholder}>
+          <Text>Spoken Language</Text>
+
+            <Picker
+            style={styles.input}
+            ref={pickerRef}
+            selectedValue={originated}
+        
+              onValueChange={(itemValue, itemIndex) => setLanguage(itemValue)}
+            >
+              <Picker.Item
+                 label={currentUser.originated}
+              />
+              <Picker.Item label="Davao del Sur" value="Davao del Sur" />
+              <Picker.Item label="Davao del Norte" value="Davao del Norte" />
+              <Picker.Item label="Davao Occidental" value="Davao Occidental" />
+              <Picker.Item label="Davao Oriental" value="Davao Oriental" />
+              <Picker.Item label="Davao de Oro" value="Davao de Oro" />
+              <Picker.Item label="Davao City" value="Davao City" />
+              <Picker.Item label="N/A" value="N/A" />
+              </Picker>
+          </View> */}
+        
 
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Example Sentence </Text>
@@ -204,7 +256,7 @@ function Validation({ currentUser, route, navigation }) {
             style={styles.input}
             value={sentence}
             multiline={true}
-            onChangeText={(sentene) => setFilipino(sentence)}
+            onChangeText={(sentence) => setFilipino(sentence)}
           />
         </View>
 
@@ -318,6 +370,7 @@ function Validation({ currentUser, route, navigation }) {
           <Text style={styles.subtitle}>Decline</Text>
         </Pressable>
       </View>
+      
     </ScrollView>
   );
 }
