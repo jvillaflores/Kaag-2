@@ -185,7 +185,7 @@ function Validation({ currentUser, route, navigation }) {
         </View>
 
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Meaning in Specific Language </Text>
+          <Text style={styles.title_text}>Specific Language Definition</Text>
 
           <TextInput
             style={styles.input}
@@ -197,10 +197,19 @@ function Validation({ currentUser, route, navigation }) {
           />
         </View>
 
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Example Sentence </Text>
+
+          <TextInput
+            style={styles.input}
+            value={sentence}
+            multiline={true}
+            onChangeText={(sentene) => setFilipino(sentence)}
+          />
+        </View>
 
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>In Filipino </Text>
-
           <TextInput
             style={styles.input}
             value={filipino}
@@ -208,8 +217,19 @@ function Validation({ currentUser, route, navigation }) {
             onChangeText={(filipino) => setFilipino(filipino)}
           />
         </View>
+
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Classification </Text>
+          <Text style={styles.title_text}>Filipino Definition </Text>
+          <TextInput
+            style={styles.input}
+            value={englishMeaning}
+            multiline={true}
+            onChangeText={(englishMeaning) => setFilipino(englishMeaning)}
+          />
+        </View>
+
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Part of Speech </Text>
 
           <Picker
             style={styles.input}
@@ -222,6 +242,10 @@ function Validation({ currentUser, route, navigation }) {
             <Picker.Item label="Verb" value="Verb" />
             <Picker.Item label="Adverb" value="Adverb" />
             <Picker.Item label="Adjective" value="Adjective" />
+            <Picker.Item label="Pronoun" value="Pronoun" />
+            <Picker.Item label="Preposition" value="Preposition" />
+            <Picker.Item label="Conjunction" value="Conjunction" />
+            <Picker.Item label="Article" value="Article" />
           </Picker>
         </View>
         <View style={styles.paddingLeft}>
@@ -235,41 +259,6 @@ function Validation({ currentUser, route, navigation }) {
           />
         </View>
 
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>{language} Sentence Example </Text>
-
-          <TextInput
-            style={styles.input}
-            value={sentence}
-            multiline={true}
-            onChangeText={(sentence) => setSentence(sentence)}
-          />
-        </View>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>English Meaning </Text>
-          <TextInput
-            style={[
-              styles.description_input,
-              { paddingHorizontal: 10, flexDirection: "row" },
-            ]}
-            value={englishMeaning}
-            multiline={true}
-            onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
-          />
-        </View>
-
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Filipino Meaning </Text>
-          <TextInput
-            style={[
-              styles.description_input,
-              { paddingHorizontal: 10, flexDirection: "row" },
-            ]}
-            value={meaning}
-            multiline={true}
-            onChangeText={(meaning) => setMeaning(meaning)}
-          />
-        </View>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
           <View>

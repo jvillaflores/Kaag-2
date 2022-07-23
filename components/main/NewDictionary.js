@@ -392,12 +392,12 @@ function NewDictionary({ currentUser, route, navigation }) {
           <Text style={styles.guidelines}>
             How to pronounce the word, Ex. Ka-gan.{" "}
           </Text>
-          {isFieldInError("pronunciation") &&
+          {/* {isFieldInError("pronunciation") &&
             getErrorsInField("pronunciation").map((errorMessage) => (
               <Text style={{ color: "red" }}>
                 Please enter the Pronunciation
               </Text>
-            ))}
+            ))} */}
           <TextInput
             style={styles.input}
             multiline={true}
