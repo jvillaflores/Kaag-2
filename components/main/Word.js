@@ -47,7 +47,7 @@ const Word = ({ route }) => {
         <View style={styles.header_line}>
           <Text style={styles.inKagan}> {data?.word} </Text>
           <Text style={styles.inPronounciation}> /{data?.pronunciation}/ </Text>
-
+          
           <TouchableOpacity
             style={styles.buttonAudio}
             onPress={() => downloadAudio()}
@@ -60,11 +60,13 @@ const Word = ({ route }) => {
               />
             </View>
           </TouchableOpacity>
+          <Text style={[styles.classy]}>{data?.classification} </Text>
         </View>
       </View>
 
       <View style={styles.container}>
         <View style={{ paddingVertical: 8 }}>
+        <Text style={[styles.classy]}>{data?.classification} </Text>
           <Text style={styles.boldText}>Definition in {data?.language} </Text>
           <Text style={styles.contextText}>{data?.meaning} </Text>
         </View>
@@ -94,6 +96,11 @@ const styles = StyleSheet.create({
     top: 1,
     paddingVertical: 20,
     paddingHorizontal: 20,
+  },
+  classy:{
+    alignContent:'center',
+    //paddingVertical: 10
+    color:"white"
   },
   headLine: {
     flexDirection: "column",

@@ -194,14 +194,7 @@ const styles = StyleSheet.create({
     top: 100,
     left: 40,
   },
-  textKagan: {
-    flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
+  
   Abutton: {
     justifyContent: "center",
     paddingVertical: 8,
@@ -339,7 +332,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingVertical:5,
     letterSpacing: 0.25,
-    color: "#8E2835",
+    color: "#215A88",
     alignSelf: "center",
   },
 
