@@ -256,12 +256,13 @@ function Validation({ currentUser, route, navigation }) {
             style={styles.input}
             value={sentence}
             multiline={true}
-            onChangeText={(sentence) => setFilipino(sentence)}
+            onChangeText={(sentence) => setSentence(sentence)}
           />
         </View>
 
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>In Filipino </Text>
+
           <TextInput
             style={styles.input}
             value={filipino}
@@ -276,7 +277,7 @@ function Validation({ currentUser, route, navigation }) {
             style={styles.input}
             value={englishMeaning}
             multiline={true}
-            onChangeText={(englishMeaning) => setFilipino(englishMeaning)}
+            onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
           />
         </View>
 

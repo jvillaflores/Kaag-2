@@ -66,7 +66,7 @@ const Word = ({ route }) => {
 
       <View style={styles.container}>
         <View style={{ paddingVertical: 8 }}>
-        <Text style={[styles.classy]}>{data?.classification} </Text>
+        <Text style={[styles.classy]}> </Text>
           <Text style={styles.boldText}>Definition in {data?.language} </Text>
           <Text style={styles.contextText}>{data?.meaning} </Text>
         </View>
