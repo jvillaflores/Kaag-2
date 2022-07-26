@@ -128,7 +128,7 @@ export class Main extends Component {
             ),
           }}
         />
-        {/* <Tab.Screen
+         <Tab.Screen
           name="ContributionWord"
           component={ContributionWord}
           //navigation = {this.props.navigation}
@@ -146,7 +146,7 @@ export class Main extends Component {
               <MaterialCommunityIcons name="upload" color={color} size={26} />
             ),
           }}
-        /> */}
+        /> 
         <Tab.Screen
           name="Settings"
           component={ProfileScreen}
