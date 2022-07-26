@@ -21,7 +21,6 @@ import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
 import { useValidation } from "react-native-form-validator";
@@ -97,60 +96,6 @@ function ContributionWord({ currentUser, route, navigation }) {
       alert("something went wrong!!");
     }
   };
-
-  // const uploadAudios = async () => {
-  //   // const uri = recording.getURI();
-  //   const uri = FileSystem.documentDirectory + audio.name;
-
-  //   await FileSystem.copyAsync({
-  //     from: audio.uri,
-  //     to: uri,
-  //   });
-
-  //   try {
-  //     // const blob = await new Promise((resolve, reject) => {
-  //     //   const xhr = new XMLHttpRequest();
-  //     //   xhr.onload = () => {
-  //     //     try {
-  //     //       resolve(xhr.response);
-  //     //     } catch (error) {
-  //     //       console.log("error:12", error);
-  //     //     }
-  //     //   };
-  //     //   xhr.onerror = (e) => {
-  //     //     console.log(e);
-  //     //     reject(new TypeError("Network request failed"));
-  //     //   };
-  //     //   xhr.responseType = "blob";
-  //     //   xhr.open("GET", `file://${audio?.uri}`, true);
-  //     //   xhr.send(null);
-  //     // });
-  //     // console.log('file://'+audio?.uri)
-  //     // let u = (`file://${audio?.uri}`)
-  //     let res = await fetch(uri);
-  //     let blobs = await res.blob();
-  //     if (blobs != null) {
-  //       const uriParts = audio?.uri.split(".");
-  //       const fileType = uriParts[uriParts.length - 1];
-  //       console.log(uriParts, "0-0-0", fileType);
-  //       // firebase
-  //       //   .storage()
-  //       //   .ref()
-  //       //   .child(`nameOfTheFile.${fileType}`)
-  //       //   .put(blob, {
-  //       //     contentType: `audio/${fileType}`,
-  //       //   })
-  //       //   .then(() => {
-  //       //     console.log("Sent!");
-  //       //   })
-  //       //   .catch((e) => console.log("error:", e));
-  //     } else {
-  //       console.log("erroor with blob");
-  //     }
-  //   } catch (error) {
-  //     console.log("error:", error);
-  //   }
-  // };
 
   const uploadAudio = async () => {
     validate({
@@ -270,25 +215,7 @@ function ContributionWord({ currentUser, route, navigation }) {
 
   return (
     <ScrollView style={styles.container}>
-        <Banner
-        visible={visible}
-        actions={[
-          {
-            label: "Okay",
-            color: "#215A88",
-            onPress: () => setVisible(false),
-          },
-        ]}
-      >
-        <Text style={styles.textHead}>Help application grow </Text>
-        <Text></Text>
-        <Text style={styles.description}>
-          Community language champions, linguistic scholars, and others involved
-          in language revitalization work are invited to help build and improve
-          the mobile application. Here, we can add new content relevant to the{" "}
-          language.{" "}
-        </Text>
-      </Banner>
+        
       <View style={styles.center}>
             <View>
                 <Text style={styles.textFormatBlue}>Upload a Word</Text>
@@ -489,17 +416,17 @@ function ContributionWord({ currentUser, route, navigation }) {
         </View>
       </View>
       {audio ? (
-        <Pressable style={styles.button} onPress={() => uploadAudio()}>
+        <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
           <Text style={styles.subtitle}>
             {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       ) : (
-        <Pressable style={styles.button_empty} disabled={true}>
+        <TouchableOpacity style={styles.button_empty} disabled={true}>
           <Text style={styles.subtitle}>
             {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       )}
     </ScrollView>
   );

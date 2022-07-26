@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  TextInput,
-  Image,
-  Button,
   TouchableOpacity,
-  Text,
   StyleSheet,
-  Pressable,
   ScrollView,
   Alert,
 } from "react-native";
+
+import {
+  TextInput,
+  Text,
+} from "react-native-paper";
+
 import { connect } from "react-redux";
 import firebase from "firebase";
 import { NavigationContainer } from "@react-navigation/native";
@@ -319,8 +320,12 @@ function NewDictionary({ currentUser, route, navigation }) {
             Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
           </Text>
           <Picker
-            style={styles.input}
-            selectedValue={classification}
+            style={[
+              styles.input,
+              { backgroundColor: "#e7e7e7"},
+            ]}
+            selectedValue={originated}
+            
             onValueChange={(itemValue, itemIndex) =>
               setOrigination(itemValue)
             }
@@ -401,7 +406,10 @@ function NewDictionary({ currentUser, route, navigation }) {
             Classification of the word ex.(Verb, Noun, Pronoun, Adverb, etc.){" "}
           </Text>
           <Picker
-            style={styles.input}
+            style={[
+              styles.input,
+              { backgroundColor: "#e7e7e7"},
+            ]}
             selectedValue={classification}
             onValueChange={(itemValue, itemIndex) =>
               setClassification(itemValue)
@@ -453,7 +461,7 @@ function NewDictionary({ currentUser, route, navigation }) {
           >
             <View>
               {audio ? (
-                <TextInput>{audio?.name}</TextInput>
+                <TextInput > {audio?.name}</TextInput>
               ) : (
                 <MaterialCommunityIcons
                   style={styles.addAudio}
@@ -495,17 +503,17 @@ function NewDictionary({ currentUser, route, navigation }) {
         </View>
       </View>
       {audio ? (
-        <Pressable style={styles.button} onPress={() => uploadAudio()}>
+        <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
           <Text style={styles.subtitle}>
             {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       ) : (
-        <Pressable style={styles.button_empty} disabled={true}>
+        <TouchableOpacity style={styles.button_empty} disabled={true}>
           <Text style={styles.subtitle}>
             {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
           </Text>
-        </Pressable>
+        </TouchableOpacity>
       )}
     </ScrollView>
   );
@@ -567,12 +575,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "95%",
-    borderWidth: 1,
+    backgroundColor: "#e7e7e7",
+    //borderWidth: 1,
     borderRadius: 10,
-    height: 70,
+    height: 82,
     borderColor: "#707070",
-    paddingTop: 20,
-    marginTop: 10,
+    paddingTop: 10,
+    marginTop: 20,
   },
   guidelines: {
     fontSize: 12,
@@ -581,6 +590,9 @@ const styles = StyleSheet.create({
   },
   addAudio: {
     flex: 1,
+    //justifyContent:'center',
+    paddingTop: 15,
+    alignSelf:'center'
   },
 
   bottom: {
@@ -611,15 +623,15 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   input: {
-    letterSpacing: 0.25,
+    letterSpacing: 0.15,
     height: 50,
     width: "95%",
     paddingLeft: 12,
-    paddingTop: 1,
+    paddingTop: 0,
     marginTop: 10,
-    borderWidth: 1,
+    //borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#707070",
+    //borderColor: "#707070",
   },
   tags_input: {
     letterSpacing: 0.25,
@@ -639,9 +651,9 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingTop: 1,
     marginTop: 10,
-    borderWidth: 1,
+    //borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#707070",
+    //borderColor: "#707070",
   },
   inputAndroid: {
     fontSize: 14,
