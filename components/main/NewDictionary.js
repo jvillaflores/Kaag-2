@@ -317,7 +317,7 @@ function NewDictionary({ currentUser, route, navigation }) {
          <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
           <Text style={styles.guidelines}>
-            Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
+            Classification of the word's origin (E.g. Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
           </Text>
           <Picker
             style={[
@@ -403,7 +403,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Parts of Speech</Text>
           <Text style={styles.guidelines}>
-            Classification of the word ex.(Verb, Noun, Pronoun, Adverb, etc.){" "}
+            Classification of the word (E.g. Verb, Noun, Pronoun, Adverb, etc.){" "}
           </Text>
           <Picker
             style={[
@@ -430,7 +430,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Pronunciation </Text>
           <Text style={styles.guidelines}>
-            How to pronounce the word, Ex. Ka-gan.{" "}
+            How to pronounce the word (E.g. Ka-gan.){" "}
           </Text>
           {/* {isFieldInError("pronunciation") &&
             getErrorsInField("pronunciation").map((errorMessage) => (

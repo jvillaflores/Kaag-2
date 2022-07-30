@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: "flex-start",
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom:20,
     flex: 1,
   },
   button: {
@@ -289,6 +290,7 @@ const styles = StyleSheet.create({
     //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
+    textAlign:'justify'
   },
   textVocabSub: {
     fontSize: 11,

@@ -60,7 +60,7 @@ const AddCulture = ({navigation,route}) => {
     
           .then(() => {
             alert("Culture Successfully Added");
-            navigation.navigate("EditCulture");
+            navigation.navigate("AddCulture");
           });
       };
 

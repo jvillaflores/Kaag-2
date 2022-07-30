@@ -459,7 +459,7 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            />
+            /> 
 
             <Stack.Screen
               name="ValAppScreen"
