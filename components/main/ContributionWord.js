@@ -5,6 +5,11 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity, 
+  Modal,
+  Pressable,
+  RefreshControl,
+  ImageBackground,
+
   
 } from "react-native";
 
@@ -45,6 +50,18 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [loading, setLoading] = useState(null);
   const [wordID, setWordID] = useState(makeid());
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [refreshing, setRefreshing] = useState(true);
+
+
+  const wait = timeout => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  };
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+  
   const { language } = route?.params ?? {};
   function makeid() {
     var randomText = "";
@@ -235,10 +252,16 @@ function ContributionWord({ currentUser, navigation, route }) {
         navigation.navigate("ContributionWord");
       });
   };
+  
   if (currentUser.terms == "0") {
     // This will render all of the functions available for the superuser
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView 
+        style={styles.container}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        >
+        
+         
         <View style={{
             paddingHorizontal:30, 
             flex:1, paddingVertical:40, 
@@ -307,161 +330,163 @@ function ContributionWord({ currentUser, navigation, route }) {
   } else {
     // This will render the Basic users functions
     return (
-      <ScrollView style={styles.container}>
-      <View style={styles.center}>
+      
+        <ImageBackground source={require("../../assets/wordbg.png")} resizeMode="cover" style={styles.image}>
+          <ScrollView style={styles.container}>
+        <View style={styles.center}>
 
-        {/* Word */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Word<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            {" "}
-            Type the word you want to contribute.{" "}
-          </Text>
-          {isFieldInError("word") &&
-            getErrorsInField("word").map((errorMessage) => (
-              <Text style={{ color: "red" }}>Please enter the word</Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCapitalize="none"
-            onChangeText={(word) => setWord(word)}
-          />
-        </View>
+              {/* Word */}
+                <View style={styles.paddingLeft}>
+                  <Text style={styles.title_text}>Words<Text style={{color:"red"}}>*</Text></Text>
+                  <Text style={styles.guidelines}>
+                    {" "}
+                    Type the word you want to contribute.{" "}
+                  </Text>
+                  {isFieldInError("word") &&
+                    getErrorsInField("word").map((errorMessage) => (
+                      <Text style={{ color: "red" }}>Please enter the word</Text>
+                    ))}
+                  <TextInput
+                    style={styles.input}
+                    multiline={true}
+                    autoCapitalize="none"
+                    onChangeText={(word) => setWord(word)}
+                  />
+                </View>
 
-          {/* Specific Language Meaning */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Specific Language Definition<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Define the word you have suggested in specific language.
-          </Text>
-          {isFieldInError("meaning") &&
-            getErrorsInField("meaning").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please provide definition
-              </Text>
-            ))}
-          <TextInput
-            style={styles.description_input}
-            multiline={true}
-            onChangeText={(meaning) => setMeaning(meaning)}
-          />
-        </View>
+              {/* Specific Language Meaning */}
+                <View style={styles.paddingLeft}>
+                  <Text style={styles.title_text}>Specific Language Definition<Text style={{color:"red"}}>*</Text></Text>
+                  <Text style={styles.guidelines}>
+                    Define the word you have suggested in specific language.
+                  </Text>
+                  {isFieldInError("meaning") &&
+                    getErrorsInField("meaning").map((errorMessage) => (
+                      <Text style={{ color: "red" }}>
+                        Please provide definition
+                      </Text>
+                    ))}
+                  <TextInput
+                    style={styles.description_input}
+                    multiline={true}
+                    onChangeText={(meaning) => setMeaning(meaning)}
+                  />
+                </View> 
 
-         {/* Parts of Speech */}
-         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
-          </Text>
-          <Picker
-            style={[
-              styles.input,
-              { backgroundColor: "#e7e7e7"},
-            ]}
-            selectedValue={originated}
-            
-            onValueChange={(itemValue, itemIndex) =>
-              setOrigination(itemValue)
-            }
-          >
-            <Picker.Item label="Pick origin" value="" />
-            <Picker.Item label="Davao del Sur" value="Davao del Sur" />
-            <Picker.Item label="Davao del Norte" value="Davao del Norte" />
-            <Picker.Item label="Davao Occidental" value="Davao Occidental" />
-            <Picker.Item label="Davao Oriental" value="Davao Oriental" />
-            <Picker.Item label="Davao de Oro" value="Davao de Oro" />
-            <Picker.Item label="Davao City" value="Davao City" />
-            <Picker.Item label="N/A" value="N/A" />
-            
-          </Picker>
-        </View>
+              {/* Parts of Speech */}
+                <View style={styles.paddingLeft}>
+                    <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
+                    <Text style={styles.guidelines}>
+                      Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
+                    </Text>
+                    <Picker
+                      style={[
+                        styles.input,
+                        { backgroundColor: "#e7e7e7"},
+                      ]}
+                      selectedValue={originated}
+                      
+                      onValueChange={(itemValue, itemIndex) =>
+                        setOrigination(itemValue)
+                      }
+                    >
+                      <Picker.Item label="Pick origin" value="" />
+                      <Picker.Item label="Davao del Sur" value="Davao del Sur" />
+                      <Picker.Item label="Davao del Norte" value="Davao del Norte" />
+                      <Picker.Item label="Davao Occidental" value="Davao Occidental" />
+                      <Picker.Item label="Davao Oriental" value="Davao Oriental" />
+                      <Picker.Item label="Davao de Oro" value="Davao de Oro" />
+                      <Picker.Item label="Davao City" value="Davao City" />
+                      <Picker.Item label="N/A" value="N/A" />
+                      
+                    </Picker>
+                </View>
+              
+              {/* Example Sentence */}
+                <View style={styles.paddingLeft}>
+                    <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
+                    <Text style={styles.guidelines}>
+                      Write an example of the word you have suggested.
+                    </Text>
+                    {isFieldInError("sentence") &&
+                      getErrorsInField("sentence").map((errorMessage) => (
+                        <Text style={{ color: "red" }}>
+                          Please enter an example sentence.
+                        </Text>
+                      ))}
+                    <TextInput
+                      style={styles.input}
+                      multiline={true}
+                      onChangeText={(sentence) => setSentence(sentence)}
+                    />
+                </View>
+              
+              {/* In Filipino */}
+                <View style={styles.paddingLeft}>
+                    <Text style={styles.title_text}>In Filipino<Text style={{color:"red"}}>*</Text></Text>
+                    <Text style={styles.guidelines}>
+                      Translate the word you have suggested to Filipino{" "}
+                    </Text>
+                    {isFieldInError("filipino") &&
+                      getErrorsInField("filipino").map((errorMessage) => (
+                        <Text style={{ color: "red" }}>
+                          Please enter the filipino word.
+                        </Text>
+                      ))}
+                    <TextInput
+                      style={styles.input}
+                      multiline={true}
+                      onChangeText={(filipino) => setFilipino(filipino)}
+                    />
+                </View>
+              
+              {/* Filipino Definition */}
+                <View style={styles.paddingLeft}>
+                    <Text style={styles.title_text}>Filipino Definition</Text>
+                    <Text style={styles.guidelines}>
+                      Define the word you have suggested in Filipino.
+                    </Text>
+                    {isFieldInError("englishMeaning") &&
+                      getErrorsInField("englishMeaning").map((errorMessage) => (
+                        <Text style={{ color: "red" }}>
+                          Please define in Filipino.
+                        </Text>
+                      ))}
+                    <TextInput
+                      style={styles.description_input}
+                      multiline={true}
+                      onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
+                    />
+              </View>
 
-        {/* Example Sentence */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Write an example of the word you have suggested.
-          </Text>
-          {isFieldInError("sentence") &&
-            getErrorsInField("sentence").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter an example sentence.
-              </Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            onChangeText={(sentence) => setSentence(sentence)}
-          />
-        </View>
-        
-         {/* In Filipino */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>In Filipino<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Translate the word you have suggested to Filipino{" "}
-          </Text>
-          {isFieldInError("filipino") &&
-            getErrorsInField("filipino").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter the filipino word.
-              </Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            onChangeText={(filipino) => setFilipino(filipino)}
-          />
-        </View>
-          
-          {/* Filipino Definition */}
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Filipino Definition</Text>
-            <Text style={styles.guidelines}>
-              Define the word you have suggested in Filipino.
-            </Text>
-            {isFieldInError("englishMeaning") &&
-              getErrorsInField("englishMeaning").map((errorMessage) => (
-                <Text style={{ color: "red" }}>
-                  Please define in Filipino.
+               {/* Parts of Speech */}
+              <View style={styles.paddingLeft}>
+                <Text style={styles.title_text}>Parts of Speech</Text>
+                <Text style={styles.guidelines}>
+                  Classification of the word ex.(Verb, Noun, Pronoun, Adverb, etc.){" "}
                 </Text>
-              ))}
-            <TextInput
-              style={styles.description_input}
-              multiline={true}
-              onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
-            />
-        </View>
-
-        {/* Parts of Speech */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Parts of Speech</Text>
-          <Text style={styles.guidelines}>
-            Classification of the word ex.(Verb, Noun, Pronoun, Adverb, etc.){" "}
-          </Text>
-          <Picker
-            style={[
-              styles.input,
-              { backgroundColor: "#e7e7e7"},
-            ]}
-            selectedValue={classification}
-            onValueChange={(itemValue, itemIndex) =>
-              setClassification(itemValue)
-            }
-          >
-            <Picker.Item label="Noun" value="Noun" />
-            <Picker.Item label="Verb" value="Verb" />
-            <Picker.Item label="Adverb" value="Adverb" />
-            <Picker.Item label="Adjective" value="Adjective" />
-            <Picker.Item label="Pronoun" value="Pronoun" />
-            <Picker.Item label="Preposition" value="Preposition" />
-            <Picker.Item label="Conjunction" value="Conjunction" />
-            <Picker.Item label="Article" value="Article" />
-          </Picker>
-        </View>
-
-        {/* Pronunciation */}
+                <Picker
+                  style={[
+                    styles.input,
+                    { backgroundColor: "#e7e7e7"},
+                  ]}
+                  selectedValue={classification}
+                  onValueChange={(itemValue, itemIndex) =>
+                    setClassification(itemValue)
+                  }
+                >
+                  <Picker.Item label="Noun" value="Noun" />
+                  <Picker.Item label="Verb" value="Verb" />
+                  <Picker.Item label="Adverb" value="Adverb" />
+                  <Picker.Item label="Adjective" value="Adjective" />
+                  <Picker.Item label="Pronoun" value="Pronoun" />
+                  <Picker.Item label="Preposition" value="Preposition" />
+                  <Picker.Item label="Conjunction" value="Conjunction" />
+                  <Picker.Item label="Article" value="Article" />
+                </Picker>
+              </View>
+              
+              {/* Pronunciation */}
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Pronunciation </Text>
           <Text style={styles.guidelines}>
@@ -536,8 +561,10 @@ function ContributionWord({ currentUser, navigation, route }) {
           />
           <Text style={styles.guidelines}> I allow my name to be shown. </Text>
         </View>
-      </View>
-      {audio ? (
+              
+        </View>
+
+        {audio ? (
         <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
           <Text style={styles.subtitle}>
             {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
@@ -550,7 +577,13 @@ function ContributionWord({ currentUser, navigation, route }) {
           </Text>
         </TouchableOpacity>
       )}
-    </ScrollView>
+
+
+</ScrollView>
+      </ImageBackground>
+        
+      
+      
     );
   }
 }
@@ -564,6 +597,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 30,
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+    height:720,
+  },
+  text: {
+    color: 'white',
+    fontSize: 42,
+    lineHeight: 84,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    backgroundColor: '#000000c0',
   },
   center: {
     justifyContent: "center",
@@ -591,6 +637,11 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
+  },
+  stretch: {
+    width: 50,
+    height: 200,
+    resizeMode: 'stretch',
   },
   input: {
     letterSpacing: 0.15,

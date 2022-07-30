@@ -606,8 +606,7 @@ const styles = StyleSheet.create({
 
   paddingLeft: {
     alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
+   
     marginTop: 20,
     paddingLeft: 20,
   },
