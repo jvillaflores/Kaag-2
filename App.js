@@ -91,6 +91,7 @@ import AddClothings from "./components/main/AddClothings";
 import EditCulture from "./components/main/EditCulture";
 import EditCultures from "./components/main/EditCultures";
 import AddCulture from "./components/main/AddCulture";
+import AgainContrib from "./components/main/AgainContrib";
 
 
 
@@ -352,6 +353,18 @@ export class App extends Component {
               navigation={this.props.navigation}
               options={{
                 title: "Upload a Word",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                },
+              }}
+            />
+             <Stack.Screen
+              name="AgainContrib"
+              component={AgainContrib}
+              navigation={this.props.navigation}
+              options={{
+                title: " ",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#215A88",

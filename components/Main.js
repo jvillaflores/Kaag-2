@@ -31,6 +31,7 @@ const EmptyScreen = () => {
 import CourseScreen from "./main/Course";
 import DictionaryScreen from "./main/Dictionary";
 import CommunityScreen from "./main/Community";
+import ContributeDictionary from "./main/ContributeDictionary"
 import audioscreen from "./main/audio";
 import ContributionWord from "./main/ContributionWord";
 import ProfileScreen from "./main/Settings";
@@ -109,7 +110,7 @@ export class Main extends Component {
             ),
           }}
         />
-        {/* <Tab.Screen
+        <Tab.Screen
           name="ContributeDictionary"
           component={ContributeDictionary}
           //navigation = {this.props.navigation}
@@ -127,7 +128,7 @@ export class Main extends Component {
               <MaterialCommunityIcons name="upload" color={color} size={26} />
             ),
           }}
-        /> */}
+        />
          <Tab.Screen
           name="ContributionWord"
           component={ContributionWord}

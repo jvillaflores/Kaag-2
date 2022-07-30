@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   Alert,
+  ImageBackground,
 } from "react-native";
 
 import {
@@ -154,7 +155,6 @@ function NewDictionary({ currentUser, route, navigation }) {
     validate({
       word: { required: true },
       filipino: { required: true },
-      pronunciation: { required: true },
       originated: { required: true },
       sentence: { required: true },
       englishMeaning: { required: true },
@@ -235,7 +235,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for contribution!!");
         setLoading(null);
-        navigation.navigate("ContributeDictionary");
+        navigation.navigate("AgainContrib");
       });
   };
 
@@ -265,141 +265,143 @@ function NewDictionary({ currentUser, route, navigation }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Thanks for contribution!!");
-        setLoading(null);
         navigation.navigate("ContributeDictionary");
+        //alert("Thanks for contribution!!");
+        setLoading(null);
+        
       });
   };
 
   return (
+    <ImageBackground source={require("../../assets/wordbg.png")} resizeMode="cover" style={styles.image}>
     <ScrollView style={styles.container}>
-      <View style={styles.center}>
+  <View style={styles.center}>
 
         {/* Word */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Word<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            {" "}
-            Type the word you want to contribute.{" "}
-          </Text>
-          {isFieldInError("word") &&
-            getErrorsInField("word").map((errorMessage) => (
-              <Text style={{ color: "red" }}>Please enter the word</Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCapitalize="none"
-            onChangeText={(word) => setWord(word)}
-          />
-        </View>
-
-          {/* Specific Language Meaning */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Specific Language Definition<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Define the word you have suggested in specific language.
-          </Text>
-          {isFieldInError("meaning") &&
-            getErrorsInField("meaning").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please provide definition
-              </Text>
-            ))}
-          <TextInput
-            style={styles.description_input}
-            multiline={true}
-            onChangeText={(meaning) => setMeaning(meaning)}
-          />
-        </View>
-
-         {/* Parts of Speech */}
-         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Classification of the word's origin (E.g. Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
-          </Text>
-          <Picker
-            style={[
-              styles.input,
-              { backgroundColor: "#e7e7e7"},
-            ]}
-            selectedValue={originated}
-            
-            onValueChange={(itemValue, itemIndex) =>
-              setOrigination(itemValue)
-            }
-          >
-            <Picker.Item label="Pick origin" value="" />
-            <Picker.Item label="Davao del Sur" value="Davao del Sur" />
-            <Picker.Item label="Davao del Norte" value="Davao del Norte" />
-            <Picker.Item label="Davao Occidental" value="Davao Occidental" />
-            <Picker.Item label="Davao Oriental" value="Davao Oriental" />
-            <Picker.Item label="Davao de Oro" value="Davao de Oro" />
-            <Picker.Item label="Davao City" value="Davao City" />
-            <Picker.Item label="N/A" value="N/A" />
-            
-          </Picker>
-        </View>
-
-        {/* Example Sentence */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Write an example of the word you have suggested.
-          </Text>
-          {isFieldInError("sentence") &&
-            getErrorsInField("sentence").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter an example sentence.
-              </Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            onChangeText={(sentence) => setSentence(sentence)}
-          />
-        </View>
-        
-         {/* In Filipino */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>In Filipino<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Translate the word you have suggested to Filipino{" "}
-          </Text>
-          {isFieldInError("filipino") &&
-            getErrorsInField("filipino").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter the filipino word.
-              </Text>
-            ))}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            onChangeText={(filipino) => setFilipino(filipino)}
-          />
-        </View>
-          
-          {/* Filipino Definition */}
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Filipino Definition</Text>
+            <Text style={styles.title_text}>Words<Text style={{color:"red"}}>*</Text></Text>
             <Text style={styles.guidelines}>
-              Define the word you have suggested in Filipino.
+              {" "}
+              Type the word you want to contribute.{" "}
             </Text>
-            {isFieldInError("englishMeaning") &&
-              getErrorsInField("englishMeaning").map((errorMessage) => (
+            {isFieldInError("word") &&
+              getErrorsInField("word").map((errorMessage) => (
+                <Text style={{ color: "red" }}>Please enter the word</Text>
+              ))}
+            <TextInput
+              style={styles.input}
+              multiline={true}
+              autoCapitalize="none"
+              onChangeText={(word) => setWord(word)}
+            />
+          </View>
+
+        {/* Specific Language Meaning */}
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Specific Language Definition<Text style={{color:"red"}}>*</Text></Text>
+            <Text style={styles.guidelines}>
+              Define the word you have suggested in specific language.
+            </Text>
+            {isFieldInError("meaning") &&
+              getErrorsInField("meaning").map((errorMessage) => (
                 <Text style={{ color: "red" }}>
-                  Please define in Filipino.
+                  Please provide definition
                 </Text>
               ))}
             <TextInput
               style={styles.description_input}
               multiline={true}
-              onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
+              onChangeText={(meaning) => setMeaning(meaning)}
             />
-        </View>
+          </View> 
 
         {/* Parts of Speech */}
+          <View style={styles.paddingLeft}>
+              <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
+              <Text style={styles.guidelines}>
+                Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
+              </Text>
+              <Picker
+                style={[
+                  styles.input,
+                  { backgroundColor: "#e7e7e7"},
+                ]}
+                selectedValue={originated}
+                
+                onValueChange={(itemValue, itemIndex) =>
+                  setOrigination(itemValue)
+                }
+              >
+                <Picker.Item label="Pick origin" value="" />
+                <Picker.Item label="Davao del Sur" value="Davao del Sur" />
+                <Picker.Item label="Davao del Norte" value="Davao del Norte" />
+                <Picker.Item label="Davao Occidental" value="Davao Occidental" />
+                <Picker.Item label="Davao Oriental" value="Davao Oriental" />
+                <Picker.Item label="Davao de Oro" value="Davao de Oro" />
+                <Picker.Item label="Davao City" value="Davao City" />
+                <Picker.Item label="N/A" value="N/A" />
+                
+              </Picker>
+          </View>
+        
+        {/* Example Sentence */}
+          <View style={styles.paddingLeft}>
+              <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
+              <Text style={styles.guidelines}>
+                Write an example of the word you have suggested.
+              </Text>
+              {isFieldInError("sentence") &&
+                getErrorsInField("sentence").map((errorMessage) => (
+                  <Text style={{ color: "red" }}>
+                    Please enter an example sentence.
+                  </Text>
+                ))}
+              <TextInput
+                style={styles.input}
+                multiline={true}
+                onChangeText={(sentence) => setSentence(sentence)}
+              />
+          </View>
+        
+        {/* In Filipino */}
+          <View style={styles.paddingLeft}>
+              <Text style={styles.title_text}>In Filipino<Text style={{color:"red"}}>*</Text></Text>
+              <Text style={styles.guidelines}>
+                Translate the word you have suggested to Filipino{" "}
+              </Text>
+              {isFieldInError("filipino") &&
+                getErrorsInField("filipino").map((errorMessage) => (
+                  <Text style={{ color: "red" }}>
+                    Please enter the filipino word.
+                  </Text>
+                ))}
+              <TextInput
+                style={styles.input}
+                multiline={true}
+                onChangeText={(filipino) => setFilipino(filipino)}
+              />
+          </View>
+        
+        {/* Filipino Definition */}
+          <View style={styles.paddingLeft}>
+              <Text style={styles.title_text}>Filipino Definition</Text>
+              <Text style={styles.guidelines}>
+                Define the word you have suggested in Filipino.
+              </Text>
+              {isFieldInError("englishMeaning") &&
+                getErrorsInField("englishMeaning").map((errorMessage) => (
+                  <Text style={{ color: "red" }}>
+                    Please define in Filipino.
+                  </Text>
+                ))}
+              <TextInput
+                style={styles.description_input}
+                multiline={true}
+                onChangeText={(englishMeaning) => setEnglishMeaning(englishMeaning)}
+              />
+        </View>
+
+         {/* Parts of Speech */}
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Parts of Speech</Text>
           <Text style={styles.guidelines}>
@@ -425,97 +427,102 @@ function NewDictionary({ currentUser, route, navigation }) {
             <Picker.Item label="Article" value="Article" />
           </Picker>
         </View>
-
-        {/* Pronunciation */}
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Pronunciation </Text>
-          <Text style={styles.guidelines}>
-            How to pronounce the word (E.g. Ka-gan.){" "}
-          </Text>
-          {/* {isFieldInError("pronunciation") &&
-            getErrorsInField("pronunciation").map((errorMessage) => (
-              <Text style={{ color: "red" }}>
-                Please enter the Pronunciation
-              </Text>
-            ))} */}
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            onChangeText={(pronunciation) => setPronunciation(pronunciation)}
-          />
-        </View>
-
         
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Audio<Text style={{color:"red"}}>*</Text></Text>
-          <Text style={styles.guidelines}>
-            Upload an audio on how to pronounce the word you have contributed.
-          </Text>
-          {isFieldInError("audio") &&
-            getErrorsInField("aduio").map((errorMessage) => (
-              <Text style={{ color: "red" }}>Please select an audio file</Text>
-            ))}
-          <TouchableOpacity
-            style={styles.audioButton}
-            onPress={() => chooseFile()}
-          >
-            <View>
-              {audio ? (
-                <TextInput > {audio?.name}</TextInput>
-              ) : (
-                <MaterialCommunityIcons
-                  style={styles.addAudio}
-                  name="plus-box"
-                  color={"#707070"}
-                  size={26}
-                />
-              )}
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Username </Text>
-          {toggleCheckBox == true ? (
-            <TextInput
-              style={styles.input}
-              multiline={true}
-              value={currentUser.name}
-              editable={false}
-            />
-          ) : null}
-          {toggleCheckBox == false ? (
-            <TextInput
-              style={styles.input}
-              multiline={true}
-              value={name}
-              editable={false}
-            />
-          ) : null}
-        </View>
-        <View style={styles.checkboxContainer}>
-          <Checkbox
-            style={styles.checkbox}
-            value={toggleCheckBox}
-            onValueChange={(newValue) => setToggleCheckBox(newValue)}
-            color={toggleCheckBox ? "#215a88" : undefined}
+        {/* Pronunciation */}
+  <View style={styles.paddingLeft}>
+    <Text style={styles.title_text}>Pronunciation </Text>
+    <Text style={styles.guidelines}>
+      How to pronounce the word, Ex. Ka-gan.{" "}
+    </Text>
+    {/* {isFieldInError("pronunciation") &&
+      getErrorsInField("pronunciation").map((errorMessage) => (
+        <Text style={{ color: "red" }}>
+          Please enter the Pronunciation
+        </Text>
+      ))} */}
+    <TextInput
+      style={styles.input}
+      multiline={true}
+      onChangeText={(pronunciation) => setPronunciation(pronunciation)}
+    />
+  </View>
+
+  
+  <View style={styles.paddingLeft}>
+    <Text style={styles.title_text}>Audio<Text style={{color:"red"}}>*</Text></Text>
+    <Text style={styles.guidelines}>
+      Upload an audio on how to pronounce the word you have contributed.
+    </Text>
+    {isFieldInError("audio") &&
+      getErrorsInField("aduio").map((errorMessage) => (
+        <Text style={{ color: "red" }}>Please select an audio file</Text>
+      ))}
+    <TouchableOpacity
+      style={styles.audioButton}
+      onPress={() => chooseFile()}
+    >
+      <View>
+        {audio ? (
+          <TextInput > {audio?.name}</TextInput>
+        ) : (
+          <MaterialCommunityIcons
+            style={styles.addAudio}
+            name="plus-box"
+            color={"#707070"}
+            size={26}
           />
-          <Text style={styles.guidelines}> I allow my name to be shown. </Text>
-        </View>
+        )}
       </View>
-      {audio ? (
-        <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
-          <Text style={styles.subtitle}>
-            {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
-          </Text>
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity style={styles.button_empty} disabled={true}>
-          <Text style={styles.subtitle}>
-            {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
-          </Text>
-        </TouchableOpacity>
-      )}
-    </ScrollView>
+    </TouchableOpacity>
+  </View>
+  <View style={styles.paddingLeft}>
+    <Text style={styles.title_text}>Username </Text>
+    {toggleCheckBox == true ? (
+      <TextInput
+        style={styles.input}
+        multiline={true}
+        value={currentUser.name}
+        editable={false}
+      />
+    ) : null}
+    {toggleCheckBox == false ? (
+      <TextInput
+        style={styles.input}
+        multiline={true}
+        value={name}
+        editable={false}
+      />
+    ) : null}
+  </View>
+  <View style={styles.checkboxContainer}>
+    <Checkbox
+      style={styles.checkbox}
+      value={toggleCheckBox}
+      onValueChange={(newValue) => setToggleCheckBox(newValue)}
+      color={toggleCheckBox ? "#215a88" : undefined}
+    />
+    <Text style={styles.guidelines}> I allow my name to be shown. </Text>
+  </View>
+        
+  </View>
+
+  {audio ? (
+  <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
+    <Text style={styles.subtitle}>
+      {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
+    </Text>
+  </TouchableOpacity>
+) : (
+  <TouchableOpacity style={styles.button_empty} disabled={true}>
+    <Text style={styles.subtitle}>
+      {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
+    </Text>
+  </TouchableOpacity>
+)}
+
+
+</ScrollView>
+</ImageBackground>
   );
 }
 
@@ -537,6 +544,11 @@ const styles = StyleSheet.create({
 
     letterSpacing: 0.25,
     color: "white",
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+    height:720,
   },
   button: {
     alignSelf: "center",

@@ -62,6 +62,7 @@ export default class Register extends ValidationComponent {
             email,
             type: 0,
             status: "0",
+            terms:"0",
             userImage: " ",
           });
         console.log(result);

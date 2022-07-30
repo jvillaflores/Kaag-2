@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  SafeAreaView,
   StyleSheet,
   ScrollView,
   TouchableOpacity, 
-  Modal,
-  Pressable,
   RefreshControl,
   ImageBackground,
 
@@ -50,19 +47,9 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [loading, setLoading] = useState(null);
   const [wordID, setWordID] = useState(makeid());
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  const [refreshing, setRefreshing] = useState(true);
-
-
-  const wait = timeout => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  };
-
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
-  
   const { language } = route?.params ?? {};
+
+ 
   function makeid() {
     var randomText = "";
     var possible =
@@ -75,7 +62,7 @@ function ContributionWord({ currentUser, navigation, route }) {
 
     return randomText;
   }
-
+  
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
@@ -118,14 +105,11 @@ function ContributionWord({ currentUser, navigation, route }) {
       alert("something went wrong!!");
     }
   };
-  function refreshPage() {
-    window.location.reload(false);
-  }
+  
   const uploadAudio = async () => {
     validate({
       word: { required: true },
       filipino: { required: true },
-      pronunciation: { required: true },
       originated: { required: true },
       sentence: { required: true },
       englishMeaning: { required: true },
@@ -247,18 +231,21 @@ function ContributionWord({ currentUser, navigation, route }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
+        
         alert("Thanks for contribution!!");
+        
         setLoading(null);
         navigation.navigate("ContributionWord");
       });
   };
+  
   
   if (currentUser.terms == "0") {
     // This will render all of the functions available for the superuser
     return (
       <ScrollView 
         style={styles.container}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        
         >
         
          
@@ -332,7 +319,8 @@ function ContributionWord({ currentUser, navigation, route }) {
     return (
       
         <ImageBackground source={require("../../assets/wordbg.png")} resizeMode="cover" style={styles.image}>
-          <ScrollView style={styles.container}>
+          <ScrollView style={styles.container}
+          >
         <View style={styles.center}>
 
               {/* Word */}
