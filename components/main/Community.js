@@ -79,11 +79,11 @@ function Community({ currentUser, route, navigation }) {
         })}
       >
         <Tab.Screen
-          name="Social"
+          name="Feed"
           children={(props) => <SocialScreen language={language} {...props} />}
         />
         <Tab.Screen
-          name="Feed"
+          name="Social"
           children={(props) => <FeedScreen language={language} {...props} />}
         />
         

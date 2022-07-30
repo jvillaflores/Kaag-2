@@ -20,7 +20,7 @@ require("firebase/firebase-storage");
 
 import { Dimensions } from "react-native";
 
-function Feed({ navigation, language }) {
+function Social({ navigation, route, language }) {
   const dimensions = Dimensions.get("window");
   //const imageHeight = Math.round(dimensions.width * 1 / 1);
   const imageWidth = dimensions.width;
@@ -33,13 +33,12 @@ function Feed({ navigation, language }) {
 
   const getData = () => {
     //Service to get the data from the server to render
+    // Fetch the data that are posted by all of the users.
     firebase
       .firestore()
       .collection("languages")
       .doc(language)
       .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
       .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
@@ -59,18 +58,6 @@ function Feed({ navigation, language }) {
       // Flat List Item
       <View style={styles.container}>
         <View style={styles.profile}>
-          {item.userImage != " " ? (
-            <Image
-              style={styles.imageprofile}
-              source={{ uri: item.userImage }}
-            />
-          ) : null}
-          {item.userImage == " " ? (
-            <Image
-              style={styles.imageprofile}
-              source={require("../../assets/blank.png")}
-            />
-          ) : null}
           <Text style={styles.profilename}>{item.username} </Text>
         </View>
 
@@ -114,7 +101,7 @@ function Feed({ navigation, language }) {
   );
 }
 
-export default Feed;
+export default Social;
 
 const styles = StyleSheet.create({
   title: {
@@ -151,6 +138,9 @@ const styles = StyleSheet.create({
   },
   profilename: {
     fontWeight: "bold",
+    paddingLeft: 10,
+    paddingBottom: 20,
+    paddingTop: 10,
   },
 
   textHead: {

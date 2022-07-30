@@ -59,7 +59,8 @@ const AddCulture = ({navigation,route}) => {
           })
     
           .then(() => {
-            console.log("About Added");
+            alert("Culture Successfully Added");
+            navigation.navigate("EditCulture");
           });
       };
 
@@ -175,7 +176,7 @@ const AddCulture = ({navigation,route}) => {
           <Text style={[styles.text, { fontSize: 16 }]}>
             About
           </Text>
-          <Text>Brief introduction/description about the language.</Text>
+          <Text style={[styles.guidelines]}>Brief introduction/description about the language.</Text>
           <TextInput
             multiline={true}
             style={[
@@ -288,6 +289,11 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         elevation: 9,
+      },
+      guidelines: {
+        fontSize: 12,
+        fontStyle: "italic",
+        color: "#707070",
       },
   });
   

@@ -59,7 +59,8 @@ const AddAbout = ({navigation,route}) => {
           })
     
           .then(() => {
-            console.log("About Added");
+            alert("About Successfully Added");
+            navigation.navigate("EditFood");
           });
       };
 

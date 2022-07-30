@@ -59,7 +59,8 @@ const AddClothings = ({navigation,route}) => {
           })
     
           .then(() => {
-            console.log("About Added");
+            alert("Clothings Successfully Added");
+            navigation.navigate("EditClothing");
           });
       };
 

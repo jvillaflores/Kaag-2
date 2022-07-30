@@ -57,9 +57,9 @@ const AddFood = ({navigation,route}) => {
             desc,
             image: downloadURL,
           })
-    
           .then(() => {
-            console.log("Food Added");
+            alert("Food Successfully Added");
+            navigation.navigate("EditFood");
           });
       };
 
@@ -175,7 +175,7 @@ const AddFood = ({navigation,route}) => {
           <Text style={[styles.text, { fontSize: 16 }]}>
             About
           </Text>
-          <Text>Brief introduction/description about the language.</Text>
+          <Text style={[styles.guidelines]}>Brief introduction/description about the language.</Text>
           <TextInput
             multiline={true}
             style={[
@@ -288,6 +288,11 @@ const styles = StyleSheet.create({
         bottom: 0,
         right: 0,
         elevation: 9,
+      },
+      guidelines: {
+        fontSize: 12,
+        fontStyle: "italic",
+        color: "#707070",
       },
   });
   
