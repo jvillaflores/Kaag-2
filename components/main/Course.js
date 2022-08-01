@@ -27,8 +27,37 @@ function Course({ currentUser, navigation, language }) {
         </View>
 
         <View>
+          <Text style={styles.textKagan}>Contribute</Text>
+        </View>
+        <View>
+          
+
+          {/* Speech.js */}
+          <TouchableOpacity
+            style={styles.buttonVocab}
+            onPress={() => 
+             navigation.navigate("NewDictionary")
+             //alert("This page is not yet available")
+            }
+          >
+            <View style={styles.contextButton}>
+              <Image
+                style={{ width: 50, height: 40 }}
+                source={require("../../assets/pronun.png")}
+              />
+              <View style={styles.text_Context}>
+                <Text style={styles.textVocab}>Words</Text>
+                <Text style={styles.textVocabSub}>Contribute Words for the dictionary
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        <View>
           <Text style={styles.textKagan}>Course</Text>
         </View>
+
 
         {/* Kagan courses options. */}
         <View>
@@ -67,9 +96,8 @@ function Course({ currentUser, navigation, language }) {
                 source={require("../../assets/pronun.png")}
               />
               <View style={styles.text_Context}>
-                <Text style={styles.textVocab}> Speech</Text>
+                <Text style={styles.textVocab}>Speech</Text>
                 <Text style={styles.textVocabSub}>
-                  {" "}
                   Select the correct pronunciation
                 </Text>
               </View>
@@ -121,7 +149,7 @@ function Course({ currentUser, navigation, language }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonVocab}
-            onPress={() => navigation.navigate("AgainContrib", { language: language })}
+            onPress={() => navigation.navigate("Consent", { language: language })}
           >
             <View style={styles.contextButton}>
               <View style={styles.text_Context}>
@@ -247,6 +275,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 15,
     marginVertical: 5,
+    paddingRight:20
   },
   buttonGrammar: {
     alignSelf: "center",
@@ -301,7 +330,7 @@ const styles = StyleSheet.create({
   },
   textVocabSub: {
     fontSize: 11,
-    lineHeight: 21,
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "grey",
   },

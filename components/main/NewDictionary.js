@@ -3,11 +3,11 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
+  Pressable,
   ScrollView,
   Alert,
-  ImageBackground,
+  ImageBackground
 } from "react-native";
-
 import {
   TextInput,
   Text,
@@ -41,6 +41,7 @@ function NewDictionary({ currentUser, route, navigation }) {
   const [wordID, setWordID] = useState(makeid());
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { language } = route?.params ?? {};
+  console.log(language);
   function makeid() {
     var randomText = "";
     var possible =
@@ -93,69 +94,17 @@ function NewDictionary({ currentUser, route, navigation }) {
       setAudio(result);
       // console.log(result);
     } else {
-      alert("something went wrong!!");
+      alert("Something went wrong!");
     }
   };
 
-  // const uploadAudios = async () => {
-  //   // const uri = recording.getURI();
-  //   const uri = FileSystem.documentDirectory + audio.name;
-
-  //   await FileSystem.copyAsync({
-  //     from: audio.uri,
-  //     to: uri,
-  //   });
-
-  //   try {
-  //     // const blob = await new Promise((resolve, reject) => {
-  //     //   const xhr = new XMLHttpRequest();
-  //     //   xhr.onload = () => {
-  //     //     try {
-  //     //       resolve(xhr.response);
-  //     //     } catch (error) {
-  //     //       console.log("error:12", error);
-  //     //     }
-  //     //   };
-  //     //   xhr.onerror = (e) => {
-  //     //     console.log(e);
-  //     //     reject(new TypeError("Network request failed"));
-  //     //   };
-  //     //   xhr.responseType = "blob";
-  //     //   xhr.open("GET", `file://${audio?.uri}`, true);
-  //     //   xhr.send(null);
-  //     // });
-  //     // console.log('file://'+audio?.uri)
-  //     // let u = (`file://${audio?.uri}`)
-  //     let res = await fetch(uri);
-  //     let blobs = await res.blob();
-  //     if (blobs != null) {
-  //       const uriParts = audio?.uri.split(".");
-  //       const fileType = uriParts[uriParts.length - 1];
-  //       console.log(uriParts, "0-0-0", fileType);
-  //       // firebase
-  //       //   .storage()
-  //       //   .ref()
-  //       //   .child(`nameOfTheFile.${fileType}`)
-  //       //   .put(blob, {
-  //       //     contentType: `audio/${fileType}`,
-  //       //   })
-  //       //   .then(() => {
-  //       //     console.log("Sent!");
-  //       //   })
-  //       //   .catch((e) => console.log("error:", e));
-  //     } else {
-  //       console.log("erroor with blob");
-  //     }
-  //   } catch (error) {
-  //     console.log("error:", error);
-  //   }
-  // };
 
   const uploadAudio = async () => {
     validate({
       word: { required: true },
       filipino: { required: true },
       originated: { required: true },
+      pronunciation: { required: true },
       sentence: { required: true },
       englishMeaning: { required: true },
       meaning: { required: true },
@@ -227,7 +176,6 @@ function NewDictionary({ currentUser, route, navigation }) {
         sentence: filteredSentence,
         englishMeaning: filteredEnglishMeaning,
         meaning: filteredMeaning,
-        language: language,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -235,7 +183,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for contribution!!");
         setLoading(null);
-        navigation.navigate("AgainContrib");
+        navigation.navigate("Course");
       });
   };
 
@@ -259,27 +207,25 @@ function NewDictionary({ currentUser, route, navigation }) {
         sentence: filteredSentence,
         englishMeaning: filteredEnglishMeaning,
         meaning: filteredMeaning,
-        language: language,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        navigation.navigate("ContributeDictionary");
-        //alert("Thanks for contribution!!");
+        alert("Thanks for your contribution! Your contribution will be validated");
         setLoading(null);
-        
+        navigation.navigate("Course");
       });
   };
 
   return (
     <ImageBackground source={require("../../assets/wordbg.png")} resizeMode="cover" style={styles.image}>
     <ScrollView style={styles.container}>
-  <View style={styles.center}>
-
+      <View style={styles.center}>
+        
         {/* Word */}
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Words<Text style={{color:"red"}}>*</Text></Text>
+        <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Word<Text style={{color:"red"}}>*</Text></Text>
             <Text style={styles.guidelines}>
               {" "}
               Type the word you want to contribute.{" "}
@@ -294,10 +240,10 @@ function NewDictionary({ currentUser, route, navigation }) {
               autoCapitalize="none"
               onChangeText={(word) => setWord(word)}
             />
-          </View>
-
+        </View>
+        
         {/* Specific Language Meaning */}
-          <View style={styles.paddingLeft}>
+        <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Specific Language Definition<Text style={{color:"red"}}>*</Text></Text>
             <Text style={styles.guidelines}>
               Define the word you have suggested in specific language.
@@ -313,10 +259,11 @@ function NewDictionary({ currentUser, route, navigation }) {
               multiline={true}
               onChangeText={(meaning) => setMeaning(meaning)}
             />
-          </View> 
+        </View> 
 
+      
         {/* Parts of Speech */}
-          <View style={styles.paddingLeft}>
+        <View style={styles.paddingLeft}>
               <Text style={styles.title_text}>Originated<Text style={{color:"red"}}>*</Text></Text>
               <Text style={styles.guidelines}>
                 Classification of the word's origin ex.(Davao del Sur, Davao del Norte, Davao de Oro, etc.){" "}
@@ -342,10 +289,11 @@ function NewDictionary({ currentUser, route, navigation }) {
                 <Picker.Item label="N/A" value="N/A" />
                 
               </Picker>
-          </View>
+        </View>
         
+
         {/* Example Sentence */}
-          <View style={styles.paddingLeft}>
+        <View style={styles.paddingLeft}>
               <Text style={styles.title_text}>Example Sentence<Text style={{color:"red"}}>*</Text></Text>
               <Text style={styles.guidelines}>
                 Write an example of the word you have suggested.
@@ -442,87 +390,83 @@ function NewDictionary({ currentUser, route, navigation }) {
       ))} */}
     <TextInput
       style={styles.input}
-      multiline={true}
+      multiline={false}
       onChangeText={(pronunciation) => setPronunciation(pronunciation)}
     />
   </View>
 
-  
-  <View style={styles.paddingLeft}>
-    <Text style={styles.title_text}>Audio<Text style={{color:"red"}}>*</Text></Text>
-    <Text style={styles.guidelines}>
-      Upload an audio on how to pronounce the word you have contributed.
-    </Text>
-    {isFieldInError("audio") &&
-      getErrorsInField("aduio").map((errorMessage) => (
-        <Text style={{ color: "red" }}>Please select an audio file</Text>
-      ))}
-    <TouchableOpacity
-      style={styles.audioButton}
-      onPress={() => chooseFile()}
-    >
-      <View>
-        {audio ? (
-          <TextInput > {audio?.name}</TextInput>
-        ) : (
-          <MaterialCommunityIcons
-            style={styles.addAudio}
-            name="plus-box"
-            color={"#707070"}
-            size={26}
+      {/* AUDIO */}
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Audio </Text>
+          <Text style={styles.guidelines}>
+            Upload an audio on how to pronounce the word you have contributed.
+          </Text>
+          {isFieldInError("audio") &&
+            getErrorsInField("aduio").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Please select an audio file</Text>
+            ))}
+          <TouchableOpacity
+            style={styles.audioButton}
+            onPress={() => chooseFile()}
+          >
+            <View>
+              {audio ? (
+                <TextInput>{audio?.name}</TextInput>
+              ) : (
+                <MaterialCommunityIcons
+                  style={styles.addAudio}
+                  name="plus-box"
+                  color={"#707070"}
+                  size={26}
+                />
+              )}
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Username </Text>
+          {toggleCheckBox == true ? (
+            <TextInput
+              style={styles.input}
+              multiline={true}
+              value={currentUser.name}
+              editable={false}
+            />
+          ) : null}
+          {toggleCheckBox == false ? (
+            <TextInput
+              style={styles.input}
+              multiline={true}
+              value={name}
+              editable={false}
+            />
+          ) : null}
+        </View>
+        <View style={styles.checkboxContainer}>
+          <Checkbox
+            style={styles.checkbox}
+            value={toggleCheckBox}
+            onValueChange={(newValue) => setToggleCheckBox(newValue)}
+            color={toggleCheckBox ? "#215a88" : undefined}
           />
-        )}
+          <Text style={styles.guidelines}> I allow my name to be shown. </Text>
+        </View>
       </View>
-    </TouchableOpacity>
-  </View>
-  <View style={styles.paddingLeft}>
-    <Text style={styles.title_text}>Username </Text>
-    {toggleCheckBox == true ? (
-      <TextInput
-        style={styles.input}
-        multiline={true}
-        value={currentUser.name}
-        editable={false}
-      />
-    ) : null}
-    {toggleCheckBox == false ? (
-      <TextInput
-        style={styles.input}
-        multiline={true}
-        value={name}
-        editable={false}
-      />
-    ) : null}
-  </View>
-  <View style={styles.checkboxContainer}>
-    <Checkbox
-      style={styles.checkbox}
-      value={toggleCheckBox}
-      onValueChange={(newValue) => setToggleCheckBox(newValue)}
-      color={toggleCheckBox ? "#215a88" : undefined}
-    />
-    <Text style={styles.guidelines}> I allow my name to be shown. </Text>
-  </View>
-        
-  </View>
-
-  {audio ? (
-  <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
-    <Text style={styles.subtitle}>
-      {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
-    </Text>
-  </TouchableOpacity>
-) : (
-  <TouchableOpacity style={styles.button_empty} disabled={true}>
-    <Text style={styles.subtitle}>
-      {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
-    </Text>
-  </TouchableOpacity>
-)}
-
-
-</ScrollView>
-</ImageBackground>
+      {audio ? (
+        <TouchableOpacity style={styles.button} onPress={() => uploadAudio()}>
+          <Text style={styles.subtitle}>
+            {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.button_empty} disabled={true}>
+          <Text style={styles.subtitle}>
+            {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
+          </Text>
+        </TouchableOpacity>
+      )}
+    </ScrollView>
+    </ImageBackground>
   );
 }
 
