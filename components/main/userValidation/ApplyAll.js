@@ -35,6 +35,7 @@ function ApplyAll({ navigation }) {
       .collection("users")
       .where("applicant", "==", "1")
       .orderBy("creation", "asc")
+      .orderBy("status", "asc")
       .get()
       .then((snapshot) => {
         console.log(snapshot, "-=-=-=-=-=-=-=-=");
