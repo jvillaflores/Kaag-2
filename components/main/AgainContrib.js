@@ -35,6 +35,10 @@ function AgainContrib({ currentUser, navigation, route }) {
         setLoading(null);
       });
   }
+  
+  function refreshPage() {
+    window.location.reload(false);
+  }
 
 
   return (
@@ -50,7 +54,7 @@ function AgainContrib({ currentUser, navigation, route }) {
       <View style={{flexDirection:"row", justifyContent:'center'}}>
       <TouchableOpacity
           style={[styles.button, { backgroundColor: "#215a88" }]}
-          onPress={() => navigation.navigate("NewDictionary", { language: language })}
+          onPress={() => navigation.navigate("ContributionWord", { language: language }, {refreshPage})}
         >
           <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
             Continue

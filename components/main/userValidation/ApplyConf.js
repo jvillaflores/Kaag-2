@@ -116,7 +116,7 @@ function Applications({ navigation }) {
             <MaterialCommunityIcons
               name="chevron-right"
               size={20}
-              color="#8E2835"
+              color="#215a88"
             />
           </View>
         </View>

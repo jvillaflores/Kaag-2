@@ -168,6 +168,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         email: currentUser.email,
         name: currentUser.name,
         downloadURL,
+        language: language,
         word: filteredWord,
         filipino: filteredFilipino,
         originated: filteredOrigin,
@@ -183,7 +184,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for contribution!!");
         setLoading(null);
-        navigation.navigate("Course");
+        navigation.navigate("Settings");
       });
   };
 
@@ -200,6 +201,7 @@ function NewDictionary({ currentUser, route, navigation }) {
         name,
         downloadURL,
         word: filteredWord,
+        language: language,
         filipino: filteredFilipino,
         originated: filteredOrigin,
         classification: filteredClassification,
@@ -214,7 +216,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for your contribution! Your contribution will be validated");
         setLoading(null);
-        navigation.navigate("Course");
+        navigation.navigate("Settings");
       });
   };
 

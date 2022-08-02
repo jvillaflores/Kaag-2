@@ -63,6 +63,10 @@ function ContributionWord({ currentUser, navigation, route }) {
     return randomText;
   }
   
+  function refreshPage() {
+    window.location.reload(false);
+  }
+  
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
@@ -199,9 +203,9 @@ function ContributionWord({ currentUser, navigation, route }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Thanks for contribution!!");
+        alert("Thanks for your contribution! Your contribution will be validated.");
         setLoading(null);
-        navigation.navigate("ContributionWord");
+        navigation.navigate("Settings");
       });
   };
 
@@ -232,10 +236,10 @@ function ContributionWord({ currentUser, navigation, route }) {
       })
       .then(function () {
         
-        alert("Thanks for contribution!!");
+        alert("Thanks for your contribution! Your contribution will be validated.");
         
         setLoading(null);
-        navigation.navigate("ContributionWord");
+        navigation.navigate("Settings");
       });
   };
   
@@ -325,7 +329,7 @@ function ContributionWord({ currentUser, navigation, route }) {
 
               {/* Word */}
                 <View style={styles.paddingLeft}>
-                  <Text style={styles.title_text}>Words<Text style={{color:"red"}}>*</Text></Text>
+                  <Text style={styles.title_text}>Word<Text style={{color:"red"}}>*</Text></Text>
                   <Text style={styles.guidelines}>
                     {" "}
                     Type the word you want to contribute.{" "}
@@ -564,8 +568,8 @@ function ContributionWord({ currentUser, navigation, route }) {
             {loading ? `Sharing...  ${parseInt(loading)}%` : "Share"}
           </Text>
         </TouchableOpacity>
+        
       )}
-
 
 </ScrollView>
       </ImageBackground>

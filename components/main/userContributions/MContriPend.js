@@ -39,6 +39,7 @@ function MContriPend({ navigation, language }) {
       .collection("languages")
       .doc(language)
       .collection("dictionary")
+      .orderBy("creation", "desc")
       .where("uid", "==", firebase.auth().currentUser.uid)
       .where("status", "==", "0")
       .get()
@@ -69,10 +70,12 @@ function MContriPend({ navigation, language }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.word}</Text>
+            <Text style={styles.itemsName}>{item?.word}</Text>
+            <Text>{item?.meaning}</Text>
           </View>
-          <View style={styles.itemBody}>
-            <Text> {item?.meaning}</Text>
+         
+          <View style={[styles.itemBody]}>
+            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
           </View>
         </View>
 
@@ -115,7 +118,7 @@ function MContriPend({ navigation, language }) {
             <MaterialCommunityIcons
               name="chevron-right"
               size={20}
-              color="#8E2835"
+              color="#215a88"
             />
           </View>
         </View>

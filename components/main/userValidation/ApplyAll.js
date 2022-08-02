@@ -34,6 +34,7 @@ function ApplyAll({ navigation }) {
       .firestore()
       .collection("users")
       .where("applicant", "==", "1")
+      .orderBy("creation", "asc")
       .get()
       .then((snapshot) => {
         console.log(snapshot, "-=-=-=-=-=-=-=-=");
@@ -109,7 +110,7 @@ function ApplyAll({ navigation }) {
             <MaterialCommunityIcons
               name="chevron-right"
               size={20}
-              color="#8E2835"
+              color="#215a88"
             />
           </View>
         </View>

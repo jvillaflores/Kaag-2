@@ -28,7 +28,7 @@ import DeclineScreen from "./MContriDec";
 
 const Tab = createMaterialTopTabNavigator();
 
-function MyContributions({ route }) {
+function MyContributions({ route, navigation }) {
   const { language } = route?.params ?? {};
 
   return (
@@ -38,10 +38,10 @@ function MyContributions({ route }) {
           tabBarContentContainerStyle: {
             backgroundColor: "#f2f2f2",
           },
-          tabBarActiveTintColor: "#004aad",
+          tabBarActiveTintColor: "#215a88",
           tabBarInactiveTintColor: "#B2B2B2",
 
-          tabBarPressColor: "#8E2835",
+          tabBarPressColor: "#215a88",
           tabBarLabelStyle: {
             fontSize: 11,
             fontWeight: "bold",
@@ -65,6 +65,15 @@ function MyContributions({ route }) {
           children={(props) => <DeclineScreen language={language} {...props} />}
         />
       </Tab.Navigator>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate("NewDictionary", { language: language })
+        }
+        //onPress={() => navigation.navigate("NewContribution")}
+      >
+        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -112,6 +121,22 @@ const styles = StyleSheet.create({
     color: "#8E2835",
     fontWeight: "bold",
     fontSize: 13,
+  },
+  button: {
+    position: "absolute",
+    width: 70,
+    height: 70,
+    borderRadius: 70 / 2,
+    alignItems: "center",
+    justifyContent: "center",
+    //shadowRadius: 10,
+    //shadowColor: "#F02A4B",
+    //shadowOpacity: 0.3,
+    //shadowOffset: { height: 10 },
+    backgroundColor: "#91B2EB",
+    bottom: 30,
+    right: 30,
+    elevation: 9,
   },
   itemContainer: {
     flexDirection: "row",

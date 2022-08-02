@@ -111,15 +111,15 @@ export class Main extends Component {
             ),
           }}
         />
-        {/* <Tab.Screen
-          name="ContributeDictionary"
-          component={ContributeDictionary}
+        <Tab.Screen
+          name="Consent"
+          component={Consent}
           //navigation = {this.props.navigation}
           //to pass along the props inside it and make it easier the logic from the profile screen perspective
           listeners={({ navigation }) => ({
             tabPress: (event) => {
               event.preventDefault();
-              navigation.navigate("ContributeDictionary", {
+              navigation.navigate("Consent", {
                 language: language,
               });
             },
@@ -129,8 +129,8 @@ export class Main extends Component {
               <MaterialCommunityIcons name="upload" color={color} size={26} />
             ),
           }}
-        /> */}
-         <Tab.Screen
+        />
+         {/* <Tab.Screen
           name="ContributionWord"
           component={ContributionWord}
           //navigation = {this.props.navigation}
@@ -148,7 +148,7 @@ export class Main extends Component {
               <MaterialCommunityIcons name="upload" color={color} size={26} />
             ),
           }}
-        /> 
+        />  */}
 
         {/* <Tab.Screen
           name="audioscreen"
