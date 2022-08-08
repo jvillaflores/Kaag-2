@@ -244,7 +244,7 @@ function ContributionWord({ currentUser, navigation, route }) {
     // This will render all of the functions available for the superuser
     return (
       <ScrollView 
-        style={styles.container}
+        style={styles.Ccontainer}
         
         >
         
@@ -254,7 +254,7 @@ function ContributionWord({ currentUser, navigation, route }) {
             flex:1, paddingVertical:40, 
             alignContent:'center',}}>
 
-            <View style={styles.header}>
+            <View style={styles.Cheader}>
               <Text style={styles.textHead}>Help application grow </Text>
               <Text style={styles.description}>
                 Community language champions, linguistic scholars, and others involved
@@ -403,5 +403,39 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         letterSpacing: 0.25,
         alignSelf:'center',
+      },
+      Cheader:{
+        paddingVertical: 15,
+      },
+      Ccontainer:{
+        flex: 1,
+        top: 30,
+      },
+      checkboxContainer: {
+        flexDirection: "row",
+        marginVertical: 10,
+        alignItems: "center",
+        alignContent: "center",
+        justifyContent:'center',
+        paddingTop: 20,
+      },
+      checkbox: {
+        width: 20,
+        height: 20,
+      },
+      proceedButton: {
+        justifyContent: "center",
+        alignSelf: "center",
+        paddingVertical: 12,
+        borderRadius: 10,
+        width: "100%",
+        
+      },
+      subtitle: {
+        alignSelf: "center",
+        fontSize: 18,
+    
+        letterSpacing: 0.25,
+        color: "white",
       },
 });

@@ -184,7 +184,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for contribution!!");
         setLoading(null);
-        navigation.navigate("Settings");
+        navigation.navigate("Course");
       });
   };
 
@@ -216,7 +216,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for your contribution! Your contribution will be validated");
         setLoading(null);
-        navigation.navigate("Settings");
+        navigation.navigate("Course");
       });
   };
 
