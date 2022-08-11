@@ -294,33 +294,7 @@ return(
           <Text style={[styles.textHead, {}]}>Hello, {currentUser.name}! </Text>
         </View>
 
-        <View>
-          <Text style={styles.textKagan}>Contribute</Text>
-        </View>
-        <View>
-          
-
-          {/* Speech.js */}
-          <TouchableOpacity
-            style={styles.buttonVocab}
-            onPress={() => 
-             navigation.navigate("NewDictionary")
-             //alert("This page is not yet available")
-            }
-          >
-            <View style={styles.contextButton}>
-              <Image
-                style={{ width: 50, height: 40 }}
-                source={require("../../assets/pronun.png")}
-              />
-              <View style={styles.text_Context}>
-                <Text style={styles.textVocab}>Words</Text>
-                <Text style={styles.textVocabSub}>Contribute Words for the dictionary
-                </Text>
-              </View>
-            </View>
-          </TouchableOpacity>
-        </View>
+        
 
         <View>
           <Text style={styles.textKagan}>Course</Text>

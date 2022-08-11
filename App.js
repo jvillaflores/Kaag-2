@@ -93,6 +93,7 @@ import EditCultures from "./components/main/EditCultures";
 import AddCulture from "./components/main/AddCulture";
 import AgainContrib from "./components/main/AgainContrib";
 import Consent from "./components/main/Consent";
+import NewConsent from "./components/main/NewConsent";
 
 
 
@@ -372,6 +373,20 @@ export class App extends Component {
                 },
               }}
             />
+
+            <Stack.Screen
+              name="NewConsent"
+              component={NewConsent}
+              navigation={this.props.navigation}
+              options={{
+               
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                },
+              }}
+            />
+
              <Stack.Screen
               name="AgainContrib"
               component={AgainContrib}

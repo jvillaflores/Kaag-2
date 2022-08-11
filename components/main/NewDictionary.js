@@ -184,7 +184,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for contribution!!");
         setLoading(null);
-        navigation.navigate("Course");
+        navigation.pop();
       });
   };
 
@@ -216,7 +216,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for your contribution! Your contribution will be validated");
         setLoading(null);
-        navigation.navigate("Course");
+        navigation.pop();
       });
   };
 
@@ -288,6 +288,7 @@ function NewDictionary({ currentUser, route, navigation }) {
                 <Picker.Item label="Davao Oriental" value="Davao Oriental" />
                 <Picker.Item label="Davao de Oro" value="Davao de Oro" />
                 <Picker.Item label="Davao City" value="Davao City" />
+                <Picker.Item label="None from the choices" value="Other" />
                 <Picker.Item label="N/A" value="N/A" />
                 
               </Picker>
