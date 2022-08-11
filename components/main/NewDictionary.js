@@ -7,6 +7,7 @@ import {
   ScrollView,
   Alert,
   ImageBackground,
+  DevSettings,
 } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 
@@ -51,6 +52,29 @@ function NewDictionary({ currentUser, route, navigation }) {
 
     return randomText;
   }
+
+  const clearWord = (val) => {
+    setWord("");
+  };
+  const clearFilipino = (val) => {
+    setFilipino("");
+  };
+  const clearSentence = (val) => {
+    setSentence("");
+  };
+  const clearEnglishMeaning = (val) => {
+    setEnglishMeaning("");
+  };
+
+  const clearMeaning = (val) => {
+    setMeaning("");
+  };
+  const clearPronunciation = (val) => {
+    setPronunciation("");
+  };
+  const clearAudio = (val) => {
+    setAudio(null);
+  };
 
   const Capitalize = (str) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -178,9 +202,18 @@ function NewDictionary({ currentUser, route, navigation }) {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Thanks for contribution!!");
+        alert(
+          "Thanks for your contribution! Your contribution will be validated"
+        );
         setLoading(null);
-        navigation.navigate("NewDictionaryReRender", { language: language });
+        navigation.navigate("NewDictionary", { language: language });
+        clearWord(word);
+        clearFilipino(filipino);
+        clearSentence(sentence);
+        clearEnglishMeaning(englishMeaning);
+        clearMeaning(meaning);
+        clearPronunciation(pronunciation);
+        clearAudio(audio);
       });
   };
 
@@ -214,7 +247,14 @@ function NewDictionary({ currentUser, route, navigation }) {
           "Thanks for your contribution! Your contribution will be validated"
         );
         setLoading(null);
-        navigation.navigate("NewDictionaryReRender", { language: language });
+        navigation.navigate("NewDictionary", { language: language });
+        clearWord(word);
+        clearFilipino(filipino);
+        clearSentence(sentence);
+        clearEnglishMeaning(englishMeaning);
+        clearMeaning(meaning);
+        clearPronunciation(pronunciation);
+        clearAudio(audio);
       });
   };
 
@@ -241,6 +281,7 @@ function NewDictionary({ currentUser, route, navigation }) {
               ))}
             <TextInput
               style={styles.input}
+              value={word}
               multiline={true}
               autoCapitalize="none"
               onChangeText={(word) => setWord(word)}
@@ -263,6 +304,7 @@ function NewDictionary({ currentUser, route, navigation }) {
             <TextInput
               style={styles.description_input}
               multiline={true}
+              value={meaning}
               onChangeText={(meaning) => setMeaning(meaning)}
             />
           </View>
@@ -312,6 +354,7 @@ function NewDictionary({ currentUser, route, navigation }) {
             <TextInput
               style={styles.input}
               multiline={true}
+              value={sentence}
               onChangeText={(sentence) => setSentence(sentence)}
             />
           </View>
@@ -333,6 +376,7 @@ function NewDictionary({ currentUser, route, navigation }) {
             <TextInput
               style={styles.input}
               multiline={true}
+              value={filipino}
               onChangeText={(filipino) => setFilipino(filipino)}
             />
           </View>
@@ -350,6 +394,7 @@ function NewDictionary({ currentUser, route, navigation }) {
             <TextInput
               style={styles.description_input}
               multiline={true}
+              value={englishMeaning}
               onChangeText={(englishMeaning) =>
                 setEnglishMeaning(englishMeaning)
               }
@@ -396,6 +441,7 @@ function NewDictionary({ currentUser, route, navigation }) {
             <TextInput
               style={styles.input}
               multiline={false}
+              value={pronunciation}
               onChangeText={(pronunciation) => setPronunciation(pronunciation)}
             />
           </View>
