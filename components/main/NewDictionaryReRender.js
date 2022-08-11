@@ -23,7 +23,7 @@ import { useValidation } from "react-native-form-validator";
 import { Picker } from "@react-native-picker/picker";
 import Checkbox from "expo-checkbox";
 
-function NewDictionary({ currentUser, route, navigation }) {
+function NewDictionaryReRender({ currentUser, route, navigation }) {
   const [word, setWord] = useState("");
   const [name, setName] = useState("Anonymous");
   const [filipino, setFilipino] = useState("");
@@ -180,7 +180,7 @@ function NewDictionary({ currentUser, route, navigation }) {
       .then(function () {
         alert("Thanks for contribution!!");
         setLoading(null);
-        navigation.navigate("NewDictionaryReRender", { language: language });
+        navigation.navigate("NewDictionary", { language: language });
       });
   };
 
@@ -214,7 +214,7 @@ function NewDictionary({ currentUser, route, navigation }) {
           "Thanks for your contribution! Your contribution will be validated"
         );
         setLoading(null);
-        navigation.navigate("NewDictionaryReRender", { language: language });
+        navigation.navigate("NewDictionary", { language: language });
       });
   };
 
@@ -484,7 +484,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 
-export default connect(mapStateToProps, null)(NewDictionary);
+export default connect(mapStateToProps, null)(NewDictionaryReRender);
 const styles = StyleSheet.create({
   container: {
     alignContent: "center",

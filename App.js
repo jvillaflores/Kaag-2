@@ -30,7 +30,7 @@ const firebaseConfig = {
   projectId: "project-kaag-357101",
   storageBucket: "project-kaag-357101.appspot.com",
   messagingSenderId: "588978127054",
-  appId: "1:588978127054:web:f1b1df43e9e77ef528d09f"
+  appId: "1:588978127054:web:f1b1df43e9e77ef528d09f",
 };
 
 if (firebase.apps.length === 0) {
@@ -50,6 +50,7 @@ import GrammarScreen from "./components/main/Grammar";
 import WordScreen from "./components/main/Word";
 import SaveScreen from "./components/main/Save";
 import NewDictionaryScreen from "./components/main/NewDictionary";
+import NewDictionaryReRenderScreen from "./components/main/NewDictionaryReRender";
 import MyContributionsScreen from "./components/main/userContributions/MyContributions";
 import BeAValidatorScreen from "./components/main/BeAValidator";
 import ValidatorAppScreen from "./components/main/ValidatorApplication";
@@ -94,9 +95,6 @@ import AddCulture from "./components/main/AddCulture";
 import AgainContrib from "./components/main/AgainContrib";
 import Consent from "./components/main/Consent";
 import NewConsent from "./components/main/NewConsent";
-
-
-
 
 const Stack = createStackNavigator();
 
@@ -362,6 +360,18 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
+              name="NewDictionaryReRender"
+              component={NewDictionaryReRenderScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Upload a Word",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                },
+              }}
+            />
+            <Stack.Screen
               name="Consent"
               component={Consent}
               navigation={this.props.navigation}
@@ -379,7 +389,6 @@ export class App extends Component {
               component={NewConsent}
               navigation={this.props.navigation}
               options={{
-               
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#215A88",
@@ -387,7 +396,7 @@ export class App extends Component {
               }}
             />
 
-             <Stack.Screen
+            <Stack.Screen
               name="AgainContrib"
               component={AgainContrib}
               navigation={this.props.navigation}
@@ -500,7 +509,7 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            /> 
+            />
 
             <Stack.Screen
               name="ValAppScreen"
@@ -873,7 +882,7 @@ export class App extends Component {
               }}
             />
 
-<Stack.Screen
+            <Stack.Screen
               name="EditCulture"
               component={EditCulture}
               options={{
@@ -917,7 +926,6 @@ export class App extends Component {
                 },
               }}
             />
-            
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
