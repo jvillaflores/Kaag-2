@@ -36,6 +36,7 @@ function VWAll({ navigation, language }) {
       .doc(language)
       .collection("dictionary")
       .where("upload", "==", "1")
+      .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
         console.log(snapshot, "-=-=-=-=-=-=-=-=");
@@ -77,10 +78,11 @@ function VWAll({ navigation, language }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.word}</Text>
+            <Text style={styles.itemsName}>{item?.word}</Text>
+            <Text>{item?.meaning}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.meaning}</Text>
+            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
           </View>
         </View>
 
@@ -123,7 +125,7 @@ function VWAll({ navigation, language }) {
             <MaterialCommunityIcons
               name="chevron-right"
               size={20}
-              color="#8E2835"
+              color="#215a88"
             />
           </View>
         </View>

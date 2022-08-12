@@ -63,20 +63,20 @@ function ApplicationConf({ route, navigation }) {
   return (
     <ScrollView style={styles.container}>
       <View>
-        <Text style={[styles.text, { color: "#215A88" }]}> {data?.name} </Text>
+        <Text style={[styles.text, { color: "#215A88" }]}>{data?.name} </Text>
       </View>
 
       <View style={(styles.bodycontainer, { marginTop: 10 })}>
         <Text style={[styles.text, { fontSize: 16 }]}>Resume</Text>
-        <Text> (tap to download) </Text>
-        <TouchableOpacity style={[styles.addButton, { height: 110 }]}>
+        <Text>(tap to download) </Text>
+        <TouchableOpacity style={[styles.addButton, {  padding:10 }]}>
           <Hyperlink linkDefault={true}>
             <MaterialCommunityIcons
               name="file-pdf-box"
               size={35}
               color="#70707033"
             />
-            <Text style={{ color: "#B1B1B1", fontSize: 12 }}>
+            <Text style={{ color: "#B1B1B1", fontSize: 12,   }}>
               {" "}
               {data?.downloadURL}
             </Text>
@@ -110,12 +110,12 @@ function ApplicationConf({ route, navigation }) {
         ></TextInput>
       </View>
 
-      <View style={{ flexDirection: "row", flex: 1, justifyContent: "center" }}>
+      <View style={{ flexDirection: "row", justifyContent: "center" }}>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#288E4D" }]}
           onPress={() => Accept()}
         >
-          <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
+          <Text style={[styles.button_text, { fontSize: 16, color: "white" }]}>
             Accept
           </Text>
         </TouchableOpacity>
@@ -123,7 +123,7 @@ function ApplicationConf({ route, navigation }) {
           style={[styles.button, { backgroundColor: "#BB0000" }]}
           onPress={() => Decline()}
         >
-          <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
+          <Text style={[styles.button_text, { fontSize: 16, color: "white" }]}>
             Decline
           </Text>
         </TouchableOpacity>
@@ -149,17 +149,26 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   addButton: {
-    borderColor: "#70707033",
-    borderWidth: 1.5,
+    backgroundColor: "#e7e7e7",
     marginVertical: 10,
-    borderRadius: 7,
+    borderRadius: 6,
     alignItems: "center",
     justifyContent: "center",
   },
   button: {
-    paddingVertical: 20,
-    paddingHorizontal: 54,
-    marginHorizontal: 5,
-    borderRadius: 5,
+    justifyContent: "center",
+        padding: 10,
+        borderRadius: 10,
+        margin: 10,
+        width:"45%",
+        paddingVertical:15,
+        elevation: 3,
+
+  },
+  button_text:{
+        fontSize: 15,
+        fontWeight: "bold",
+        letterSpacing: 0.25,
+        alignSelf:'center',
   },
 });

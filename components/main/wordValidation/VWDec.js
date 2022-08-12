@@ -76,10 +76,12 @@ function VWDec({ navigation, language }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.word}</Text>
+            <Text style={styles.itemsName}>{item?.word}</Text>
+            <Text>{item?.meaning}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.meaning}</Text>
+            
+            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
           </View>
         </View>
 
@@ -122,7 +124,7 @@ function VWDec({ navigation, language }) {
             <MaterialCommunityIcons
               name="chevron-right"
               size={20}
-              color="#8E2835"
+              color="#215a88"
             />
           </View>
         </View>

@@ -65,15 +65,18 @@ function Applications({ navigation }) {
         key={index}
         style={styles.itemContainer}
         onPress={() =>
-          navigation.navigate("ConfirmationScreen", { data: item })
+          navigation.navigate("ConfirmScreen", { data: item })
         }
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
             <Text style={styles.itemsName}> {item?.name}</Text>
-          </View>
-          <View style={styles.itemBody}>
             <Text> {item?.note}</Text>
+          </View>
+          
+          <View style={[styles.itemBody]}>
+           <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
+
           </View>
         </View>
 

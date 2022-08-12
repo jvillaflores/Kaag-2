@@ -34,8 +34,8 @@ function ApplyAll({ navigation }) {
       .firestore()
       .collection("users")
       .where("applicant", "==", "1")
-      .orderBy("creation", "asc")
-      .orderBy("status", "asc")
+      .orderBy("creation", "desc")
+      //.orderBy("status", "asc")
       .get()
       .then((snapshot) => {
         console.log(snapshot, "-=-=-=-=-=-=-=-=");
@@ -65,10 +65,12 @@ function ApplyAll({ navigation }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.name}</Text>
+            <Text style={styles.itemsName}>{item?.name}</Text>
+            <Text>{item?.note}</Text>
           </View>
-          <View style={styles.itemBody}>
-            <Text> {item?.note}</Text>
+          
+          <View style={[styles.itemBody]}>
+            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
           </View>
         </View>
 

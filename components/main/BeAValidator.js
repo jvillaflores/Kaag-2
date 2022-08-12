@@ -17,7 +17,11 @@ export default function BeAValidator({ navigation, route }) {
   const [complianceModal, setComplianceModal] = useState(true);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <View style={{
+            paddingHorizontal:30, 
+            flex:1, paddingVertical:40, 
+            alignContent:'center',}}>
       <View style={styles.header}>
         <Text style={styles.textHead}>Help application grow </Text>
         <Text style={styles.description}>
@@ -85,15 +89,14 @@ export default function BeAValidator({ navigation, route }) {
           <Text style={styles.subtitle}> PROCEED </Text>
         </TouchableOpacity>
       </View>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 30,
-    alignItems: "center",
   },
   containerbox: {
     alignItems: "center",
@@ -104,9 +107,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 10,
     alignItems: "center",
-    marginRight: 50,
-    paddingRight: 50,
-    justifyContent: "center",
+    alignContent: "center",
+    justifyContent:'center',
     paddingTop: 20,
   },
   subtitle: {
@@ -118,32 +120,22 @@ const styles = StyleSheet.create({
   },
   proceedButton: {
     justifyContent: "center",
-    alignSelf: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 110,
-    borderRadius: 10,
-
-    width: "100%",
-    // paddingRight:30,
-    // marginRight: 30,
-    marginTop: 20,
+        alignSelf: "center",
+        paddingVertical: 12,
+        borderRadius: 10,
+        width: "100%",
+        
   },
 
   checkbox: {
-    width: 40,
-    height: 40,
-    marginRight: 20,
+    width: 20,
+    height: 20,
   },
   label: {
     margin: 8,
   },
   header: {
-    //flex:1,
-    alignContent: "center",
-    alignSelf: "flex-start",
-    marginLeft: 30,
-    //marginTop: 5,
-    marginBottom: 30,
+    paddingVertical: 15,
   },
   button: {
     //flex:1,
@@ -177,21 +169,22 @@ const styles = StyleSheet.create({
   },
   textHead: {
     flexDirection: "row",
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
+        fontSize: 20,
+        fontWeight: "bold",
+        lineHeight: 21,
+        letterSpacing: 0.25,
+        color: "black",
+        textAlign:'center',
   },
   description: {
     flexDirection: "row",
-    fontSize: 13,
-    lineHeight: 20,
-    letterSpacing: 0.25,
-    color: "black",
-    marginRight: 35,
-    textAlign: "justify",
-    //marginTop: 10,
+        fontSize: 13,
+        lineHeight: 20,
+        letterSpacing: 0.25,
+        color: "black",
+        //marginRight: 35,
+        textAlign: "justify",
+        marginTop: 10,
   },
   headLine: {
     top: 15,

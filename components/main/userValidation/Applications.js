@@ -29,10 +29,10 @@ function Applications() {
           tabBarContentContainerStyle: {
             backgroundColor: "#f2f2f2",
           },
-          tabBarActiveTintColor: "#004AAD",
+          tabBarActiveTintColor: "#215a88",
           tabBarInactiveTintColor: "#B2B2B2",
 
-          tabBarPressColor: "#8E2835",
+          tabBarPressColor: "#215a88",
           tabBarLabelStyle: {
             fontSize: 11,
             fontWeight: "bold",

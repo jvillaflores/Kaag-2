@@ -56,27 +56,7 @@ function MContriAll({ navigation, language }) {
     getData();
   };
 
-  // useEffect(() => {
-  //   const unsubscribe = navigation.addListener("focus", () => {
-  //     firebase
-  //       .firestore()
-  //       .collection("languages")
-  //       .doc(language)
-  //       .collection("dictionary")
-  //       .where("uid", "==", firebase.auth().currentUser.uid)
-  //       .get()
-  //       .then((snapshot) => {
-  //         let dictionaryAll = snapshot.docs.map((doc) => {
-  //           const data = doc.data();
-  //           const id = doc.id;
-  //           return { id, ...data };
-  //         });
-  //         setDatalist(dictionaryAll);
-  //       });
-  //   });
-
-  //   return unsubscribe;
-  // }, [navigation]);
+  
 
   const renderItem = ({ item, index }) => {
     return (

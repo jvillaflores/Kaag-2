@@ -127,6 +127,8 @@ function ValidatorApplication({ route, navigation }) {
         userLanguage,
         secondLanguage,
         thirdLanguage,
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
+
       })
       .then(function () {
         alert("Thanks for applying as a validator");
@@ -150,18 +152,18 @@ function ValidatorApplication({ route, navigation }) {
       <View style={styles.bodycontainer}>
         <View style={{}}>
           <View>
-            <Text style={[styles.text, { color: "#000000" }]}>
+            <Text style={[styles.text, { color: "#000000", paddingVertical:1 }]}>
               Be a KAAG Validator
             </Text>
           </View>
-          <Text style={{ textAlign: "justify" }}>
+          <Text style={{ textAlign: "justify", paddingVertical:3 }}>
             A KAAG Validator must be from the Tribe, a linguist, or speaks the{" "}
             language. He/She will validate submissions and contributions of
             different words.
           </Text>
         </View>
 
-        <View style={{ marginVertical: 5 }}>
+        <View style={{ paddingVertical: 10 }}>
           <Text style={[styles.text, { fontSize: 16 }]}>Resume</Text>
           <TouchableOpacity
             style={[styles.addButton, { height: 90 }]}
@@ -182,12 +184,13 @@ function ValidatorApplication({ route, navigation }) {
             )}
           </TouchableOpacity>
         </View>
-        <View>
+        
+
+
+        <View style={{paddingVertical:10}}>
           <Text style={[styles.text, { fontSize: 16 }]}>
             What languages do you speak?
           </Text>
-        </View>
-        <View style={styles.Checkbox}>
           <Picker
             style={styles.input}
             selectedValue={userLanguage}
@@ -195,6 +198,9 @@ function ValidatorApplication({ route, navigation }) {
           >
             {renderDatalist()}
           </Picker>
+        </View>
+        <View style={{paddingVertical:10}}>
+          
           <View>
             <Text style={[styles.text, { fontSize: 16 }]}>
               Secondary Languages
@@ -272,17 +278,16 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
-    letterSpacing: 0.5,
   },
   bodycontainer: {
     paddingVertical: 5,
     paddingHorizontal: 15,
   },
   addButton: {
-    borderColor: "#70707033",
-    borderWidth: 1.5,
+    width: "100%",
+    backgroundColor: "#e7e7e7",
     marginVertical: 10,
-    borderRadius: 7,
+    borderRadius: 6,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -294,8 +299,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: "center",
   },
-  Checkbox: {
-    flex: 1,
-    marginTop: 5,
+  
+  input: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    backgroundColor: "#e7e7e7",
+    borderRadius: 6,
+    borderColor: "#707070",
+    marginVertical:4,
   },
 });
