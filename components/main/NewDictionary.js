@@ -448,7 +448,7 @@ function NewDictionary({ currentUser, route, navigation }) {
 
           {/* AUDIO */}
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Audio </Text>
+            <Text style={styles.title_text}>Audio<Text style={{ color: "red" }}>*</Text></Text>
             <Text style={styles.guidelines}>
               Upload an audio on how to pronounce the word you have contributed.
             </Text>

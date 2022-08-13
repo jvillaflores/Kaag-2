@@ -318,8 +318,8 @@ return(
               />
 
               <View style={styles.text_Context}>
-                <Text style={styles.textVocab}> Vocabulary</Text>
-                <Text style={styles.textVocabSub}> Translate words</Text>
+                <Text style={styles.textVocab}>Vocabulary</Text>
+                <Text style={styles.textVocabSub}>Translate words</Text>
               </View>
             </View>
           </TouchableOpacity>
