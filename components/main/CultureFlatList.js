@@ -8,108 +8,99 @@ import {
   TextInput,
   FlatList,
   SafeAreaView,
-  Button,
-  Alert,
+  ScrollView,
+  TouchableOpacity,
+  RefreshControl,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { connect } from "react-redux";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import AddButton from "./AddButton";
 import firebase from "firebase";
 require("firebase/firestore");
-import FeedScreen from "./Feed";
-import CultureFL from "./CultureFlatList";
-import SocialScreen from "./Social";
-import { NavigationContainer } from "@react-navigation/native";
+require("firebase/firebase-storage");
+// import SeeMore from "react-native-see-more-inline";
 
-const Tab = createMaterialTopTabNavigator();
+import { Dimensions } from "react-native";
 
-function Community({ currentUser, route, navigation }) {
+function CultureFlatList({ navigation, route, language }) {
+  const dimensions = Dimensions.get("window");
+  //const imageHeight = Math.round(dimensions.width * 1 / 1);
+  const imageWidth = dimensions.width;
   const [datalist, setDatalist] = useState("");
-  const { language } = route?.params ?? {};
-  console.log(language);
-  // console.log(datalist);
-  console.log(datalist);
+  const [refreshing, setRefreshing] = useState(true);
 
   useEffect(() => {
-    setDatalist(currentUser);
-  }, [currentUser]);
-  useEffect(() => {
-    //used to fetch the name of the current user.
-    const unsubscribe = navigation.addListener("focus", () => {
-      firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .get()
-        .then((snapshot) => {
-          console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          if (snapshot.exists) {
-            let currentUser = snapshot.data();
-            setDatalist(currentUser);
-          } else {
-          }
+    getData();
+  }, []);
+
+  const getData = () => {
+    //Service to get the data from the server to render
+    // Fetch the data that are posted by all of the users.
+    firebase
+    .firestore()
+      .collection("languages")
+      .doc(language)
+      .collection("Culture")
+      .get()
+      .then((snapshot) => {
+        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        let postsAll = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          return { id, ...data };
         });
-    });
+        setDatalist(postsAll);
+        setRefreshing(false);
+      });
+  };
 
-    return unsubscribe;
-  }, [navigation]);
+  const ItemView = ({ item }) => {
+    return (
+      // Flat List Item
+      <TouchableOpacity style={styles.container}>
+        <Text style={styles.textKagan}>
+          {" "} 
+          {item.title}
+        </Text>
+        {/*<Image
+          style={{ width: imageWidth, height: imageWidth }}
+          source={{ uri: item.image }}
+        />*/}
+       <Image
+          style={{ width: imageWidth, height: imageWidth }}
+          source={{ uri: item.image }}/>
+        <View style={{ padding: 30 }}>
+          <Text style={styles.textVocab}> {item.desc}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+  const onRefresh = () => {
+    //Clear old data of the list
+    setDatalist([]);
+    //Call the Service to get the latest data
+    getData();
+  };
+
   return (
-    <NavigationContainer independent={true}>
-      
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarContentContainerStyle: {
-            backgroundColor: "#f2f2f2",
-          },
-          tabBarActiveTintColor: "#215a88",
-          tabBarInactiveTintColor: "#B2B2B2",
-
-          tabBarPressColor: "#215a88",
-          tabBarLabelStyle: {
-            fontSize: 15,
-            fontWeight: "bold",
-          },
-        })}
-      >
-       
-        <Tab.Screen
-          name="Culture"
-          children={(props) => <CultureFL language={language} {...props} />}
+    <FlatList
+      nestedScrollEnabled
+      numColumns={1}
+      horizontal={false}
+      data={datalist}
+      style={{ flex: 1 }}
+      renderItem={ItemView}
+      refreshControl={
+        <RefreshControl
+          //refresh control used for the Pull to Refresh
+          refreshing={refreshing}
+          onRefresh={onRefresh}
         />
-
-        <Tab.Screen
-          name="Food"
-          children={(props) => <CultureFL language={language} {...props} />}
-        />
-
-        <Tab.Screen
-          name="Clothing"
-          children={(props) => <CultureFL language={language} {...props} />}
-        />
-        
-      </Tab.Navigator>
-
-      <Pressable
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate("MainContribution", { language: language })
-        }
-        //onPress={() => navigation.navigate("NewContribution")}
-      >
-        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
-      </Pressable>
-    </NavigationContainer>
-    // <View>
-    //   <Text>{language}</Text>
-    // </View>
+      }
+    />
   );
 }
 
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser,
-});
-
-export default connect(mapStateToProps, null)(Community);
+export default CultureFlatList;
 
 const styles = StyleSheet.create({
   title: {
@@ -117,35 +108,38 @@ const styles = StyleSheet.create({
     left: 10,
   },
   container: {
-     alignItems: "center",
-    // marginTop: 30,
-    // marginBottom: -360,
+    alignItems: "flex-start",
+    marginBottom: 20,
     flex: 1,
-  },
-  innercontainer: {
-    flex: 1,
-    // alignItems: "flex-start",
-    // justifyContent: "flex-start",
-    // marginTop: 30,
-    // marginLeft: 20,
-    // marginRight: 15,
-    //backgroundColor: '#FFFFFF',
   },
   button: {
     position: "absolute",
-    width: 70,
-    height: 70,
-    borderRadius: 70 / 2,
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
     alignItems: "center",
     justifyContent: "center",
-    //shadowRadius: 10,
-    //shadowColor: "#F02A4B",
-    //shadowOpacity: 0.3,
-    //shadowOffset: { height: 10 },
-    backgroundColor: "#215A88",
-    bottom: 30,
-    right: 30,
-    elevation: 9,
+    shadowRadius: 10,
+    shadowColor: "#F02A4B",
+    shadowOpacity: 0.3,
+    shadowOffset: { height: 10 },
+    backgroundColor: "#8E2835",
+  },
+  imageprofile: {
+    height: 45,
+    width: 45,
+    borderRadius: 100,
+    margin: 10,
+  },
+  profile: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  profilename: {
+    fontWeight: "bold",
+    paddingLeft: 10,
+    paddingBottom: 20,
+    paddingTop: 10,
   },
 
   textHead: {
@@ -154,23 +148,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    color: "#215a88",
+    color: "white",
   },
   textSubHead: {
-    // flexDirection: "row",
-    // fontSize: 15,
-    // fontWeight: "bold",
-    // lineHeight: 21,
-    // letterSpacing: 0.25,
-    //color: "white",
-  },
-  textreg: {
     flexDirection: "row",
     fontSize: 15,
     // fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
+    color: "white",
   },
   headLine: {
     flexDirection: "row",
@@ -211,7 +197,20 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "black",
   },
-
+  Abutton: {
+    justifyContent: "center",
+    paddingVertical: 8,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    width: 150,
+    top: -120,
+    backgroundColor: "#8E2835",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+  },
   buttonVocab: {
     alignSelf: "center",
     justifyContent: "center",
@@ -280,9 +279,10 @@ const styles = StyleSheet.create({
     left: -10,
   },
   textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 13,
+    margin: 10,
+    fontStyle: "italic",
+    //lineHeight: 21,
     letterSpacing: 0.25,
     color: "black",
   },
@@ -327,8 +327,5 @@ const styles = StyleSheet.create({
     left: 130,
     height: 50,
     borderColor: "black",
-  },
-  Icon: {
-    left: 7,
   },
 });

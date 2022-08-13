@@ -57,7 +57,7 @@ const EditAbout = ({ navigation, route }) => {
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() =>
-              navigation.navigate("EditTraditions", { language: language })
+              navigation.navigate("EditCulture", { language: language })
             }
           >
             <View style={styles.contextButton}>
