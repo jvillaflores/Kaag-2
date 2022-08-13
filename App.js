@@ -354,9 +354,9 @@ export class App extends Component {
                 headerLeft: () => (
                   <View style={{ marginLeft: 10 }}>
                     <MaterialCommunityIcons
-                      name="home"
+                      name="arrow-left"
                       color={"#ffffff"}
-                      size={30}
+                      size={25}
                       onPress={() => {
                         navigation.navigate("Course");
                       }}
@@ -747,7 +747,7 @@ export class App extends Component {
               name="EditEvent"
               component={EditEvent}
               options={{
-                title: "EditEvent",
+                title: " ",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

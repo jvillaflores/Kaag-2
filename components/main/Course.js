@@ -372,7 +372,7 @@ return(
             </View>
           </TouchableOpacity>
 
-          {/* AboutCulture.js */}
+          {/* AboutEvents.js */}
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() => navigation.navigate("Event", { language: language })}
@@ -389,17 +389,7 @@ return(
               </View>
             </View>
           </TouchableOpacity>
-          {/* <TouchableOpacity
-            style={styles.buttonVocab}
-            onPress={() => navigation.navigate("Consent", { language: language })}
-          >
-            <View style={styles.contextButton}>
-              <View style={styles.text_Context}>
-                <Text style={styles.textVocab}>Trial</Text>
-                <Text style={styles.textVocabSub}></Text>
-              </View>
-            </View>
-          </TouchableOpacity> */}
+         
         </View>
       </ScrollView>
     </SafeAreaView>

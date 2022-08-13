@@ -53,7 +53,7 @@ const EditAbout = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
       >
         <View style={{ paddingBottom: 30 }}>
-          {/* AboutCulture.js */}
+          {/* EditCulture.js */}
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() =>

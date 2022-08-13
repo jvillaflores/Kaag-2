@@ -20,6 +20,7 @@ require("firebase/firebase-storage");
 // import SeeMore from "react-native-see-more-inline";
 
 import { Dimensions } from "react-native";
+import { Directions } from "react-native-gesture-handler";
 
 function CultureFlatList({ navigation, route, language }) {
   const dimensions = Dimensions.get("window");
@@ -56,22 +57,44 @@ function CultureFlatList({ navigation, route, language }) {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
+      // <TouchableOpacity style={styles.container}>
+      //   <Text style={styles.textKagan}>
+      //     {" "} 
+      //     {item.title}
+      //   </Text>
+        
+      //  <Image
+      //     style={{ width: imageWidth, height: imageWidth }}
+      //     source={{ uri: item.image }}/>
+      //   <View style={{ padding: 30 }}>
+      //     <Text style={styles.textVocab}> {item.desc}</Text>
+      //   </View>
+      // </TouchableOpacity>
       <TouchableOpacity style={styles.container}>
-        <Text style={styles.textKagan}>
-          {" "} 
-          {item.title}
-        </Text>
-        {/*<Image
-          style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: item.image }}
-        />*/}
-       <Image
-          style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: item.image }}/>
-        <View style={{ padding: 30 }}>
-          <Text style={styles.textVocab}> {item.desc}</Text>
-        </View>
-      </TouchableOpacity>
+          <View >  
+            <Image
+            style={{ width: 80, height: 80 }}
+            source={{ uri: item.image }}/>
+
+          </View>
+          <View style={{width:"65%",  paddingHorizontal:10}}>
+            <Text style={styles.textKagan}>
+              {item.title}
+            </Text>
+            <View>
+              <Text numberOfLines={3} style={styles.textVocab}>{item.desc}</Text>
+            </View> 
+          </View>
+          <View style={{justifyContent:'center'}}>
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={20}
+              color="#215a88"
+            />
+          </View>
+            
+     </TouchableOpacity>
+      
     );
   };
   const onRefresh = () => {
@@ -108,9 +131,12 @@ const styles = StyleSheet.create({
     left: 10,
   },
   container: {
-    alignItems: "flex-start",
-    marginBottom: 20,
+    
+    flexDirection:"row",
     flex: 1,
+    paddingHorizontal:5,
+    paddingVertical: 5,
+    justifyContent:"center"
   },
   button: {
     position: "absolute",
@@ -280,10 +306,7 @@ const styles = StyleSheet.create({
   },
   textVocab: {
     fontSize: 13,
-    margin: 10,
     fontStyle: "italic",
-    //lineHeight: 21,
-    letterSpacing: 0.25,
     color: "black",
   },
   textVocabSub: {
