@@ -350,14 +350,25 @@ export class App extends Component {
             <Stack.Screen
               name="NewDictionary"
               component={NewDictionaryScreen}
-              navigation={this.props.navigation}
-              options={{
+              options={({ navigation }) => ({
+                headerLeft: () => (
+                  <View style={{ marginLeft: 10 }}>
+                    <MaterialCommunityIcons
+                      name="home"
+                      color={"#ffffff"}
+                      size={30}
+                      onPress={() => {
+                        navigation.navigate("Course");
+                      }}
+                    />
+                  </View>
+                ),
                 title: "Upload a Word",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#215A88",
                 },
-              }}
+              })}
             />
             <Stack.Screen
               name="NewDictionaryReRender"
@@ -886,7 +897,7 @@ export class App extends Component {
               name="EditCulture"
               component={EditCulture}
               options={{
-                title: "Culture",
+                title: "",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
