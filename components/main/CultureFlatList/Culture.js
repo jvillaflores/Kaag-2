@@ -13,16 +13,14 @@ import {
   Dimensions,
 } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-
-import CultureScreen from "./CultureFlatList/CultureScreen";
-import FoodScreen from "./FoodFlatList";
-import ClothingScreen from "./ClothingFlatList";
+import CultureSC from "./CultureScreen";
+import FoodSC from "./FoodScreen";
+import ClothingSC from "./ClothingScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
-function EditCulture() {
+function Applications() {
   return (
     <SafeAreaView style={styles.container}>
       <Tab.Navigator
@@ -40,11 +38,11 @@ function EditCulture() {
           },
         })}
       >
-        <Tab.Screen name="Culture" component={CultureScreen} />
-        <Tab.Screen name="Food" component={FoodScreen} />
-        <Tab.Screen name="Clothing" component={ClothingScreen} />
+        <Tab.Screen name="Culture" component={CultureSC} />
+        <Tab.Screen name="Food" component={FoodSC} />
+        <Tab.Screen name="Clothing" component={ClothingSC} />
       </Tab.Navigator>
-      
+
       <Pressable
         style={styles.button}
         onPress={() =>
@@ -54,12 +52,11 @@ function EditCulture() {
       >
         <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
       </Pressable>
-
     </SafeAreaView>
   );
 }
 
-export default EditCulture;
+export default Applications;
 
 const styles = StyleSheet.create({
   container: {
@@ -75,22 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ebebeb",
     borderRadius: 10,
   },
-  button: {
-    position: "absolute",
-    width: 70,
-    height: 70,
-    borderRadius: 70 / 2,
-    alignItems: "center",
-    justifyContent: "center",
-    //shadowRadius: 10,
-    //shadowColor: "#F02A4B",
-    //shadowOpacity: 0.3,
-    //shadowOffset: { height: 10 },
-    backgroundColor: "#215A88",
-    bottom: 30,
-    right: 30,
-    elevation: 9,
-  },
+
   btnTab: {
     width: Dimensions.get("window").width / 4.5,
     flexDirection: "row",

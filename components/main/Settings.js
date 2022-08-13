@@ -137,6 +137,7 @@ function Settings({ currentUser, navigation, route }) {
           {/* Edit Quiz screen (end)*/}
 
           {/* Edit About screen (start)*/}
+          {/* EditAbout.js */}
           <TouchableRipple
             onPress={() =>
               navigation.navigate("EditAbout", { language: language })

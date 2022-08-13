@@ -13,7 +13,8 @@ import {
   RefreshControl,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import AddButton from "./AddButton";
+import AddButton from "../AddButton";
+import { NavigationContainer } from "@react-navigation/native";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
@@ -50,11 +51,11 @@ function CultureFlatList({ navigation, route, language }) {
           return { id, ...data };
         });
         setDatalist(postsAll);
-        setRefreshing(false);
+        setRefreshing(false); console.log(postsAll)
       });
   };
 
-  const ItemView = ({ item }) => {
+  // const ItemView = ({ item }) => {
     return (
       // Flat List Item
       // <TouchableOpacity style={styles.container}>
@@ -70,31 +71,49 @@ function CultureFlatList({ navigation, route, language }) {
       //     <Text style={styles.textVocab}> {item.desc}</Text>
       //   </View>
       // </TouchableOpacity>
-      <TouchableOpacity style={styles.container}>
-          <View >  
-            <Image
-            style={{ width: 80, height: 80 }}
-            source={{ uri: item.image }}/>
-
-          </View>
-          <View style={{width:"65%",  paddingHorizontal:10}}>
-            <Text style={styles.textKagan}>
-              {item.title}
-            </Text>
-            <View>
-              <Text numberOfLines={3} style={styles.textVocab}>{item.desc}</Text>
-            </View> 
-          </View>
-          <View style={{justifyContent:'center'}}>
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={20}
-              color="#215a88"
-            />
-          </View>
-            
-     </TouchableOpacity>
+      <NavigationContainer independent={true}>
+        <FlatList
+      nestedScrollEnabled
+      keyExtractor={(item, index) => index.toString()}
+      numColumns={1}
+      horizontal={false}
+      data={datalist}
+      style={{ flex: 1 }}
+      renderItem={({item}) => {
+      return(
+      <TouchableOpacity 
+        style={styles.container}
+        onPress={() => navigation.navigate("Word", { data: item })}>
+            <View >  
+              <Image
+              style={{ width: 80, height: 80 }}
+              source={{ uri: item.image }}/>
+  
+            </View>
+            <View style={{width:"65%",  paddingHorizontal:10}}>
+              <Text style={styles.textKagan}>
+                {item.title}
+              </Text>
+              <View>
+                <Text numberOfLines={3} style={styles.textVocab}>{item.desc}</Text>
+              </View> 
+            </View>
+            <View style={{justifyContent:'center'}}>
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={20}
+                color="#215a88"
+              />
+            </View>
+  
+       </TouchableOpacity>
+       )
+       }}
+    
+     
+    />
       
+     </NavigationContainer>
     );
   };
   const onRefresh = () => {
@@ -104,24 +123,10 @@ function CultureFlatList({ navigation, route, language }) {
     getData();
   };
 
-  return (
-    <FlatList
-      nestedScrollEnabled
-      numColumns={1}
-      horizontal={false}
-      data={datalist}
-      style={{ flex: 1 }}
-      renderItem={ItemView}
-      refreshControl={
-        <RefreshControl
-          //refresh control used for the Pull to Refresh
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      }
-    />
-  );
-}
+
+    
+  
+
 
 export default CultureFlatList;
 
