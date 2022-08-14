@@ -20,10 +20,38 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationEvents } from "react-navigation";
 import { Audio } from "expo-av";
 import { updateDictionary } from "../../redux/actions";
+import { Picker } from "@react-native-picker/picker";
+import * as DocumentPicker from "expo-document-picker";
+import * as FileSystem from "expo-file-system";
 
 function Validation({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
+  const [word, setWord] = useState(data?.word);
+  const [name, setName] = useState(data?.name);
+  const [filipino, setFilipino] = useState(data?.filipino);
+  const [sentence, setSentence] = useState(data?.sentence);
+  const [classification, setClassification] = useState(data?.classification);
+  const [originated, setOrigination] = useState(data?.originated);
+  const [englishMeaning, setEnglishMeaning] = useState(data?.englishMeaning);
+  const [meaning, setMeaning] = useState(data?.meaning);
+  const [pronunciation, setPronunciation] = useState(data?.pronunciation);
+  const [audio, setAudio] = useState(null);
+
+  const chooseFile = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: "audio/*",
+      copyToCacheDirectory: false,
+    });
+    // Alert.alert("Audio File", result.name);
+
+    console.log(result);
+    if (result.type === "success") {
+      setAudio(result);
+    } else {
+      alert("Please choose a file.");
+    }
+  };
 
   const downloadAudio = async () => {
     let SoundObject = new Audio.Sound();
@@ -43,6 +71,87 @@ function Validation({ currentUser, route, navigation }) {
 
   const retryPlaySound = () => downloadAudio();
 
+  const Capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
+  const filteredWord = Capitalize(word);
+  const filteredFilipino = Capitalize(filipino);
+  const filteredOrigin = Capitalize(originated);
+  const filteredSentence = Capitalize(sentence);
+  const filteredClassification = Capitalize(classification);
+  const filteredEnglishMeaning = Capitalize(englishMeaning);
+  const filteredMeaning = Capitalize(meaning);
+  const filteredPronunciation = Capitalize(pronunciation);
+
+  const Update = async () => {
+    const childPath = `audio/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    console.log(childPath);
+    const uri = FileSystem.documentDirectory + audio.name;
+
+    await FileSystem.copyAsync({
+      from: audio.uri,
+      to: uri,
+    });
+
+    let res = await fetch(uri);
+    let blob = await res.blob();
+
+    const task = firebase.storage().ref().child(childPath).put(blob);
+
+    const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+      console.log(`transferred: ${snapshot.bytesTransferred}`);
+    };
+
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+        saveAllPostData(snapshot);
+        setLoading(null);
+        console.log(snapshot);
+      });
+    };
+
+    const taskError = (snapshot) => {
+      setLoading(null);
+      alert(snapshot);
+      console.log(snapshot);
+    };
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  };
+
+  const saveAllPostData = (downloadURL) => {
+    firebase
+      .firestore()
+      .collection("languages")
+      .doc(data?.language)
+      .collection("dictionary")
+      .doc(`${data?.id}`)
+      .update({
+        email: currentUser.email,
+        name: currentUser.name,
+        downloadURL,
+        word: filteredWord,
+        filipino: filteredFilipino,
+        originated: filteredOrigin,
+        classification: filteredClassification,
+        pronunciation: filteredPronunciation,
+        sentence: filteredSentence,
+        englishMeaning: filteredEnglishMeaning,
+        meaning: filteredMeaning,
+        status: "0",
+        upload: "1",
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(function () {
+        alert("Contribution Updated");
+        setLoading(null);
+        navigation.goBack();
+      });
+  };
   if (data?.status == "2") {
     return (
       <ScrollView style={styles.container}>
@@ -58,7 +167,7 @@ function Validation({ currentUser, route, navigation }) {
             />
           </View>
           <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>In Filipino ahh</Text>
+            <Text style={styles.title_text}>In Filipino</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
@@ -267,42 +376,92 @@ function Validation({ currentUser, route, navigation }) {
 
             <TextInput
               style={[styles.input, { color: "black" }]}
-              value={data?.word}
+              value={word}
               multiline={true}
-              editable={false}
+              onChangeText={(word) => setWord(word)}
             />
           </View>
-
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Specific Language Definition</Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.meaning}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Example Sentence</Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.sentence}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>In Filipino</Text>
 
             <TextInput
               style={[styles.input, { color: "black" }]}
-              value={data?.filipino}
+              value={filipino}
               multiline={true}
-              editable={false}
+              onChangeText={(filipino) => setFilipino(filipino)}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Classification </Text>
+
+            <Picker
+              style={[styles.input, { backgroundColor: "#e7e7e7" }]}
+              selectedValue={classification}
+              onValueChange={(itemValue, itemIndex) =>
+                setClassification(itemValue)
+              }
+            >
+              <Picker.Item label="Noun" value="Noun" />
+              <Picker.Item label="Verb" value="Verb" />
+              <Picker.Item label="Adverb" value="Adverb" />
+              <Picker.Item label="Adjective" value="Adjective" />
+              <Picker.Item label="Pronoun" value="Pronoun" />
+              <Picker.Item label="Preposition" value="Preposition" />
+              <Picker.Item label="Conjunction" value="Conjunction" />
+              <Picker.Item label="Article" value="Article" />
+            </Picker>
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Origination </Text>
+
+            <Picker
+              style={[styles.input, { backgroundColor: "#e7e7e7" }]}
+              selectedValue={originated}
+              onValueChange={(itemValue, itemIndex) =>
+                setOrigination(itemValue)
+              }
+            >
+              <Picker.Item label="Pick origin" value="" />
+              <Picker.Item label="Davao del Sur" value="Davao del Sur" />
+              <Picker.Item label="Davao del Norte" value="Davao del Norte" />
+              <Picker.Item label="Davao Occidental" value="Davao Occidental" />
+              <Picker.Item label="Davao Oriental" value="Davao Oriental" />
+              <Picker.Item label="Davao de Oro" value="Davao de Oro" />
+              <Picker.Item label="Davao City" value="Davao City" />
+              <Picker.Item label="None from the choices" value="Other" />
+              <Picker.Item label="N/A" value="N/A" />
+            </Picker>
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Pronunciation </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={pronunciation}
+              multiline={true}
+              onChangeText={(pronunciation) => setPronunciation(pronunciation)}
+            />
+          </View>
+
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Sentence Example </Text>
+
+            <TextInput
+              style={[styles.input, { color: "black" }]}
+              value={sentence}
+              multiline={true}
+              onChangeText={(sentence) => setSentence(sentence)}
+            />
+          </View>
+          <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>English Meaning </Text>
+            <TextInput
+              style={[styles.description_input, { color: "black" }]}
+              value={englishMeaning}
+              multiline={true}
+              onChangeText={(englishMeaning) =>
+                setEnglishMeaning(englishMeaning)
+              }
             />
           </View>
 
@@ -310,50 +469,52 @@ function Validation({ currentUser, route, navigation }) {
             <Text style={styles.title_text}>Filipino Meaning </Text>
             <TextInput
               style={[styles.description_input, { color: "black" }]}
-              value={data?.englishMeaning}
+              value={meaning}
               multiline={true}
-              editable={false}
+              onChangeText={(meaning) => setMeaning(meaning)}
             />
           </View>
-
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Parts of Speech</Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.classification}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Pronunciation </Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.pronunciation}
-              multiline={true}
-              editable={false}
-            />
-          </View>
-
-          
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Audio </Text>
-            <Text style={styles.guidelines}></Text>
+            <View>
+              <Pressable onPress={() => chooseFile()}>
+                <Text style={styles.edit_audio}> Change Audio </Text>
+              </Pressable>
+            </View>
             <TouchableOpacity
               style={styles.audioButton}
               onPress={() => downloadAudio()}
             >
               <View>
-                <MaterialCommunityIcons
-                  style={styles.addAudio}
-                  name="volume-high"
-                  color={"#707070"}
-                  size={26}
-                />
+                {audio ? (
+                  <TextInput>{audio?.name}</TextInput>
+                ) : (
+                  <MaterialCommunityIcons
+                    style={styles.addAudio}
+                    name="volume-high"
+                    color={"#707070"}
+                    size={26}
+                  />
+                )}
               </View>
             </TouchableOpacity>
+          </View>
+          <View style={styles.row}>
+            <Pressable style={styles.buttonAccept} onPress={() => Update()}>
+              <Text style={styles.subtitle}>
+                {loading ? "Updating..." : "Update"}
+              </Text>
+            </Pressable>
+            <Pressable
+              style={styles.buttonDecline}
+              onPress={() =>
+                navigation.navigate("Delete", {
+                  data: data,
+                })
+              }
+            >
+              <Text style={styles.subtitle}>Delete</Text>
+            </Pressable>
           </View>
         </View>
       </ScrollView>
@@ -437,7 +598,7 @@ const styles = StyleSheet.create({
   center: {
     justifyContent: "center",
     alignContent: "center",
-    paddingVertical:15
+    paddingVertical: 15,
   },
 
   paddingLeft: {
@@ -490,5 +651,34 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     borderColor: "#707070",
+  },
+  buttonAccept: {
+    // alignSelf: "flex-start",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 10,
+    // elevation: 1,
+    width: "40%",
+    backgroundColor: "#73B504",
+    //top: 130,
+    // marginTop: 20,
+    // marginBottom: 80,
+  },
+  buttonDecline: {
+    // alignSelf: "flex-end",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 10,
+    // elevation: 1,
+    width: "40%",
+    backgroundColor: "#8E2835",
+    //top: 130,
+    // marginBottom: 100,
+  },
+  edit_audio: {
+    fontSize: 15,
+    fontStyle: "italic",
+    color: "#215A88",
+    marginLeft: 220,
   },
 });

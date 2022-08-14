@@ -293,7 +293,7 @@ function ContributionWord({ currentUser, navigation, route }) {
       })
       .then(function () {
         setLoading(null);
-        navigation.navigate("Consent", { language: language });
+        navigation.navigate("NewDictionary", { language: language });
       });
   };
 

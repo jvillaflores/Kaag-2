@@ -50,6 +50,7 @@ import GrammarScreen from "./components/main/Grammar";
 import WordScreen from "./components/main/Word";
 import SaveScreen from "./components/main/Save";
 import NewDictionaryScreen from "./components/main/NewDictionary";
+import DeleteContributionScreen from "./components/main/DeleteContribution";
 import NewDictionaryReRenderScreen from "./components/main/NewDictionaryReRender";
 import MyContributionsScreen from "./components/main/userContributions/MyContributions";
 import BeAValidatorScreen from "./components/main/BeAValidator";
@@ -508,6 +509,21 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
+              name="Delete"
+              component={DeleteContributionScreen}
+              options={{
+                title: "Delete Contribution",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
               name="ValidatorScreen"
               component={BeAValidatorScreen}
               options={{
@@ -565,8 +581,6 @@ export class App extends Component {
                 },
               }}
             />
-
-            
 
             <Stack.Screen
               name="AddQuestion"

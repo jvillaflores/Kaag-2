@@ -56,8 +56,6 @@ function MContriAll({ navigation, language }) {
     getData();
   };
 
-  
-
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
@@ -70,9 +68,11 @@ function MContriAll({ navigation, language }) {
             <Text style={styles.itemsName}>{item?.word}</Text>
             <Text>{item?.meaning}</Text>
           </View>
-         
+
           <View style={[styles.itemBody]}>
-            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
+            <Text style={{ fontSize: 9 }}>
+              {item?.creation.toDate().toDateString()}
+            </Text>
           </View>
         </View>
 
