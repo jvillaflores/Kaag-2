@@ -59,34 +59,43 @@ function ApplyAll({ navigation, language }) {
   const ItemView = ({ item }) => {
     return (
       
-      <TouchableOpacity style={styles.container}>
-          <View >  
+      <TouchableOpacity 
+          onPress={() => navigation.navigate("DeleteAbout", { data: item })}
+          style={styles.container}>
+          
+          <View>  
             <Image
             style={{ width: 80, height: 80 }}
             source={{ uri: item.image }}/>
 
           </View>
-          <View style={{width:"65%",  paddingHorizontal:10}}>
-            <Text style={styles.textKagan}>
-              {item.title}
-            </Text>
-            <View>
-              <Text numberOfLines={3} style={styles.textVocab}>{item.desc}</Text>
-            </View> 
+          <View style={{flexDirection:"row",}}>
+            <View style={{width:"80%",  paddingHorizontal:10, paddingVertical: 5}}>
+              <Text style={styles.textKagan}>
+                {item.title}
+              </Text>
+              <View>
+                <Text numberOfLines={3} style={{fontSize:12}}>{item.desc}</Text>
+              </View> 
+            </View>
+            <View style={{justifyContent:'center'}}>
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={20}
+                color="#215a88"
+              />
+            </View>
           </View>
-          <View style={{justifyContent:'center'}}>
-            <MaterialCommunityIcons
-              name="dots-vertical"
-              size={20}
-              color="#215a88"
-            />
-          </View>
+          
             
      </TouchableOpacity>
       
     );
   };
   
+  const separator = () => {
+    return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
+  };
 
   return (
     <FlatList
@@ -95,6 +104,7 @@ function ApplyAll({ navigation, language }) {
       horizontal={false}
       data={datalist}
       style={{ flex: 1 }}
+      ItemSeparatorComponent={separator}
       renderItem={ItemView}
       refreshControl={
         <RefreshControl
@@ -113,8 +123,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    justifyContent: "center",
-    paddingVertical: 20,
+    alignContent: "center",
+    paddingVertical: 5,
+    flexDirection:'row'
   },
   listTab: {
     alignSelf: "center",

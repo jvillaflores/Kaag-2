@@ -31,7 +31,7 @@ function EditTraditions({ currentUser, navigation, route }) {
                  {/* AboutCulture.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("EditCulture", {language: language})}
+                  onPress={() => navigation.navigate("AddCulture", {language: language})}
                 >
                   <View style={styles.contextButton}>
                     <Image
@@ -49,7 +49,7 @@ function EditTraditions({ currentUser, navigation, route }) {
                 {/* AboutFoods.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("EditFood", {language: language})}
+                  onPress={() => navigation.navigate("AddFood", {language: language})}
                 >
                   <View style={styles.contextButton}>
                     <Image
@@ -67,7 +67,7 @@ function EditTraditions({ currentUser, navigation, route }) {
                 {/* AboutFoods.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("EditClothing", {language: language})}
+                  onPress={() => navigation.navigate("AddClothings", {language: language})}
                 >
                   <View style={styles.contextButton}>
                     <Image

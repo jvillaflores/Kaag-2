@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  TextInput,
+  
   Image,
   Button,
   TouchableOpacity,
@@ -11,6 +11,9 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
+import {
+  TextInput,
+} from 'react-native-paper'
 import { connect } from "react-redux";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -56,7 +59,7 @@ const AddCulture = ({ navigation, route }) => {
 
       .then(() => {
         alert("Culture Successfully Added");
-        navigation.pop();
+        navigation.popToTop();
       });
   };
 
@@ -135,43 +138,140 @@ const AddCulture = ({ navigation, route }) => {
   }
 
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.bodycontainer}>
-        <View style={{ marginVertical: 15 }}>
-          <View>
-            <Text style={[styles.text, { color: "#000000" }]}>Title</Text>
-          </View>
-        </View>
+    // <ScrollView style={styles.container}>
+    //   <View style={styles.bodycontainer}>
+    //     <View style={{ marginVertical: 15 }}>
+    //     <View style={styles.centered_Buttons}>
+    //         <TouchableOpacity
+    //           style={styles.ChooseImageButton}
+    //           title="Pick Image From Gallery"
+    //           onPress={(onPress) => pickImage()}
+    //         >
+    //           <MaterialCommunityIcons
+    //             name="image-multiple"
+    //             color="#263238"
+    //             size={50}
+    //           />
+    //         </TouchableOpacity>
+    //   </View>
 
-        <View>
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCapitalize="none"
-            onChangeText={(title) => setTitle(title)}
-          />
-          <Text style={[styles.text, { fontSize: 16 }]}>Credits</Text>
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCapitalize="none"
-            onChangeText={(credits) => setCredits(credits)}
-          />
+    //   {image && (
+    //     <Image
+    //       source={{ uri: image }}
+    //       style={{ bottom: 100, aspectRatio: 1 }}
+    //     />
+    //   )}
+    //       <View>
+    //         <Text style={[styles.text, { color: "#000000" }]}>Title</Text>
+    //       </View>
+    //     </View>
+
+    //     <View>
+    //       <TextInput
+    //         style={styles.input}
+    //         multiline={true}
+    //         autoCapitalize="none"
+    //         onChangeText={(title) => setTitle(title)}
+    //       />
+    //       <Text style={[styles.text, { fontSize: 16 }]}>Credits</Text>
+    //       <TextInput
+    //         style={styles.input}
+    //         multiline={true}
+    //         autoCapitalize="none"
+    //         onChangeText={(credits) => setCredits(credits)}
+    //       />
+    //     </View>
+    //     <View>
+    //       <Text style={[styles.text, { fontSize: 16 }]}>About</Text>
+    //       <Text style={[styles.guidelines]}>
+    //         Brief introduction/description about the language.
+    //       </Text>
+    //       <TextInput
+    //         multiline={true}
+    //         style={[
+    //           styles.addButton,
+    //           { height: 180 },
+    //           { paddingHorizontal: 10, flexDirection: "row" },
+    //         ]}
+    //         onChangeText={(desc) => setDesc(desc)}
+    //       ></TextInput>
+    //     </View>
+    //     <View
+    //       style={{
+    //         flexDirection: "row",
+    //         flex: 1,
+    //         justifyContent: "center",
+    //         marginVertical: 25,
+    //       }}
+    //     >
+    //       <TouchableOpacity
+    //         style={[styles.button, { backgroundColor: "#215a88" }]}
+    //         onPress={() => submit()}
+    //       >
+    //         <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
+    //           Submit
+    //         </Text>
+    //       </TouchableOpacity>
+    //     </View>
+    //   </View>
+    // </ScrollView>
+    <ScrollView style={styles.container}>
+          <View>
+            <View style={{alignItems:"center"}}>
+                <TouchableOpacity
+                    style={styles.ChooseImageButton}
+                    title="Pick Image From Gallery"
+                    onPress={(onPress) => pickImage()}
+                >
+                  <MaterialCommunityIcons
+                    name="image-multiple"
+                    color="#707070"
+                    size={50}
+                  />
+                </TouchableOpacity>
+            </View>
+                {image && (
+                <Image
+                  source={{ uri: image }}
+                  style={{ bottom: 100, aspectRatio: 1 }}
+                />
+                )}
         </View>
         <View>
-          <Text style={[styles.text, { fontSize: 16 }]}>About</Text>
-          <Text style={[styles.guidelines]}>
-            Brief introduction/description about the language.
-          </Text>
-          <TextInput
-            multiline={true}
-            style={[
-              styles.addButton,
-              { height: 180 },
-              { paddingHorizontal: 10, flexDirection: "row" },
-            ]}
-            onChangeText={(desc) => setDesc(desc)}
-          ></TextInput>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { color: "#000000" }]}>Title</Text>
+                <TextInput
+                  style={styles.input}
+                  multiline={true}
+                  autoCapitalize="none"
+                  onChangeText={(title) => setTitle(title)}
+                />
+            </View>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { fontSize: 16 }]}>Credits</Text>
+                <TextInput
+                  style={styles.input}
+                  multiline={true}
+                  autoCapitalize="none"
+                  onChangeText={(credits) => setCredits(credits)}
+                />
+            </View>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { fontSize: 16 }]}>About</Text>
+                <Text style={[styles.guidelines]}>
+                  Brief introduction/description about the language.
+                </Text>
+                <TextInput
+                  multiline={true}
+                  style={[
+                    { paddingHorizontal: 10, flexDirection: "row" },
+                  ]}
+                  onChangeText={(desc) => setDesc(desc)}
+                >
+                  
+                </TextInput>
+            </View>
+
         </View>
         <View
           style={{
@@ -190,28 +290,11 @@ const AddCulture = ({ navigation, route }) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+        
 
-      <View style={styles.centered_Buttons}>
-        <TouchableOpacity
-          style={styles.ChooseImageButton}
-          title="Pick Image From Gallery"
-          onPress={(onPress) => pickImage()}
-        >
-          <MaterialCommunityIcons
-            name="image-multiple"
-            color="#263238"
-            size={50}
-          />
-        </TouchableOpacity>
-      </View>
+             
+        
 
-      {image && (
-        <Image
-          source={{ uri: image }}
-          style={{ bottom: 100, aspectRatio: 1 }}
-        />
-      )}
     </ScrollView>
   );
 };
@@ -219,38 +302,24 @@ const AddCulture = ({ navigation, route }) => {
 export default AddCulture;
 const styles = StyleSheet.create({
   container: {
-    alignContent: "center",
-    top: 1,
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    flex:1,
+    paddingVertical: 10,
+    paddingHorizontal: 30,
   },
   input: {
     letterSpacing: 0.25,
     height: 50,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
+    width: "100%",
+
   },
   text: {
     fontWeight: "bold",
-    fontSize: 20,
-    letterSpacing: 0.5,
+    fontSize: 16,
+    paddingVertical:4,
   },
   bodycontainer: {
     paddingVertical: 5,
     paddingHorizontal: 15,
-  },
-  addButton: {
-    borderColor: "#70707033",
-    borderWidth: 1.5,
-    marginVertical: 10,
-    borderRadius: 7,
-    alignItems: "center",
-    justifyContent: "center",
   },
   button: {
     flex: 1,
@@ -279,4 +348,15 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: "#707070",
   },
+  ChooseImageButton:{
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    backgroundColor: "#e7e7e7",
+    borderRadius: 6,
+    height: 100,
+    borderColor: "#707070",
+    paddingTop: 10,
+    marginTop: 20,
+  }
 });

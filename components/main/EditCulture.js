@@ -22,40 +22,81 @@ import ClothingScreen from "./ClothingFlatList";
 
 const Tab = createMaterialTopTabNavigator();
 
-function EditCulture() {
+function EditCulture({ route, navigation}) {
+  const { language } = route?.params ?? {};
   return (
-    <SafeAreaView style={styles.container}>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarContentContainerStyle: {
-            backgroundColor: "#f2f2f2",
-          },
-          tabBarActiveTintColor: "#215a88",
-          tabBarInactiveTintColor: "#B2B2B2",
+    // <SafeAreaView style={styles.container}>
+    //   <Tab.Navigator
+    //     screenOptions={({ route }) => ({
+    //       tabBarContentContainerStyle: {
+    //         backgroundColor: "#f2f2f2",
+    //       },
+    //       tabBarActiveTintColor: "#215a88",
+    //       tabBarInactiveTintColor: "#B2B2B2",
 
-          tabBarPressColor: "#215a88",
-          tabBarLabelStyle: {
-            fontSize: 11,
-            fontWeight: "bold",
-          },
-        })}
-      >
-        <Tab.Screen name="Culture" component={CultureScreen} />
-        <Tab.Screen name="Food" component={FoodScreen} />
-        <Tab.Screen name="Clothing" component={ClothingScreen} />
-      </Tab.Navigator>
+    //       tabBarPressColor: "#215a88",
+    //       tabBarLabelStyle: {
+    //         fontSize: 11,
+    //         fontWeight: "bold",
+    //       },
+    //     })}
+    //   >
+    //     <Tab.Screen name="Culture" component={CultureScreen} />
+    //     <Tab.Screen name="Food" component={FoodScreen} />
+    //     <Tab.Screen name="Clothing" component={ClothingScreen} />
+    //   </Tab.Navigator>
       
-      <Pressable
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate("MainContribution", { language: language })
-        }
-        //onPress={() => navigation.navigate("NewContribution")}
-      >
-        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
-      </Pressable>
+    //   <Pressable
+    //     style={styles.button}
+    //     onPress={() =>
+    //       navigation.navigate("MainContribution", { language: language })
+    //     }
+    //     //onPress={() => navigation.navigate("NewContribution")}
+    //   >
+    //     <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+    //   </Pressable>
 
-    </SafeAreaView>
+    // </SafeAreaView>
+    <SafeAreaView style={styles.container}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarContentContainerStyle: {
+          backgroundColor: "#f2f2f2",
+        },
+        tabBarActiveTintColor: "#215a88",
+        tabBarInactiveTintColor: "#B2B2B2",
+
+        tabBarPressColor: "#215a88",
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: "bold",
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Occasions"
+        children={(props) => <CultureScreen language={language} {...props} />}
+      />
+      <Tab.Screen
+        name="Food"
+        children={(props) => <FoodScreen language={language} {...props} />}
+      />
+      <Tab.Screen
+        name="Clothing"
+        children={(props) => <ClothingScreen language={language} {...props} />}
+      />
+      
+    </Tab.Navigator>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() =>
+        navigation.navigate("EditTraditions", { language: language })
+      }
+      //onPress={() => navigation.navigate("NewContribution")}
+    >
+      <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+    </TouchableOpacity>
+  </SafeAreaView>
   );
 }
 

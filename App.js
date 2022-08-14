@@ -96,6 +96,7 @@ import AddCulture from "./components/main/AddCulture";
 import AgainContrib from "./components/main/AgainContrib";
 import Consent from "./components/main/Consent";
 import NewConsent from "./components/main/NewConsent";
+import DeleteAbout from "./components/main/CultureFlatList/DeleteAbout";
 
 const Stack = createStackNavigator();
 
@@ -557,6 +558,20 @@ export class App extends Component {
               component={UserContributionScreen}
               options={{
                 title: "My Contribution",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="DeleteAbout"
+              component={DeleteAbout}
+              options={{
+                title: "Delete",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
