@@ -70,10 +70,10 @@ function Applications({ navigation }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.name}</Text>
+            <Text style={styles.itemsName}>{item?.name}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.note}</Text>
+            <Text>{item?.note}</Text>
           </View>
           <View style={[styles.itemBody]}>
             <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>

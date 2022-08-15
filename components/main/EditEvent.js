@@ -7,121 +7,73 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Picker,
   SafeAreaView,
-  Button,
-  Alert,
+  TouchableOpacity,
+  Dimensions,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import firebase from "firebase";
-require("firebase/firestore");
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import AboutFL from "./AboutFlatList";
 
-import { NavigationContainer } from "@react-navigation/native";
+import AboutScreen from "./AboutFlatList"
 
 const Tab = createMaterialTopTabNavigator();
 
-function Community({ currentUser, route, navigation }) {
-  const [datalist, setDatalist] = useState("");
+function EditEvent({ route, navigation}) {
   const { language } = route?.params ?? {};
-  console.log(language);
-  // console.log(datalist);
-  // console.log(datalist);
-
-  useEffect(() => {
-    setDatalist(currentUser);
-  }, [currentUser]);
-  useEffect(() => {
-    //used to fetch the name of the current user.
-    const unsubscribe = navigation.addListener("focus", () => {
-      firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .get()
-        .then((snapshot) => {
-          // console.log(snapshot, "-=-=-=-=-=-=-=-=");
-          if (snapshot.exists) {
-            let currentUser = snapshot.data();
-            setDatalist(currentUser);
-          } else {
-          }
-        });
-    });
-
-    return unsubscribe;
-  }, [navigation]);
   return (
-    <NavigationContainer independent={true}>
+    
+    <SafeAreaView style={styles.container}>
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarContentContainerStyle: {
+          backgroundColor: "#f2f2f2",
+        },
+        tabBarActiveTintColor: "#215a88",
+        tabBarInactiveTintColor: "#B2B2B2",
+
+        tabBarPressColor: "#215a88",
+        tabBarLabelStyle: {
+          fontSize: 11,
+          fontWeight: "bold",
+        },
+      })}
+    >
+      <Tab.Screen
+        name="Language"
+        children={(props) => <AboutScreen language={language} {...props} />}
+      />
       
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarContentContainerStyle: {
-            backgroundColor: "#f2f2f2",
-          },
-          tabBarActiveTintColor: "#215a88",
-          tabBarInactiveTintColor: "#B2B2B2",
-
-          tabBarPressColor: "#215a88",
-          tabBarLabelStyle: {
-            fontSize: 15,
-            fontWeight: "bold",
-          },
-        })}
-      >
-       
-        <Tab.Screen
-          name="Culture"
-          children={(props) => <AboutFL language={language} {...props} />}
-        />
-
-        
-        
-      </Tab.Navigator>
-
-      <Pressable
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate("MainContribution", { language: language })
-        }
-        //onPress={() => navigation.navigate("NewContribution")}
-      >
-        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
-      </Pressable>
-    </NavigationContainer>
-    // <View>
-    //   <Text>{language}</Text>
-    // </View>
+      
+    </Tab.Navigator>
+    <TouchableOpacity
+      style={styles.button}
+      onPress={() =>
+        navigation.navigate("AddAbout", { language: language })
+      }
+    >
+      <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+    </TouchableOpacity>
+  </SafeAreaView>
   );
 }
 
-const mapStateToProps = (store) => ({
-  currentUser: store.userState.currentUser,
-});
-
-export default connect(mapStateToProps, null)(Community);
+export default EditEvent;
 
 const styles = StyleSheet.create({
-  title: {
-    top: 20,
-    left: 10,
-  },
   container: {
-     alignItems: "center",
-    // marginTop: 30,
-    // marginBottom: -360,
     flex: 1,
+    //paddingHorizontal:10,
+    justifyContent: "center",
   },
-  innercontainer: {
-    flex: 1,
-    // alignItems: "flex-start",
-    // justifyContent: "flex-start",
-    // marginTop: 30,
-    // marginLeft: 20,
-    // marginRight: 15,
-    //backgroundColor: '#FFFFFF',
+  listTab: {
+    alignSelf: "center",
+    marginBottom: 20,
+    flexDirection: "row",
+    paddingHorizontal: 2,
+    backgroundColor: "#ebebeb",
+    borderRadius: 10,
   },
   button: {
     position: "absolute",
@@ -139,188 +91,104 @@ const styles = StyleSheet.create({
     right: 30,
     elevation: 9,
   },
-
-  textHead: {
+  btnTab: {
+    width: Dimensions.get("window").width / 4.5,
     flexDirection: "row",
-    fontSize: 21,
+    borderWidth: 0.5,
+    borderColor: "#ebebeb",
+    padding: 10,
+    justifyContent: "center",
+  },
+  textTab: {
+    fontSize: 12,
     fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "#215a88",
+    color: "#000000",
+    //lineHeight: 1,
   },
-  textSubHead: {
-    // flexDirection: "row",
-    // fontSize: 15,
-    // fontWeight: "bold",
-    // lineHeight: 21,
-    // letterSpacing: 0.25,
-    //color: "white",
+  brnTabActive: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
   },
-  textreg: {
+  textTabActive: {
+    color: "#8E2835",
+    fontWeight: "bold",
+    fontSize: 13,
+  },
+  itemContainer: {
     flexDirection: "row",
-    fontSize: 15,
-    // fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    //color: "white",
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+  },
+  itemLogo: {
+    padding: 10,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+  },
+
+  itemBody: {
+    flex: 1,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+
+  itemsName: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  itemStatus: {
+    backgroundColor: "#69C080",
+    paddingHorizontal: 17,
+    height: 30,
+    justifyContent: "center",
+    right: 14,
+    borderRadius: 5,
   },
   headLine: {
-    flexDirection: "row",
+    flexDirection: "column",
     width: "100%",
-    height: 110,
+    padding: 30,
+    top: -20,
+    height: 150,
     backgroundColor: "#8E2835",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    position: "relative",
   },
-  textHeadline: {
-    flexDirection: "row",
+  textHead: {
     fontSize: 20,
     fontWeight: "bold",
-    lineHeight: 21,
     letterSpacing: 0.25,
-    color: "black",
+    position: "relative",
+    alignSelf: "center",
+    color: "white",
   },
-  searchBar: {
-    top: 40,
-    left: -120,
-    width: "100%",
-  },
-  Kagan: {
-    top: 90,
-    left: 40,
-  },
-  grammar: {
-    top: 70,
-    left: 40,
-  },
-  pronun: {
-    top: 100,
-    left: 40,
-  },
-  textKagan: {
+  textSubHead: {
     flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-
-  buttonVocab: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -70,
-    left: -40,
-    height: 280,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonGrammar: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -30,
-    left: -40,
-    height: 300,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonPronun: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -40,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  Vocab: {
-    top: 10,
-    left: -20,
-    paddingBottom: 20,
-  },
-  VocabSubSub: {
-    top: 5,
-    left: -10,
-  },
-  VocabSub: {
-    top: 5,
-    left: -10,
-  },
-  textVocab: {
-    fontSize: 20,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSubSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "#8E2835",
-  },
-  text: {
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
+    fontSize: 13,
     letterSpacing: 0.25,
     color: "white",
   },
-  input: {
-    height: 45,
-    width: "90%",
-    backgroundColor: "white",
-    margin: 12,
-    borderWidth: 1,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
+  title: {
+    top: 40,
+    //left: 110,
   },
-  buttonAudio: {
-    alignSelf: "center",
+  statusFont: {
+    fontWeight: "bold",
+  },
+  arrowRight: {
+    backgroundColor: "#ebebeb",
+    paddingHorizontal: 5,
+    width: 30,
+    height: 30,
     justifyContent: "center",
-    borderRadius: 50,
-    elevation: 3,
-    width: 50,
-    backgroundColor: "#79222D",
-    top: 300,
-    left: 130,
-    height: 50,
-    borderColor: "black",
+    right: 2,
+    borderRadius: 5,
+    margin: 10,
   },
-  Icon: {
-    left: 7,
+  buttonContainer: {
+    alignItems: "flex-end",
+    alignSelf: "center",
   },
 });

@@ -25,38 +25,7 @@ const Tab = createMaterialTopTabNavigator();
 function EditCulture({ route, navigation}) {
   const { language } = route?.params ?? {};
   return (
-    // <SafeAreaView style={styles.container}>
-    //   <Tab.Navigator
-    //     screenOptions={({ route }) => ({
-    //       tabBarContentContainerStyle: {
-    //         backgroundColor: "#f2f2f2",
-    //       },
-    //       tabBarActiveTintColor: "#215a88",
-    //       tabBarInactiveTintColor: "#B2B2B2",
-
-    //       tabBarPressColor: "#215a88",
-    //       tabBarLabelStyle: {
-    //         fontSize: 11,
-    //         fontWeight: "bold",
-    //       },
-    //     })}
-    //   >
-    //     <Tab.Screen name="Culture" component={CultureScreen} />
-    //     <Tab.Screen name="Food" component={FoodScreen} />
-    //     <Tab.Screen name="Clothing" component={ClothingScreen} />
-    //   </Tab.Navigator>
-      
-    //   <Pressable
-    //     style={styles.button}
-    //     onPress={() =>
-    //       navigation.navigate("MainContribution", { language: language })
-    //     }
-    //     //onPress={() => navigation.navigate("NewContribution")}
-    //   >
-    //     <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
-    //   </Pressable>
-
-    // </SafeAreaView>
+    
     <SafeAreaView style={styles.container}>
     <Tab.Navigator
       screenOptions={({ route }) => ({

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  TextInput,
   Image,
   Button,
   TouchableOpacity,
@@ -12,6 +11,9 @@ import {
   Alert,
 } from "react-native";
 import { connect } from "react-redux";
+import {
+  TextInput,
+} from 'react-native-paper'
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
@@ -56,11 +58,14 @@ const AddAbout = ({navigation,route}) => {
             credits,
             desc,
             image: downloadURL,
+            language: language,
+            type: "About",
+            creation: firebase.firestore.FieldValue.serverTimestamp(),
           })
     
           .then(() => {
             alert("About Successfully Added");
-            navigation.navigate("EditFood");
+            navigation.pop();
           });
       };
 
@@ -148,44 +153,62 @@ const AddAbout = ({navigation,route}) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.bodycontainer}>
-        <View style={{ marginVertical: 15 }}>
           <View>
-            <Text style={[styles.text, { color: "#000000" }]}>
-              Title
-            </Text>
-          </View>
+            <View style={{alignItems:"center"}}>
+                <TouchableOpacity
+                    style={styles.ChooseImageButton}
+                    title="Pick Image From Gallery"
+                    onPress={(onPress) => pickImage()}
+                >
+                  <MaterialCommunityIcons
+                    name="image-multiple"
+                    color="#707070"
+                    size={50}
+                  />
+                </TouchableOpacity>
+            </View>
+                {image && (
+                <Image
+                  source={{ uri: image }}
+                  style={{ bottom: 100, aspectRatio: 1 }}
+                />
+                )}
         </View>
+        <View>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { color: "#000000" }]}>Title</Text>
+                <TextInput
+                  style={styles.input}
+                  multiline={true}
+                  autoCapitalize="none"
+                  onChangeText={(title) => setTitle(title)}
+                />
+            </View>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { fontSize: 16 }]}>Credits</Text>
+                <TextInput
+                  style={styles.input}
+                  multiline={true}
+                  autoCapitalize="none"
+                  onChangeText={(credits) => setCredits(credits)}
+                />
+            </View>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { fontSize: 16 }]}>About</Text>
+                <Text style={[styles.guidelines]}>
+                  Brief introduction/description about the image.
+                </Text>
+                <TextInput
+                  multiline={true}
+                  style={[
+                    { paddingHorizontal: 10, flexDirection: "row" },
+                  ]}
+                  onChangeText={(desc) => setDesc(desc)}
+                >
+                  
+                </TextInput>
+            </View>
 
-        <View>
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCapitalize="none"
-            onChangeText={(title) => setTitle(title)}
-          />
-          <Text style={[styles.text, { fontSize: 16 }]}>Credits</Text>
-          <TextInput
-            style={styles.input}
-            multiline={true}
-            autoCapitalize="none"
-            onChangeText={(credits) => setCredits(credits)}
-          />
-        </View>
-        <View>
-          <Text style={[styles.text, { fontSize: 16 }]}>
-            About
-          </Text>
-          <Text style={[styles.guidelines]}>Brief introduction/description about the language.</Text>
-          <TextInput
-            multiline={true}
-            style={[
-              styles.addButton,
-              { height: 180 },
-              { paddingHorizontal: 10, flexDirection: "row" },
-            ]}
-            onChangeText={(desc) => setDesc(desc)}
-          ></TextInput>
         </View>
         <View
           style={{
@@ -204,30 +227,6 @@ const AddAbout = ({navigation,route}) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      <View style={styles.centered_Buttons}>
-        <TouchableOpacity
-          style={styles.ChooseImageButton}
-          title="Pick Image From Gallery"
-          onPress={(onPress) => pickImage()}
-        >
-          <MaterialCommunityIcons
-            name="image-multiple"
-            color="#263238"
-            size={50}
-          />
-        </TouchableOpacity>
-      </View>
-
-      {image && (
-        <Image
-          source={{ uri: image }}
-          style={{ bottom: 100, aspectRatio: 1 }}
-        />
-      )}
-    
-     
     </ScrollView>
   )
 }
@@ -235,38 +234,35 @@ const AddAbout = ({navigation,route}) => {
 export default AddAbout;
 const styles = StyleSheet.create({
     container: {
-      alignContent: "center",
-      top: 1,
-      paddingVertical: 15,
-      paddingHorizontal: 20,
+      flex:1,
+      paddingVertical: 10,
+      paddingHorizontal: 30,
+    },
+    ChooseImageButton:{
+      alignItems: "center",
+      justifyContent: "center",
+      width: "100%",
+      backgroundColor: "#e7e7e7",
+      borderRadius: 6,
+      height: 100,
+      borderColor: "#707070",
+      paddingTop: 10,
+      marginTop: 20,
+    },
+    text: {
+      fontWeight: "bold",
+      fontSize: 16,
+      paddingVertical:4,
     },
     input: {
       letterSpacing: 0.25,
       height: 50,
-      width: "95%",
-      paddingLeft: 12,
-      paddingTop: 1,
-      marginTop: 10,
-      borderWidth: 1,
-      borderRadius: 5,
-      borderColor: "#707070",
+      width: "100%",
     },
-    text: {
-      fontWeight: "bold",
-      fontSize: 20,
-      letterSpacing: 0.5,
-    },
-    bodycontainer: {
-      paddingVertical: 5,
-      paddingHorizontal: 15,
-    },
-    addButton: {
-      borderColor: "#70707033",
-      borderWidth: 1.5,
-      marginVertical: 10,
-      borderRadius: 7,
-      alignItems: "center",
-      justifyContent: "center",
+    guidelines: {
+      fontSize: 12,
+      fontStyle: "italic",
+      color: "#707070",
     },
     button: {
       flex: 1,
@@ -274,26 +270,5 @@ const styles = StyleSheet.create({
       alignItems: "center",
       paddingVertical: 15,
     },
-    buttonss: {
-        position: "absolute",
-        width: 70,
-        height: 70,
-        borderRadius: 70 / 2,
-        alignItems: "center",
-        justifyContent: "center",
-        shadowRadius: 10,
-        shadowColor: "#F02A4B",
-        shadowOpacity: 0.3,
-        shadowOffset: { height: 10 },
-        backgroundColor: "#91B2EB",
-        bottom: 0,
-        right: 0,
-        elevation: 9,
-      },
-      guidelines: {
-        fontSize: 12,
-        fontStyle: "italic",
-        color: "#707070",
-      },
   });
   

@@ -13,22 +13,23 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import firebase from "firebase";
-import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationEvents } from "react-navigation";
-import * as DocumentPicker from "expo-document-picker";
-import * as FileSystem from "expo-file-system";
+import { Dimensions } from "react-native";
 import Checkbox from "expo-checkbox";
 
 function DeleteAbout({ route, navigation, currentUser }) {
+  const dimensions = Dimensions.get("window");
+  const imageHeight = Math.round((dimensions.width * 1) / 1);
+  const imageWidth = dimensions.width;
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   console.log(data?.language);
   console.log(data?.id);
+  console.log(data?.type)
   const Reject = () => {
     setLoading(true);
     rejectDictionaryAll();
@@ -39,12 +40,12 @@ function DeleteAbout({ route, navigation, currentUser }) {
       .firestore()
       .collection("languages")
       .doc(data?.language)
-      .collection("dictionary")
+      .collection(data?.type)
       .doc(`${data?.id}`)
       .delete()
       .then((result) => {
         alert("Contribution Permanently Deleted!");
-        navigation.navigate("MyContribution");
+        navigation.pop();
         setLoading(false);
       })
       .catch((err) => console.log(err, "-=error"));
@@ -52,6 +53,23 @@ function DeleteAbout({ route, navigation, currentUser }) {
 
   return (
     <ScrollView style={styles.container}>
+      <View style={{paddingVertical:20}}>
+      <View style={{justifyContent:'center'}}>
+        <Text style={{
+                    textAlign:"center",
+                    fontSize:20,
+                    fontWeight:'bold'
+                    }}>{data?.title}</Text>
+        <Image
+          style={{ width: imageWidth, height: imageWidth }}
+          source={{ uri: data?.image }}/>
+        <View style={styles.padding}>
+          <TextInput
+            multiline={true}
+            editable={false}
+            style={styles.textInput}>{data?.desc}</TextInput>
+        </View>  
+      </View>
       <View style={styles.center}>
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Delete {data?.word} </Text>
@@ -74,16 +92,19 @@ function DeleteAbout({ route, navigation, currentUser }) {
           </View>
         </View>
       </View>
-      <TouchableOpacity
-        style={[
-          styles.button,
-          { backgroundColor: toggleCheckBox ? "#215a88" : "#91B2EB" },
-        ]}
-        disabled={!toggleCheckBox}
-        onPress={() => [deleteContribution()]}
-      >
-        <Text style={styles.subtitle}> Delete </Text>
-      </TouchableOpacity>
+      <View style={styles.padding}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { backgroundColor: toggleCheckBox ? "#8E2835" : "#d7979f" },
+          ]}
+          disabled={!toggleCheckBox}
+          onPress={() => [deleteContribution()]}
+        >
+          <Text style={styles.subtitle}> Delete </Text>
+        </TouchableOpacity>
+      </View>
+      </View>
     </ScrollView>
   );
 }
@@ -95,14 +116,13 @@ const mapStateToProps = (store) => ({
 export default connect(mapStateToProps, null)(DeleteAbout);
 const styles = StyleSheet.create({
   container: {
-    alignContent: "center",
-    // /justifyContent: "center",
-    top: 1,
-    //left: 40,
+    flex:1,
+    
   },
   subtitle: {
     alignSelf: "center",
     fontSize: 18,
+
     letterSpacing: 0.25,
     color: "white",
   },
@@ -114,17 +134,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingTop: 20,
   },
+  padding:{
+    paddingHorizontal:30, 
+    paddingVertical: 20, 
+  },
   button: {
     alignSelf: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 10,
     elevation: 1,
-    width: "90%",
+    width: "100%",
     backgroundColor: "#215A88",
-    //top: 130,
-    marginTop: 20,
-    marginBottom: 80,
+  },
+  textInput:{
+    backgroundColor:"#e7e7e7", 
+    paddingHorizontal:15,
+    paddingVertical: 15,
+    borderRadius:6,
   },
   audioButton: {
     alignItems: "center",
@@ -154,15 +181,11 @@ const styles = StyleSheet.create({
   center: {
     justifyContent: "center",
     alignContent: "center",
+    paddingHorizontal:30
   },
 
   paddingLeft: {
     alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
-    marginTop: 20,
-    paddingLeft: 20,
-    paddingRight: 10,
     justifyContent: "center",
   },
 

@@ -17,6 +17,7 @@ import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
+import UserContribution from "../UserContribution";
 
 function MContriAll({ navigation, language }) {
   const [status, setStatus] = useState("All");
@@ -58,6 +59,7 @@ function MContriAll({ navigation, language }) {
 
   const renderItem = ({ item, index }) => {
     return (
+      // UserContribution.js
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}

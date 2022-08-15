@@ -55,11 +55,14 @@ const AddCulture = ({ navigation, route }) => {
         credits,
         desc,
         image: downloadURL,
+        language: language,
+        type: "Culture",
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
 
       .then(() => {
         alert("Culture Successfully Added");
-        navigation.popToTop();
+        navigation.pop();
       });
   };
 
@@ -138,83 +141,6 @@ const AddCulture = ({ navigation, route }) => {
   }
 
   return (
-    // <ScrollView style={styles.container}>
-    //   <View style={styles.bodycontainer}>
-    //     <View style={{ marginVertical: 15 }}>
-    //     <View style={styles.centered_Buttons}>
-    //         <TouchableOpacity
-    //           style={styles.ChooseImageButton}
-    //           title="Pick Image From Gallery"
-    //           onPress={(onPress) => pickImage()}
-    //         >
-    //           <MaterialCommunityIcons
-    //             name="image-multiple"
-    //             color="#263238"
-    //             size={50}
-    //           />
-    //         </TouchableOpacity>
-    //   </View>
-
-    //   {image && (
-    //     <Image
-    //       source={{ uri: image }}
-    //       style={{ bottom: 100, aspectRatio: 1 }}
-    //     />
-    //   )}
-    //       <View>
-    //         <Text style={[styles.text, { color: "#000000" }]}>Title</Text>
-    //       </View>
-    //     </View>
-
-    //     <View>
-    //       <TextInput
-    //         style={styles.input}
-    //         multiline={true}
-    //         autoCapitalize="none"
-    //         onChangeText={(title) => setTitle(title)}
-    //       />
-    //       <Text style={[styles.text, { fontSize: 16 }]}>Credits</Text>
-    //       <TextInput
-    //         style={styles.input}
-    //         multiline={true}
-    //         autoCapitalize="none"
-    //         onChangeText={(credits) => setCredits(credits)}
-    //       />
-    //     </View>
-    //     <View>
-    //       <Text style={[styles.text, { fontSize: 16 }]}>About</Text>
-    //       <Text style={[styles.guidelines]}>
-    //         Brief introduction/description about the language.
-    //       </Text>
-    //       <TextInput
-    //         multiline={true}
-    //         style={[
-    //           styles.addButton,
-    //           { height: 180 },
-    //           { paddingHorizontal: 10, flexDirection: "row" },
-    //         ]}
-    //         onChangeText={(desc) => setDesc(desc)}
-    //       ></TextInput>
-    //     </View>
-    //     <View
-    //       style={{
-    //         flexDirection: "row",
-    //         flex: 1,
-    //         justifyContent: "center",
-    //         marginVertical: 25,
-    //       }}
-    //     >
-    //       <TouchableOpacity
-    //         style={[styles.button, { backgroundColor: "#215a88" }]}
-    //         onPress={() => submit()}
-    //       >
-    //         <Text style={[styles.text, { fontSize: 16, color: "white" }]}>
-    //           Submit
-    //         </Text>
-    //       </TouchableOpacity>
-    //     </View>
-    //   </View>
-    // </ScrollView>
     <ScrollView style={styles.container}>
           <View>
             <View style={{alignItems:"center"}}>
@@ -259,7 +185,7 @@ const AddCulture = ({ navigation, route }) => {
             <View style={{paddingVertical:5}}>
                 <Text style={[styles.text, { fontSize: 16 }]}>About</Text>
                 <Text style={[styles.guidelines]}>
-                  Brief introduction/description about the language.
+                  Brief introduction/description about the image.
                 </Text>
                 <TextInput
                   multiline={true}
@@ -290,11 +216,6 @@ const AddCulture = ({ navigation, route }) => {
             </Text>
           </TouchableOpacity>
         </View>
-        
-
-             
-        
-
     </ScrollView>
   );
 };
