@@ -139,6 +139,15 @@ function VWAll({ navigation, language }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={{
+            alignItems:'center',
+            paddingVertical:15,}}>
+        <TextInput 
+            placeholder="Search for words..."
+            style={styles.input}>
+
+        </TextInput>
+      </View>
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
@@ -171,6 +180,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 2,
     backgroundColor: "#ebebeb",
     borderRadius: 10,
+  },
+  input: {
+    height: 45,
+    width: "90%",
+    backgroundColor: "white",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
+    paddingLeft:20
   },
 
   btnTab: {

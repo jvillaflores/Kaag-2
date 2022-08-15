@@ -27,6 +27,7 @@ function ValidateWord({ route }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
@@ -59,6 +60,8 @@ function ValidateWord({ route }) {
           children={(props) => <DeclineScreen language={language} {...props} />}
         />
       </Tab.Navigator>
+      
+
     </SafeAreaView>
   );
 }
@@ -79,6 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ebebeb",
     borderRadius: 10,
   },
+  
 
   btnTab: {
     width: Dimensions.get("window").width / 4.5,
