@@ -22,9 +22,7 @@ require("firebase/firebase-storage");
 import { Dimensions } from "react-native";
 
 function CultureFlatList({ navigation, route, language }) {
-  const dimensions = Dimensions.get("window");
-  //const imageHeight = Math.round(dimensions.width * 1 / 1);
-  const imageWidth = dimensions.width;
+  const [status, setStatus] = useState("All");
   const [datalist, setDatalist] = useState("");
   const [refreshing, setRefreshing] = useState(true);
 
@@ -34,9 +32,9 @@ function CultureFlatList({ navigation, route, language }) {
 
   const getData = () => {
     //Service to get the data from the server to render
-    // Fetch the data that are posted by all of the users.
+    //Applicant == 1 , basic user that has applied to be a validator
     firebase
-    .firestore()
+      .firestore()
       .collection("languages")
       .doc(language)
       .collection("Food")
@@ -53,33 +51,54 @@ function CultureFlatList({ navigation, route, language }) {
       });
   };
 
-  const ItemView = ({ item }) => {
-    return (
-      // Flat List Item
-      <TouchableOpacity style={styles.container}>
-        <Text style={styles.textKagan}>
-          {" "} 
-          {item.title}
-        </Text>
-        {/*<Image
-          style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: item.image }}
-        />*/}
-       <Image
-          style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: item.image }}/>
-        <View style={{ padding: 30 }}>
-          <Text style={styles.textVocab}> {item.desc}</Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
   const onRefresh = () => {
     //Clear old data of the list
     setDatalist([]);
     //Call the Service to get the latest data
     getData();
   };
+
+  const ItemView = ({ item }) => {
+    return (
+      
+      <TouchableOpacity 
+          onPress={() => navigation.navigate("DeleteAbout", { data: item })}
+          style={styles.container}>
+          
+          <View>  
+            <Image
+            style={{ width: 80, height: 80 }}
+            source={{ uri: item.image }}/>
+
+          </View>
+          <View style={{flexDirection:"row",}}>
+            <View style={{width:"80%",  paddingHorizontal:10, paddingVertical: 5}}>
+              <Text style={styles.textKagan}>
+                {item.title}
+              </Text>
+              <View>
+                <Text numberOfLines={3} style={{fontSize:10}}>{item.desc}</Text>
+              </View> 
+            </View>
+            <View style={{justifyContent:'center'}}>
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={20}
+                color="#215a88"
+              />
+            </View>
+          </View>
+          
+            
+     </TouchableOpacity>
+      
+    );
+  };
+
+  const separator = () => {
+    return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
+  };
+
 
   return (
     <FlatList
@@ -88,6 +107,7 @@ function CultureFlatList({ navigation, route, language }) {
       horizontal={false}
       data={datalist}
       style={{ flex: 1 }}
+      ItemSeparatorComponent={separator}
       renderItem={ItemView}
       refreshControl={
         <RefreshControl
@@ -103,229 +123,112 @@ function CultureFlatList({ navigation, route, language }) {
 export default CultureFlatList;
 
 const styles = StyleSheet.create({
-  title: {
-    top: 20,
-    left: 10,
-  },
   container: {
-    alignItems: "flex-start",
-    marginBottom: 20,
     flex: 1,
+    paddingHorizontal: 20,
+    alignContent: "center",
+    paddingVertical: 5,
+    flexDirection:'row'
   },
-  button: {
-    position: "absolute",
-    width: 60,
-    height: 60,
-    borderRadius: 60 / 2,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowRadius: 10,
-    shadowColor: "#F02A4B",
-    shadowOpacity: 0.3,
-    shadowOffset: { height: 10 },
-    backgroundColor: "#8E2835",
-  },
-  imageprofile: {
-    height: 45,
-    width: 45,
-    borderRadius: 100,
-    margin: 10,
-  },
-  profile: {
+  listTab: {
+    alignSelf: "center",
+    marginBottom: 20,
     flexDirection: "row",
-    alignItems: "center",
-  },
-  profilename: {
-    fontWeight: "bold",
-    paddingLeft: 10,
-    paddingBottom: 20,
-    paddingTop: 10,
+    paddingHorizontal: 2,
+    backgroundColor: "#ebebeb",
+    borderRadius: 10,
   },
 
-  textHead: {
+  btnTab: {
+    width: Dimensions.get("window").width / 4.5,
     flexDirection: "row",
-    fontSize: 21,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
+    borderWidth: 0.5,
+    borderColor: "#ebebeb",
+    padding: 10,
+    justifyContent: "center",
   },
-  textSubHead: {
+  textTab: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: "#000000",
+    //lineHeight: 1,
+  },
+  brnTabActive: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+  },
+  textTabActive: {
+    color: "#8E2835",
+    fontWeight: "bold",
+    fontSize: 13,
+  },
+  itemContainer: {
     flexDirection: "row",
-    fontSize: 15,
-    // fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
+    paddingVertical: 15,
+  },
+  itemLogo: {
+    padding: 10,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+  },
+
+  itemBody: {
+    flex: 1,
+    paddingHorizontal: 10,
+    justifyContent: "center",
+  },
+
+  itemsName: {
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+  itemStatus: {
+    backgroundColor: "#69C080",
+    paddingHorizontal: 17,
+    height: 30,
+    justifyContent: "center",
+    right: 14,
+    borderRadius: 5,
   },
   headLine: {
-    flexDirection: "row",
+    flexDirection: "column",
     width: "100%",
-    height: 110,
+    padding: 30,
+    top: -20,
+    height: 150,
     backgroundColor: "#8E2835",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    position: "relative",
   },
-  textHeadline: {
-    flexDirection: "row",
+  textHead: {
     fontSize: 20,
     fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  searchBar: {
-    top: 40,
-    left: -120,
-    width: "100%",
-  },
-  Kagan: {
-    top: 90,
-    left: 40,
-  },
-  grammar: {
-    top: 70,
-    left: 40,
-  },
-  pronun: {
-    top: 100,
-    left: 40,
-  },
-  textKagan: {
-    flexDirection: "row",
-    fontSize: 15,
-    fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  Abutton: {
-    justifyContent: "center",
-    paddingVertical: 8,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: 150,
-    top: -120,
-    backgroundColor: "#8E2835",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  buttonVocab: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -70,
-    left: -40,
-    height: 280,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonGrammar: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -30,
-    left: -40,
-    height: 300,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  buttonPronun: {
-    alignSelf: "center",
-    justifyContent: "center",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 4,
-    elevation: 3,
-    width: "90%",
-    backgroundColor: "#dadada",
-    top: -40,
-    left: -40,
-    height: 105,
-    borderTopLeftRadius: 7,
-    borderTopRightRadius: 7,
-    borderBottomRightRadius: 7,
-    borderBottomLeftRadius: 7,
-    borderColor: "black",
-  },
-  Vocab: {
-    top: 10,
-    left: -20,
-    paddingBottom: 20,
-  },
-  VocabSubSub: {
-    top: 5,
-    left: -10,
-  },
-  VocabSub: {
-    top: 5,
-    left: -10,
-  },
-  textVocab: {
-    fontSize: 13,
-    margin: 10,
-    fontStyle: "italic",
-    //lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSub: {
-    fontSize: 11,
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "black",
-  },
-  textVocabSubSub: {
-    fontSize: 11,
-    lineHeight: 21,
     letterSpacing: 0.25,
     color: "#8E2835",
+    paddingVertical: 15,
   },
-  text: {
-    fontSize: 15,
+
+  statusFont: {
     fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
-    color: "white",
   },
-  input: {
-    height: 45,
-    width: "90%",
-    backgroundColor: "white",
-    margin: 12,
-    borderWidth: 1,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderBottomLeftRadius: 10,
-  },
-  buttonAudio: {
-    alignSelf: "center",
+  arrowRight: {
+    backgroundColor: "#ebebeb",
+    paddingHorizontal: 5,
+    width: 30,
+    height: 30,
     justifyContent: "center",
-    borderRadius: 50,
-    elevation: 3,
-    width: 50,
-    backgroundColor: "#79222D",
-    top: 300,
-    left: 130,
-    height: 50,
-    borderColor: "black",
+    right: 2,
+    borderRadius: 5,
+    margin: 10,
   },
+  buttonContainer: {
+    alignItems: "flex-end",
+    alignSelf: "center",
+  },
+  textKagan:{
+    fontWeight: "bold",
+  }
 });

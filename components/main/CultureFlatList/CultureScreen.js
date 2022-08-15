@@ -75,7 +75,7 @@ function ApplyAll({ navigation, language }) {
                 {item.title}
               </Text>
               <View>
-                <Text numberOfLines={3} style={{fontSize:12}}>{item.desc}</Text>
+                <Text numberOfLines={3} style={{fontSize:10}}>{item.desc}</Text>
               </View> 
             </View>
             <View style={{justifyContent:'center'}}>
@@ -225,4 +225,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     alignSelf: "center",
   },
+  textKagan:{
+    fontWeight: "bold",
+  }
 });
