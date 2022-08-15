@@ -22,6 +22,9 @@ function VWAll({ navigation, language }) {
   const [status, setStatus] = useState("All");
   const [datalist, setDatalist] = useState("");
   const [refreshing, setRefreshing] = useState(true);
+  const [search, setSearch] = useState("");
+  const [filteredDataSource, setFilteredDataSource] = useState("");
+  const [masterDataSource, setMasterDataSource] = useState("");
 
   useEffect(() => {
     getData();
@@ -40,14 +43,38 @@ function VWAll({ navigation, language }) {
       .get()
       .then((snapshot) => {
         console.log(snapshot, "-=-=-=-=-=-=-=-=");
-        let dictionaryAll = snapshot.docs.map((doc) => {
+        let masterDataSource = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
           return { id, ...data };
         });
-        setDatalist(dictionaryAll);
+        setDatalist(masterDataSource);
+        setFilteredDataSource(masterDataSource);
+        setMasterDataSource(masterDataSource);
         setRefreshing(false);
       });
+  };
+  const searchFilterFunction = (text) => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = `${
+          item.word ? item.word.toUpperCase() : "".toUpperCase()
+        }`;
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
   };
 
   const onRefresh = () => {
@@ -82,7 +109,9 @@ function VWAll({ navigation, language }) {
             <Text>{item?.meaning}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
+            <Text style={{ fontSize: 9 }}>
+              {item?.creation.toDate().toDateString()}
+            </Text>
           </View>
         </View>
 
@@ -139,17 +168,20 @@ function VWAll({ navigation, language }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{
-            alignItems:'center',
-            paddingVertical:15,}}>
-        <TextInput 
-            placeholder="Search for words..."
-            style={styles.input}>
-
-        </TextInput>
+      <View
+        style={{
+          alignItems: "center",
+          paddingVertical: 15,
+        }}
+      >
+        <TextInput
+          placeholder="Search for words..."
+          style={styles.input}
+          onChangeText={(text) => searchFilterFunction(text)}
+        ></TextInput>
       </View>
       <FlatList
-        data={datalist}
+        data={filteredDataSource}
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}
@@ -189,7 +221,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     borderBottomLeftRadius: 10,
-    paddingLeft:20
+    paddingLeft: 20,
   },
 
   btnTab: {

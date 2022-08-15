@@ -88,6 +88,7 @@ function Save({ currentUser, route, navigation }) {
         username: currentUser.name,
         userImage: currentUser.userImage,
         downloadURL,
+        language: language,
         title,
         description,
         tags,
