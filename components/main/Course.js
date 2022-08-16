@@ -291,18 +291,20 @@ return(
         showsVerticalScrollIndicator={false}
       >
         <View>
-          <Text style={[styles.textHead, {}]}>Hello, {currentUser.name}! </Text>
+          <Text style={[styles.textHead]}>Hello, {currentUser.name}! </Text>
+          
         </View>
 
         
 
-        <View>
-          <Text style={styles.textKagan}>Course</Text>
-        </View>
+        
 
 
         {/* Kagan courses options. */}
-        <View>
+        <View style={{paddingVertical:15}}>
+          <View>
+            <Text style={styles.textKagan}>{language} Course</Text>
+          </View>
           {/* Vocabulary.js */}
           <TouchableOpacity
             style={styles.buttonVocab}
@@ -347,9 +349,10 @@ return(
           </TouchableOpacity>
         </View>
 
+        <View style={{paddingVertical:15}}>
         {/* Images Course text */}
         <View style={{ paddingTop: 10, paddingVertical: 5 }}>
-          <Text style={styles.textKagan}>About</Text>
+          <Text style={styles.textKagan}>About {language}</Text>
         </View>
 
         {/* About Kagan options. */}
@@ -390,6 +393,7 @@ return(
             </View>
           </TouchableOpacity>
          
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -446,8 +450,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     fontSize: 15,
     fontWeight: "bold",
-    lineHeight: 21,
-    letterSpacing: 0.25,
     color: "black",
     paddingVertical: 15,
   },

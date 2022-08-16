@@ -65,15 +65,13 @@ function AboutCulture  ({ navigation,route }) {
           {" "} 
           {item.title}
         </Text>
-        {/*<Image
-          style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: item.image }}
-        />*/}
        <Image
-          style={{ width: imageWidth, height: imageWidth }}
+          style={{ width: imageWidth, height: imageWidth, }}
           source={{ uri: item.image }}/>
+        <Text style={{textAlign:"right", color:"#707070", fontSize:12,}}>Image from: {item.credits}</Text>
         <View style={{ padding: 30 }}>
-          <Text style={styles.textVocab}> {item.desc}</Text>
+          <Text style={styles.textVocab}>{item.desc}</Text>
+          <Text style={{color:"#707070", fontSize:10, paddingVertical:15}}>Source: {item.source}</Text>
         </View>
       </View>
     );
@@ -285,10 +283,7 @@ const styles = StyleSheet.create({
   },
   textVocab: {
     fontSize: 13,
-    margin: 10,
     fontStyle: "italic",
-    //lineHeight: 21,
-    letterSpacing: 0.25,
     color: "black",
     textAlign:'justify'
   },

@@ -33,10 +33,11 @@ function Settings({ currentUser, navigation, route }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <View>
+            <View  style={{alignItems:"center"}}>
               <Title style={[styles.title, { marginTop: 35, marginBottom: 5 }]}>
                 {currentUser.name}
               </Title>
+              <Text>Super User</Text>
             </View>
           </View>
         </View>
@@ -173,13 +174,12 @@ function Settings({ currentUser, navigation, route }) {
         <SafeAreaView style={styles.container}>
           <View>
             <View style={styles.userInfoSelection}>
-              <View>
-                <Title
-                  style={[styles.title, { marginTop: 35, marginBottom: 5 }]}
-                >
-                  {currentUser.name}
-                </Title>
-              </View>
+            <View  style={{alignItems:"center"}}>
+              <Title style={[styles.title, { marginTop: 35, marginBottom: 5 }]}>
+                {currentUser.name}
+              </Title>
+              <Text>Validator</Text>
+            </View>
             </View>
           </View>
 
@@ -231,13 +231,12 @@ function Settings({ currentUser, navigation, route }) {
         <SafeAreaView style={styles.container}>
           <View>
             <View style={styles.userInfoSelection}>
-              <View>
-                <Title
-                  style={[styles.title, { marginTop: 35, marginBottom: 5 }]}
-                >
-                  {currentUser.name}
-                </Title>
-              </View>
+            <View  style={{alignItems:"center"}}>
+              <Title style={[styles.title, { marginTop: 35, marginBottom: 5 }]}>
+                {currentUser.name}
+              </Title>
+              <Text>Contributor</Text>
+            </View>
             </View>
           </View>
 
@@ -274,10 +273,10 @@ function Settings({ currentUser, navigation, route }) {
       <SafeAreaView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
-            <View>
-              <Title style={[styles.title, { marginTop: 35, marginBottom: 5 }]}>
-                {currentUser.name}
+            <View  style={{alignItems:"center"}}>
+              <Title style={[styles.title, { marginTop: 35, marginBottom: 5 }]}>{currentUser.name}
               </Title>
+              <Text>Contributor</Text>
             </View>
           </View>
         </View>

@@ -31,6 +31,7 @@ const AddCulture = ({ navigation, route }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [credits, setCredits] = useState("");
+  const [source, setSource] = useState("");
 
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
   const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -54,6 +55,7 @@ const AddCulture = ({ navigation, route }) => {
         title,
         credits,
         desc,
+        source,
         image: downloadURL,
         language: language,
         type: "Culture",
@@ -169,7 +171,6 @@ const AddCulture = ({ navigation, route }) => {
                 <TextInput
                   style={styles.input}
                   multiline={true}
-                  autoCapitalize="none"
                   onChangeText={(title) => setTitle(title)}
                 />
             </View>
@@ -178,7 +179,6 @@ const AddCulture = ({ navigation, route }) => {
                 <TextInput
                   style={styles.input}
                   multiline={true}
-                  autoCapitalize="none"
                   onChangeText={(credits) => setCredits(credits)}
                 />
             </View>
@@ -193,6 +193,20 @@ const AddCulture = ({ navigation, route }) => {
                     { paddingHorizontal: 10, flexDirection: "row" },
                   ]}
                   onChangeText={(desc) => setDesc(desc)}
+                >
+                  
+                </TextInput>
+            </View>
+            <View style={{paddingVertical:5}}>
+                <Text style={[styles.text, { fontSize: 16 }]}>Source</Text>
+                <Text style={[styles.guidelines]}>
+                  Indicate the source of your description.
+                </Text>
+                <TextInput
+                  style={styles.input}
+                  multiline={true}
+                  autoCapitalize="none"
+                  onChangeText={(source) => setSource(source)}
                 >
                   
                 </TextInput>
@@ -228,8 +242,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   input: {
-    letterSpacing: 0.25,
-    height: 50,
     width: "100%",
 
   },
