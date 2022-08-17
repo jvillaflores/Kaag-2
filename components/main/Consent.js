@@ -238,7 +238,8 @@ function ContributionWord({ currentUser, navigation, route }) {
         clearMeaning(meaning);
         clearPronunciation(pronunciation);
         clearAudio(audio);
-      });
+      })
+      
   };
 
   const savePostData = (downloadURL) => {
@@ -279,7 +280,8 @@ function ContributionWord({ currentUser, navigation, route }) {
         clearMeaning(meaning);
         clearPronunciation(pronunciation);
         clearAudio(audio);
-      });
+      })
+      
   };
 
   /* Saving data to the firestore*/
@@ -390,9 +392,7 @@ function ContributionWord({ currentUser, navigation, route }) {
               <Text style={styles.title_text}>
                 Word<Text style={{ color: "red" }}>*</Text>
               </Text>
-              <Text style={styles.guidelines}>
-                {" "}
-                Type the word you want to contribute.{" "}
+              <Text style={styles.guidelines}>Type the word you want to contribute.{" "}
               </Text>
               {isFieldInError("word") &&
                 getErrorsInField("word").map((errorMessage) => (
@@ -401,7 +401,6 @@ function ContributionWord({ currentUser, navigation, route }) {
               <TextInput
                 style={styles.input}
                 value={word}
-                multiline={true}
                 autoCapitalize="none"
                 onChangeText={(word) => setWord(word)}
               />
@@ -839,15 +838,10 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   input: {
-    letterSpacing: 0.15,
-    height: 50,
     width: "95%",
     paddingLeft: 12,
-    paddingTop: 0,
-    marginTop: 10,
-    //borderWidth: 1,
     borderRadius: 5,
-    //borderColor: "#707070",
+    marginTop: 10,
   },
   tags_input: {
     letterSpacing: 0.25,
@@ -861,11 +855,8 @@ const styles = StyleSheet.create({
     borderColor: "#707070",
   },
   description_input: {
-    letterSpacing: 0.25,
-    height: 100,
     width: "95%",
     paddingLeft: 12,
-    paddingTop: 1,
     marginTop: 10,
     //borderWidth: 1,
     borderRadius: 5,
