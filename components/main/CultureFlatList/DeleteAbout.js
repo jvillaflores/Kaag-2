@@ -96,7 +96,7 @@ function DeleteAbout({ route, navigation, currentUser }) {
         <TouchableOpacity
           style={[
             styles.button,
-            { backgroundColor: toggleCheckBox ? "#8E2835" : "#d7979f" },
+            { backgroundColor: toggleCheckBox ? "#215a88" : "#91B2EB" },
           ]}
           disabled={!toggleCheckBox}
           onPress={() => [deleteContribution()]}
