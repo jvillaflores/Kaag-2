@@ -330,8 +330,8 @@ return(
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() => 
-             // navigation.navigate("Speech")
-             alert("This page is not yet available")
+             navigation.navigate("SpeechQuiz", { language: language })
+             
             }
           >
             <View style={styles.contextButton}>

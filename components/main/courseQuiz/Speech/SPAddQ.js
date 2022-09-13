@@ -99,7 +99,7 @@ import {
         .firestore()
         .collection("languages")
         .doc(language)
-        .collection("Quizzes")
+        .collection("SpeechQuiz")
         .doc(currentQuizId)
         .set({
           title,
@@ -113,7 +113,7 @@ import {
       await createQuiz(currentQuizId, title, description);
   
       // Navigate to Add Question string
-      navigation.navigate("AddQuiz", {
+      navigation.navigate("AddSpeechQuiz", {
         currentQuizId: currentQuizId,
         currentQuizTitle: title,
         language: language,

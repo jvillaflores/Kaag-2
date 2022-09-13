@@ -68,12 +68,14 @@ import EventsScreen from "./components/main/AboutEvents";
 import TraditionScreen from "./components/main/Traditions";
 import ClothingScreen from "./components/main/AboutClothing";
 import AddLanguageScreen from "./components/main/AddLanguage";
-import AddQuiz from "./components/main/courseQuiz/AddQuiz";
+import AddSpeechQuiz from "./components/main/courseQuiz/Speech/AddQuiz";
+import AddQuiz from "./components/main/courseQuiz/Vocabulary/AddQuiz";
 import AddQuestion from "./components/main/courseQuiz/Vocabulary/AddQuestion";
 import SPAddQ from "./components/main/courseQuiz/Speech/SPAddQ";
 import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 import EditQuestion from "./components/main/EditQuestion";
 import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
+import SpeechQuiz from "./components/main/courseQuiz/SpeechQuiz";
 import PlayQuizScreen from "./components/main/PlayQuizScreen";
 import Edit from "./components/main/Edit";
 import Edits from "./components/main/Edits";
@@ -628,6 +630,20 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
+              name="AddSpeechQuiz"
+              component={AddSpeechQuiz}
+              options={{
+                title: "AddQuiz",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
               name="EditQuestion"
               component={EditQuestion}
               options={{
@@ -647,6 +663,20 @@ export class App extends Component {
               component={Vocabulary}
               options={{
                 title: "Vocabulary",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="SpeechQuiz"
+              component={SpeechQuiz}
+              options={{
+                title: "Speech",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
