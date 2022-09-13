@@ -88,7 +88,7 @@ import {
                 backgroundColor: COLORS.primary + "20",
               }}
               onPress={() => {
-                navigation.navigate("PlayQuizScreen", {
+                navigation.navigate("PlaySpeechQuizScreen", {
                   quizId: quiz.id,
                   language: language,
                 });

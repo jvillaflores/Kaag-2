@@ -76,7 +76,8 @@ import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 import EditQuestion from "./components/main/EditQuestion";
 import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
 import SpeechQuiz from "./components/main/courseQuiz/SpeechQuiz";
-import PlayQuizScreen from "./components/main/PlayQuizScreen";
+import PlaySpeechQuizScreen from "./components/main/courseQuiz/Speech/PlayQuizScreen";
+import PlayVocabularyQuizScreen from "./components/main/courseQuiz/Vocabulary/PlayQuizScreen";
 import Edit from "./components/main/Edit";
 import Edits from "./components/main/Edits";
 import Add from "./components/main/Add";
@@ -718,8 +719,22 @@ export class App extends Component {
             />
 
             <Stack.Screen
-              name="PlayQuizScreen"
-              component={PlayQuizScreen}
+              name="PlaySpeechQuizScreen"
+              component={PlaySpeechQuizScreen}
+              options={{
+                title: "Vocabulary",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="PlayVocabularyQuizScreen"
+              component={PlayVocabularyQuizScreen}
               options={{
                 title: "Vocabulary",
                 headerShadowVisible: false,
