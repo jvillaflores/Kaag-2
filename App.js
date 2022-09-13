@@ -71,7 +71,7 @@ import AddLanguageScreen from "./components/main/AddLanguage";
 import AddQuiz from "./components/main/AddQuiz";
 import AddQuestion from "./components/main/AddQuestion";
 import EditQuestion from "./components/main/EditQuestion";
-// import Testpage from "./components/main/Testpage";
+import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
 import PlayQuizScreen from "./components/main/PlayQuizScreen";
 import Edit from "./components/main/Edit";
 import Edits from "./components/main/Edits";
@@ -640,11 +640,11 @@ export class App extends Component {
               }}
             />
 
-            {/* <Stack.Screen
-              name="Testpage"
-              component={Testpage}
+            <Stack.Screen
+              name="Vocabulary"
+              component={Vocabulary}
               options={{
-                title: "Testpage",
+                title: "Vocabulary",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
@@ -653,13 +653,13 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            /> */}
+            />
 
             <Stack.Screen
               name="PlayQuizScreen"
               component={PlayQuizScreen}
               options={{
-                title: "PlayQuizScreen",
+                title: "Vocabulary",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

@@ -91,7 +91,7 @@ const AddEdit = ({navigation, route}) => {
 
   return (
     
-   <ScrollView>
+   <View>
        <FlatList
         nestedScrollEnabled
         keyExtractor={(item, index) => index.toString()}
@@ -113,7 +113,7 @@ const AddEdit = ({navigation, route}) => {
           );
         }}
       />
-          <Pressable
+          {/* <Pressable
         style={styles.buttonss}
         onPress={() =>
           navigation.navigate("AddQuestions", { language: language })
@@ -121,8 +121,8 @@ const AddEdit = ({navigation, route}) => {
         //onPress={() => navigation.navigate("NewContribution")}
       >
         <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
-      </Pressable>
-   </ScrollView>
+      </Pressable> */}
+   </View>
     
     
   )

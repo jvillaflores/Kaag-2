@@ -446,6 +446,9 @@ function NewDictionary({ currentUser, route, navigation }) {
             />
           </View>
 
+          {/* AUDIO RECORD */}
+          
+
           {/* AUDIO */}
           <View style={styles.paddingLeft}>
             <Text style={styles.title_text}>Audio<Text style={{ color: "red" }}>*</Text></Text>

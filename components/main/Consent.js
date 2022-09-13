@@ -41,6 +41,9 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { language } = route?.params ?? {};
   const [userTerm, setUserTerm] = useState("");
+  const [recording, setRecording] = React.useState();
+  const [recordings, setRecordings] = React.useState([]);
+  const [message, setMessage] = React.useState("");
 
   useEffect(() => {
     //used for fetching the dictionary data from the firestore
@@ -571,6 +574,27 @@ function ContributionWord({ currentUser, navigation, route }) {
                   setPronunciation(pronunciation)
                 }
               />
+            </View>
+
+            <View style={styles.paddingLeft}>
+              <Text style={styles.title_text}>
+                Audio<Text style={{ color: "red" }}>*</Text>
+              </Text>
+              
+              
+              <TouchableOpacity
+                title={recording ? 'Stop Recording' : 'Start Recording'}
+                style={styles.audioButton}
+                onPress={() => chooseFile()}
+              >
+                <View>
+                  {recording ? (
+                    <Text>Stop Recording</Text>
+                  ) : (
+                    <Text>Start Recording</Text>
+                  )}
+                </View>
+              </TouchableOpacity>
             </View>
 
             {/* AUDIO */}

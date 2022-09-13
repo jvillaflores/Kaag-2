@@ -309,8 +309,8 @@ return(
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() =>
-              //navigation.navigate("Testpage", { language: language })
-              alert("This page is not yet available")
+              navigation.navigate("Vocabulary", { language: language })
+              //alert("This page is not yet available")
             }
           >
             <View style={styles.contextButton}>
