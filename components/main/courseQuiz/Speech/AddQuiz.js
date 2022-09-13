@@ -164,6 +164,18 @@ const AddQuestion = ({ navigation, route }) => {
           >
             Add Question
           </Text>
+
+          <TouchableOpacity
+            style={styles.buttonVocab}
+            
+          >
+            <View style={styles.contextButton}>
+              <View style={styles.text_Context}>
+                <Text style={styles.textVocab}>Add Audio</Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+
           <Text style={{ textAlign: "center", marginBottom: 20 }}>
             For {currentQuizTitle}
           </Text>
@@ -222,6 +234,32 @@ const AddQuestion = ({ navigation, route }) => {
 };
 
 export default AddQuestion;
+const styles = StyleSheet.create({
+  buttonVocab: {
+    width: "47.5%",
+    elevation: 0.7,
+    backgroundColor: "#ffffff",
+    borderRadius: 10,
+    paddingVertical: 15,
+    margin: 5,
+
+  },
+  textVocab: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "black",
+  },
+  contextButton: {
+    flexDirection: "column",
+    paddingHorizontal: 20,
+    alignItems: "center",
+  },
+  text_Context: {
+    flexDirection: "column",
+    alignItems: "center",
+  },
+});
+
 const COLORS = {
   primary: "#215a88",
   secondary: "#000020",
@@ -235,6 +273,8 @@ const COLORS = {
   border: "#F5F5F7",
 };
 
+
 export const SIZES = {
   base: 10,
 };
+

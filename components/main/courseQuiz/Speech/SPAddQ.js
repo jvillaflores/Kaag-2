@@ -157,7 +157,6 @@ import {
           value={description}
         />
 
-        <Button title="Add Audio"> </Button>
   
         <FormButton labelText="Create Quiz" handleOnPress={handleQuizSave} />
   
