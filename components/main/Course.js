@@ -60,7 +60,7 @@ return(
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() => 
-             navigation.navigate("SpeechQuiz", { language: language })
+              navigation.navigate("SpeechQuiz", { language: language })
              
             }
           >
@@ -83,54 +83,54 @@ return(
         </View>
 
 
-
+        
         
 
         <View style={styles.Vertical}>
-        {/* Images Course text */}
-        <View style={{ paddingTop: 10, paddingVertical: 5 }}>
-          <Text style={styles.textKagan}>About {language}</Text>
-        </View>
-
-        {/* About Kagan options. */}
-        <View style={styles.Row}>
-          {/* AboutCulture.js */}
-          <TouchableOpacity
-            style={styles.buttonVocab}
-            onPress={() => navigation.navigate("Traditions", { language: language })}
-          >
-            <View style={styles.contextButton}>
-              <Image
-                style={{ width: 40, height: 40, margin: 25 }}
-                source={require("../../assets/images.png")}
-              />
-
-              <View style={styles.text_Context}>
-                <Text style={styles.textVocab}>Images</Text>
-                <Text style={styles.textVocabSub}>About the Culture</Text>
+              {/* Images Course text */}
+              <View style={{ paddingTop: 10, paddingVertical: 5 }}>
+                <Text style={styles.textKagan}>About {language}</Text>
               </View>
-            </View>
-          </TouchableOpacity>
 
-          {/* AboutEvents.js */}
-          <TouchableOpacity
-            style={styles.buttonVocab}
-            onPress={() => navigation.navigate("Event", { language: language })}
-          >
-            <View style={styles.contextButton}>
-              <Image
-                style={{ width: 40, height: 40, margin: 25 }}
-                source={require("../../assets/book.png")}
-              />
+              {/* About Kagan options. */}
+              <View style={styles.Row}>
+                {/* AboutCulture.js */}
+                <TouchableOpacity
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Traditions", { language: language })}
+                >
+                  <View style={styles.contextButton}>
+                      <Image
+                        style={{ width: 40, height: 40, margin: 25 }}
+                        source={require("../../assets/images.png")}
+                      />
 
-              <View style={styles.text_Context}>
-                <Text style={styles.textVocab}>More</Text>
-                <Text style={styles.textVocabSub}>About the Culture</Text>
-              </View>
-            </View>
-          </TouchableOpacity>
+                      <View style={styles.text_Context}>
+                            <Text style={styles.textVocab}>Images</Text>
+                            <Text style={styles.textVocabSub}>About the Culture</Text>
+                      </View>
+                  </View>
+                </TouchableOpacity>
+
+                {/* AboutEvents.js */}
+                <TouchableOpacity
+                  style={styles.buttonVocab}
+                  onPress={() => navigation.navigate("Event", { language: language })}
+                >
+                      <View style={styles.contextButton}>
+                              <Image
+                                style={{ width: 40, height: 40, margin: 25 }}
+                                source={require("../../assets/book.png")}
+                              />
+
+                        <View style={styles.text_Context}>
+                              <Text style={styles.textVocab}>More</Text>
+                              <Text style={styles.textVocabSub}>About the Culture</Text>
+                        </View>
+                      </View>
+                </TouchableOpacity>
          
-          </View>
+              </View>
         </View>
       </ScrollView>
     </SafeAreaView>
