@@ -106,7 +106,7 @@ function Settings({ currentUser, navigation, route }) {
           {/*Add Quiz */}
           <TouchableRipple
             onPress={() =>
-              navigation.navigate("AddQuestion", { language: language })
+              navigation.navigate("OptionQuiz", { language: language })
             }
           >
             <View style={styles.menuItem}>

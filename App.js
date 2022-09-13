@@ -68,8 +68,10 @@ import EventsScreen from "./components/main/AboutEvents";
 import TraditionScreen from "./components/main/Traditions";
 import ClothingScreen from "./components/main/AboutClothing";
 import AddLanguageScreen from "./components/main/AddLanguage";
-import AddQuiz from "./components/main/AddQuiz";
-import AddQuestion from "./components/main/AddQuestion";
+import AddQuiz from "./components/main/courseQuiz/AddQuiz";
+import AddQuestion from "./components/main/courseQuiz/Vocabulary/AddQuestion";
+import SPAddQ from "./components/main/courseQuiz/Speech/SPAddQ";
+import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 import EditQuestion from "./components/main/EditQuestion";
 import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
 import PlayQuizScreen from "./components/main/PlayQuizScreen";
@@ -645,6 +647,36 @@ export class App extends Component {
               component={Vocabulary}
               options={{
                 title: "Vocabulary",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="OptionQuiz"
+              component={OptionQuiz}
+              options={{
+                title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="SpeechAddQuiz"
+              component={SPAddQ}
+              options={{
+                title: "Add Quiz",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

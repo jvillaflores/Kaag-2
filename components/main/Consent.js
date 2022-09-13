@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   ImageBackground,
+  Pressable,
 } from "react-native";
 
 import { Title, TextInput, Text, TouchableRipple } from "react-native-paper";
@@ -24,6 +25,9 @@ import * as FileSystem from "expo-file-system";
 import { useValidation } from "react-native-form-validator";
 import { Picker } from "@react-native-picker/picker";
 import Checkbox from "expo-checkbox";
+import { Audio } from 'expo-av';
+import * as Sharing from 'expo-sharing';
+
 
 function ContributionWord({ currentUser, navigation, route }) {
   const [word, setWord] = useState("");
@@ -44,6 +48,69 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [recording, setRecording] = React.useState();
   const [recordings, setRecordings] = React.useState([]);
   const [message, setMessage] = React.useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+
+  async function startRecording() {
+    try {
+      const permission = await Audio.requestPermissionsAsync();
+
+      if (permission.status === "granted") {
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+          shouldDuckAndroid: false,
+        });
+        
+        const { recording } = await Audio.Recording.createAsync(
+          // Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY //low qual
+          Audio.RecordingOptionsPresets.HIGH_QUALITY //higher qual
+        );
+
+        setRecording(recording);
+      } else {
+        setMessage("Please grant permission to app to access microphone");
+      }
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
+
+  async function stopRecording() {
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+
+    let updatedRecordings = [...recordings];
+    const { sound, status } = await recording.createNewLoadedSoundAsync();
+    updatedRecordings.push({
+      sound: sound,
+      duration: getDurationFormatted(status.durationMillis),
+      file: recording.getURI()
+    });
+
+    setRecordings(updatedRecordings);
+  }
+
+  function getDurationFormatted(millis) {
+    const minutes = millis / 1000 / 60;
+    const minutesDisplay = Math.floor(minutes);
+    const seconds = Math.round((minutes - minutesDisplay) * 60);
+    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
+    return `${minutesDisplay}:${secondsDisplay}`;
+  }
+
+  function getRecordingLines() {
+    return recordings.map((recordingLine, index) => {
+      return (
+        <View key={index} style={styles.row}>
+          <Text style={styles.fill}>Recording {index + 1} - {recordingLine.duration}</Text>
+          <Button style={styles.button} onPress={() => recordingLine.sound.replayAsync()} title="Play"></Button>
+          <Button style={styles.button} onPress={() => Sharing.shareAsync(recordingLine.file)} title="Share"></Button>
+          <Button style={styles.button}  title="Add"></Button>
+        </View>
+        
+      );
+    });
+  }
 
   useEffect(() => {
     //used for fetching the dictionary data from the firestore
@@ -595,6 +662,10 @@ function ContributionWord({ currentUser, navigation, route }) {
                   )}
                 </View>
               </TouchableOpacity>
+              <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
+        <Text style={styles.textStyle}>Show Modal</Text>
+      </Pressable>   
+
             </View>
 
             {/* AUDIO */}
