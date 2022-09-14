@@ -45,8 +45,8 @@ return(
           >
             <View style={styles.contextButton}>
               <Image
-                style={{ width: 30, height: 40, margin: 25 }}
-                source={require("../../assets/vocab.png")}
+                style={{ width: 70, height: 70, margin: 20 }}
+                source={require("../../assets/image-v.png")}
               />
 
               <View style={styles.text_Context}>
@@ -67,8 +67,8 @@ return(
             <View style={styles.contextButton}>
               
                   <Image
-                  style={{ width: 50, height: 40, margin: 15 }}
-                  source={require("../../assets/pronun.png")}
+                  style={{ width: 70, height: 70, margin: 20 }}
+                  source={require("../../assets/speech.png")}
                 />
               
               <View style={styles.text_Context}>
@@ -101,8 +101,8 @@ return(
                 >
                   <View style={styles.contextButton}>
                       <Image
-                        style={{ width: 40, height: 40, margin: 25 }}
-                        source={require("../../assets/images.png")}
+                        style={{ width: 70, height: 70, margin: 20 }}
+                        source={require("../../assets/imag.png")}
                       />
 
                       <View style={styles.text_Context}>
