@@ -21,7 +21,7 @@ var head = require("../../assets/learning.svg");
 
 const Word = ({ route }) => {
   const { data } = route?.params ?? {};
-
+  console.log(data?.downloadURL)
   const downloadAudio = async () => {
     //function for playing the audio of the dictionary data
     let SoundObject = new Audio.Sound();

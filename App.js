@@ -72,6 +72,7 @@ import AddSpeechQuiz from "./components/main/courseQuiz/Speech/AddQuiz";
 import AddQuiz from "./components/main/courseQuiz/Vocabulary/AddQuiz";
 import AddQuestion from "./components/main/courseQuiz/Vocabulary/AddQuestion";
 import SPAddQ from "./components/main/courseQuiz/Speech/SPAddQ";
+import AudioList from "./components/main/courseQuiz/Speech/AudioList";
 import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 import EditQuestion from "./components/main/EditQuestion";
 import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
@@ -635,6 +636,20 @@ export class App extends Component {
               component={AddSpeechQuiz}
               options={{
                 title: "AddQuiz",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="AudioList"
+              component={AudioList}
+              options={{
+                title: "Audio List",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

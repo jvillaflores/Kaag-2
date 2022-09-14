@@ -14,6 +14,7 @@ import {
   ToastAndroid,
 } from "react-native";
 import React, { useState, useEffect } from "react";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
@@ -88,7 +89,10 @@ export const FormButton = ({
 
 const AddQuestion = ({ navigation, route }) => {
   const { language } = route.params;
+  const { data } =route?.params?? {}
+  
   console.log(language);
+  console.log(data?.downloadURL)
 
   const [currentQuizId, setcurrentQuizId] = useState(
     route.params.currentQuizId
@@ -103,7 +107,9 @@ const AddQuestion = ({ navigation, route }) => {
   const [OptionTwo, setOptionTwo] = useState("");
   const [OptionThree, setOptionThree] = useState("");
   const [OptionFour, setOptionFour] = useState("");
-
+  // const audio= data?.downloadURL 
+  // const [audio1, setAudio] = useState(audio)
+  // console.log(audio1)
   const handleQuestionSave = async () => {
     if (
       question == "" ||
@@ -118,9 +124,10 @@ const AddQuestion = ({ navigation, route }) => {
     let currentQuestionId = Math.floor(
       100000 + Math.random() * 9000
     ).toString();
-
+  console.log(currentQuestionId);
     // Add question to db
     await createQuestion(currentQuizId, currentQuestionId, {
+      audio: data?.downloadURL,
       question: question,
       correct_answer: correctAnswer,
       incorrect_answers: [OptionTwo, OptionThree, OptionFour],
@@ -132,6 +139,7 @@ const AddQuestion = ({ navigation, route }) => {
     setOptionTwo("");
     setOptionThree("");
     setOptionFour("");
+    data = null
   };
 
   const createQuestion = (currentQuizId, currentQuestionId, question) => {
@@ -167,13 +175,19 @@ const AddQuestion = ({ navigation, route }) => {
 
           <TouchableOpacity
             style={styles.buttonVocab}
-            
+            onPress={() => navigation.navigate("AudioList", {language : language})}
           >
-            <View style={styles.contextButton}>
+           { data?.downloadURL ? ( <MaterialCommunityIcons
+                    style={styles.addAudio}
+                    name="volume-high"
+                    color={"#707070"}
+                    size={26}
+                  />) :(<View style={styles.contextButton}>
               <View style={styles.text_Context}>
                 <Text style={styles.textVocab}>Add Audio</Text>
               </View>
-            </View>
+            </View>) } 
+           
           </TouchableOpacity>
 
           <Text style={{ textAlign: "center", marginBottom: 20 }}>

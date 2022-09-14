@@ -37,7 +37,7 @@ function Validation({ currentUser, route, navigation }) {
   const [meaning, setMeaning] = useState(data?.meaning);
   const [pronunciation, setPronunciation] = useState(data?.pronunciation);
   const [audio, setAudio] = useState(null);
-
+  console.log(data?.downloadURL)
   const chooseFile = async () => {
     let result = await DocumentPicker.getDocumentAsync({
       type: "audio/*",
