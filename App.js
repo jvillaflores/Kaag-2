@@ -69,10 +69,12 @@ import TraditionScreen from "./components/main/Traditions";
 import ClothingScreen from "./components/main/AboutClothing";
 import AddLanguageScreen from "./components/main/AddLanguage";
 import AddSpeechQuiz from "./components/main/courseQuiz/Speech/AddQuiz";
+import AddSpeechQuiz2 from "./components/main/courseQuiz/Speech/AddQuiz2";
 import AddQuiz from "./components/main/courseQuiz/Vocabulary/AddQuiz";
 import AddQuestion from "./components/main/courseQuiz/Vocabulary/AddQuestion";
 import SPAddQ from "./components/main/courseQuiz/Speech/SPAddQ";
 import AudioList from "./components/main/courseQuiz/Speech/AudioList";
+import AudioList2 from "./components/main/courseQuiz/Speech/AudioList2";
 import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 import EditQuestion from "./components/main/EditQuestion";
 import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
@@ -646,10 +648,38 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
+              name="AddSpeechQuiz2"
+              component={AddSpeechQuiz2}
+              options={{
+                title: "AddQuiz2",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
               name="AudioList"
               component={AudioList}
               options={{
                 title: "Audio List",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="AudioList2"
+              component={AudioList2}
+              options={{
+                title: "Audio List2",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

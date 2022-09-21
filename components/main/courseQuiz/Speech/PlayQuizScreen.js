@@ -5,12 +5,15 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
+  StyleSheet,
   Image,
   TouchableOpacity,
 } from "react-native";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
+import { Audio } from "expo-av";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const PlayQuizScreen = ({ navigation, route }) => {
   const { language } = route.params;
@@ -23,6 +26,27 @@ const PlayQuizScreen = ({ navigation, route }) => {
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
   const [isResultModalVisible, setIsResultModalVisible] = useState(false);
+
+  const downloadAudio = async (item) => {
+    //function for playing the audio of the dictionary data
+   
+    let SoundObject = new Audio.Sound();
+    try {
+      
+      await SoundObject.loadAsync({ uri: item.audio });
+      const status = await SoundObject.playAsync();
+      setTimeout(() => {
+        SoundObject.unloadAsync();
+      }, status.playableDurationMillis + 1000);
+    } catch (error) {
+      console.log(error);
+      await SoundObject.unloadAsync(); // Unload any sound loaded
+      SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+      retryPlaySound();
+    }
+  };
+
+  const retryPlaySound = () => downloadAudio();
 
   const FormButton = ({
     labelText = "",
@@ -242,6 +266,19 @@ const PlayQuizScreen = ({ navigation, route }) => {
             <View style={{ padding: 20 }}>
               <Text style={{ fontSize: 16 }}>
                 {index + 1}. {item.question}
+                <TouchableOpacity
+            style={styles.buttonAudio}
+            onPress={() => downloadAudio(item)}
+          >
+            {/* {console.log(item)} */}
+            <View>
+              <MaterialCommunityIcons
+                name="volume-high"
+                size={26}
+                color="#215a88"
+              />
+            </View>
+          </TouchableOpacity>
               </Text>
             </View>
             {/* Options */}
@@ -326,3 +363,11 @@ const COLORS = {
 export const SIZES = {
   base: 10,
 };
+const styles = StyleSheet.create({
+  buttonAudio: {
+    alignSelf: "center",
+    padding: 8,
+    margin: 10,
+    borderRadius: 7,
+    backgroundColor: "white",
+  },})

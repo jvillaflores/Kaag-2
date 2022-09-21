@@ -134,12 +134,17 @@ const AddQuestion = ({ navigation, route }) => {
     });
 
     // Reset
+
     setQuestion("");
     setCorrectAnswer("");
     setOptionTwo("");
     setOptionThree("");
     setOptionFour("");
-    data = null
+    navigation.navigate("AddSpeechQuiz2", {
+                currentQuizId: currentQuizId,
+                currentQuizTitle: currentQuizTitle,
+                language: language,
+              })
   };
 
   const createQuestion = (currentQuizId, currentQuestionId, question) => {
@@ -228,7 +233,7 @@ const AddQuestion = ({ navigation, route }) => {
           </View>
           <FormButton
             labelText="Add Question"
-            handleOnPress={handleQuestionSave}
+            handleOnPress={ handleQuestionSave}
           />
           <FormButton
             labelText="Done & Go Home"
