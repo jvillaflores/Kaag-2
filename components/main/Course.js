@@ -119,8 +119,8 @@ return(
                 >
                       <View style={styles.contextButton}>
                               <Image
-                                style={{ width: 40, height: 40, margin: 25 }}
-                                source={require("../../assets/book.png")}
+                                style={{ width: 70, height: 70, margin: 20 }}
+                                source={require("../../assets/more.png")}
                               />
 
                         <View style={styles.text_Context}>
