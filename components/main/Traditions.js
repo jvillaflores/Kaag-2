@@ -36,7 +36,7 @@ function Traditions({ currentUser, navigation, route }) {
                   <View style={styles.contextButton}>
                     <Image
                       style={{ width: 40, height: 40 }}
-                      source={require("../../assets/images.png")}
+                      source={require("../../assets/imag.png")}
                     />
 
                     <View style={styles.text_Context}>
@@ -54,7 +54,7 @@ function Traditions({ currentUser, navigation, route }) {
                   <View style={styles.contextButton}>
                     <Image
                       style={{ width: 40, height: 40 }}
-                      source={require("../../assets/images.png")}
+                      source={require("../../assets/imag.png")}
                     />
 
                     <View style={styles.text_Context}>
@@ -72,7 +72,7 @@ function Traditions({ currentUser, navigation, route }) {
                   <View style={styles.contextButton}>
                     <Image
                       style={{ width: 40, height: 40 }}
-                      source={require("../../assets/images.png")}
+                      source={require("../../assets/imag.png")}
                     />
 
                     <View style={styles.text_Context}>
