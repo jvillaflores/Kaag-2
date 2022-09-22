@@ -235,7 +235,6 @@ const styles = StyleSheet.create({
   buttonVocab: {
     width: "47.5%",
     elevation: 0.7,
-    //width: 300,
     backgroundColor: "#ffffff",
     borderRadius: 10,
     paddingVertical: 15,

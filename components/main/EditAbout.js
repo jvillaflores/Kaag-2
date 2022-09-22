@@ -52,7 +52,7 @@ const EditAbout = ({ navigation, route }) => {
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
-        <View style={{ paddingBottom: 30 }}>
+        <View style={{ paddingBottom: 30, flexDirection:"row"  }}>
           {/* EditCulture.js */}
           <TouchableOpacity
             style={styles.buttonVocab}
@@ -62,8 +62,8 @@ const EditAbout = ({ navigation, route }) => {
           >
             <View style={styles.contextButton}>
               <Image
-                style={{ width: 40, height: 40 }}
-                source={require("../../assets/images.png")}
+                style={{ width: 70, height: 70, margin: 20  }}
+                source={require("../../assets/image-v.png")}
               />
 
               <View style={styles.text_Context}>
@@ -82,8 +82,8 @@ const EditAbout = ({ navigation, route }) => {
           >
             <View style={styles.contextButton}>
               <Image
-                style={{ width: 40, height: 40 }}
-                source={require("../../assets/book.png")}
+                style={{ width: 70, height: 70, margin: 20  }}
+                source={require("../../assets/speech.png")}
               />
 
               <View style={styles.text_Context}>
@@ -104,14 +104,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    // paddingHorizontal: 40,
-    //paddingVertical: 30,
     alignContent: "center",
     marginTop: 25,
   },
   scrollView: {
-    marginHorizontal: 40,
-    //paddingVertical: 30
+    paddingHorizontal: 15,
   },
   containerbox: {
     alignItems: "center",
@@ -136,15 +133,13 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   contextButton: {
-    //padding: 13,
-    flexDirection: "row",
-    paddingHorizontal: 35,
+    flexDirection: "column",
+    paddingHorizontal: 20,
     alignItems: "center",
   },
   text_Context: {
     flexDirection: "column",
-    marginLeft: 20,
-    alignItems: "flex-start",
+    alignItems: "center",
   },
   textHead: {
     flexDirection: "row",
@@ -201,16 +196,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#8E2835",
   },
   buttonVocab: {
-    width: "100%",
-    //alignSelf: "center",
-    //alignItems: "flex-start",
-    //marginTop: 10,
+    width: "47.5%",
     elevation: 0.7,
-    //width: 300,
-    backgroundColor: "#EBEBEB",
+    backgroundColor: "#ffffff",
     borderRadius: 10,
     paddingVertical: 15,
-    marginVertical: 5,
+    margin: 5,
   },
   buttonGrammar: {
     alignSelf: "center",
