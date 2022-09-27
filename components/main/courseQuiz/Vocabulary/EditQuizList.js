@@ -16,7 +16,7 @@ import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
-const AddEdit = ({ navigation, route }) => {
+const EditQuizList = ({ navigation, route }) => {
   const { language } = route?.params ?? {};
 
   const [allQuizzes, setAllQuizzes] = useState([]);
@@ -27,7 +27,7 @@ const AddEdit = ({ navigation, route }) => {
       .firestore()
       .collection("languages")
       .doc(language)
-      .collection("SpeechQuiz")
+      .collection("Quizzes")
       .get();
   };
 
@@ -88,8 +88,8 @@ const AddEdit = ({ navigation, route }) => {
               backgroundColor: COLORS.primary + "20",
             }}
             onPress={() => {
-              navigation.navigate("PlaySpeechQuizScreen", {
-                quizId: quiz.id,
+              navigation.navigate("EditVocabQuestion", {
+                data: quiz,
                 language: language,
               });
             }}
@@ -104,7 +104,7 @@ const AddEdit = ({ navigation, route }) => {
   );
 };
 
-export default AddEdit;
+export default EditQuizList;
 const COLORS = {
   primary: "#215A88",
   secondary: "#000020",

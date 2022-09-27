@@ -77,6 +77,11 @@ import AudioList from "./components/main/courseQuiz/Speech/AudioList";
 import AudioList2 from "./components/main/courseQuiz/Speech/AudioList2";
 import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 import EditQuestion from "./components/main/EditQuestion";
+import EditOptionQuiz from "./components/main/courseQuiz/EditOptionQuiz";
+import EditSpeechQuizList from "./components/main/courseQuiz/Speech/EditQuizList";
+import EditVocabQuizList from "./components/main/courseQuiz/Vocabulary/EditQuizList";
+import EditSpeechQuestionsList from "./components/main/courseQuiz/Speech/EditQuestionsList";
+import EditVocabQuestionsList from "./components/main/courseQuiz/Vocabulary/EditQuestionsList";
 import Vocabulary from "./components/main/courseQuiz/VocabularyQuiz"
 import SpeechQuiz from "./components/main/courseQuiz/SpeechQuiz";
 import PlaySpeechQuizScreen from "./components/main/courseQuiz/Speech/PlayQuizScreen";
@@ -694,6 +699,77 @@ export class App extends Component {
               component={EditQuestion}
               options={{
                 title: "EditQuestion",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditOptionQuiz"
+              component={EditOptionQuiz}
+              options={{
+                title: "EditQuestion",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditSpeechQuiz"
+              component={EditSpeechQuizList}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditVocabQuiz"
+              component={EditVocabQuizList}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            
+            <Stack.Screen
+              name="EditSpeechQuestion"
+              component={EditSpeechQuestionsList}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditVocabQuestion"
+              component={EditVocabQuestionsList}
+              options={{
+                title: "Edit Question",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

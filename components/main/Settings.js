@@ -127,7 +127,7 @@ function Settings({ currentUser, navigation, route }) {
           {/* Edit Quiz screen (start)*/}
           <TouchableRipple
             onPress={() =>
-              navigation.navigate("AddEdit", { language: language })
+              navigation.navigate("EditOptionQuiz", { language: language })
             }
           >
             <View style={styles.menuItem}>
