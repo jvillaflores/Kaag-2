@@ -264,21 +264,28 @@ const PlayQuizScreen = ({ navigation, route }) => {
             }}
           >
             <View style={{ padding: 20 }}>
+              <View style={{alignItems:'center'}}>
+                    <Text style={{fontSize:10,}}>
+                      Paminawa ug pilia ang tama nga tubag
+                    </Text>
+                    <TouchableOpacity
+                      style={styles.buttonAudio}
+                      onPress={() => downloadAudio(item)}
+                      >
+                      {/* {console.log(item)} */}
+                      <View>
+                        <MaterialCommunityIcons
+                          name="volume-high"
+                          size={26}
+                          color="#215a88"
+                        />
+                      </View>
+                    </TouchableOpacity>
+                </View>
               <Text style={{ fontSize: 16 }}>
+              
                 {index + 1}. {item.question}
-                <TouchableOpacity
-            style={styles.buttonAudio}
-            onPress={() => downloadAudio(item)}
-          >
-            {/* {console.log(item)} */}
-            <View>
-              <MaterialCommunityIcons
-                name="volume-high"
-                size={26}
-                color="#215a88"
-              />
-            </View>
-          </TouchableOpacity>
+                
               </Text>
             </View>
             {/* Options */}
@@ -365,9 +372,6 @@ export const SIZES = {
 };
 const styles = StyleSheet.create({
   buttonAudio: {
-    alignSelf: "center",
-    padding: 8,
-    margin: 10,
-    borderRadius: 7,
-    backgroundColor: "white",
+    padding:20,
+    alignItems:'center'
   },})
