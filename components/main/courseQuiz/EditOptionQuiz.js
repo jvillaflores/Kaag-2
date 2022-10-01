@@ -49,7 +49,7 @@ const EditOptionQuiz = ({ navigation, route }) => {
             </View>
           </TouchableOpacity>
 
-          {/* AboutCulture.js */}
+          {/* EditQuizList.js */}
           <TouchableOpacity
             style={styles.buttonVocab}
             onPress={() =>

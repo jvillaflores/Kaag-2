@@ -13,9 +13,8 @@ import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
-const EditQuestionsList = ({route, navigation}) => {
+const EditQuestionsList = ({route, navigation, language}) => {
 
-    const { language } = route?.params ?? {};
     const { data } = route?.params ?? {};
     
 
