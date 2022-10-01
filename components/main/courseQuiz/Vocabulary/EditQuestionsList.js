@@ -63,7 +63,7 @@ const EditQuestionsList = ({route, navigation}) => {
          return (
            <TouchableOpacity
              style={styles.container}
-             onPress={() => navigation.navigate("Edits", { currentData: item, language: language, data: data})}
+             onPress={() => navigation.navigate("EditVocabQuestionItem", { currentData: item, language: language, data: data})}
            >
              <View style={styles.bodycontainer}>
                <Text style={styles.inKagan}>{item.question} </Text>

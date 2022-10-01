@@ -60,10 +60,12 @@ const EditQuestionsList = ({route, navigation}) => {
        data={filteredDataSource}
        style={{ flex: 1 }}
        renderItem={({ item }) => {
+
+        
          return (
            <TouchableOpacity
              style={styles.container}
-             onPress={() => navigation.navigate("Edits", { currentData: item, language: language, data: data})}
+             onPress={() => navigation.navigate("EditSpeechQuestionItem", { currentData: item, language: language, data: data})}
            >
              <View style={styles.bodycontainer}>
                <Text style={styles.inKagan}>{item.question} </Text>
