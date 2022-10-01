@@ -13,9 +13,9 @@ import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
-const EditQuestionsList = ({route, navigation, language}) => {
+const EditQuestionsList = ({route, navigation, language,data}) => {
 
-    const { data } = route?.params ?? {};
+   
     
 
     const [filteredDataSource, setFilteredDataSource] = useState("");

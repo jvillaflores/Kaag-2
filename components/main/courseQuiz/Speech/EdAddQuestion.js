@@ -22,6 +22,8 @@ const Tab = createMaterialTopTabNavigator();
 
 function AddAnotherQuestion({ route, navigation}) {
   const { language } = route?.params ?? {};
+  const { data } = route?.params ?? {};
+  console.log(data?.id)
   return (
     
     <SafeAreaView style={styles.container}>
@@ -42,7 +44,7 @@ function AddAnotherQuestion({ route, navigation}) {
     >
       <Tab.Screen
         name="EDIT"
-        children={(props) => <Question language={language} {...props} />}
+        children={(props) => <Question language={language} data={data} {...props} />}
       />
       
       

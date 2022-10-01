@@ -768,6 +768,20 @@ export class App extends Component {
                 },
               }}
             />
+            <Stack.Screen
+              name="EditSpeechQuestionItem"
+              component={EditSpeechQuestionItem}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
             
             <Stack.Screen
               name="EditVocabQuestion"
