@@ -60,6 +60,7 @@ import ValidateWordScreen from "./components/main/wordValidation/ValidateWord";
 import DeclineScreen from "./components/main/Decline";
 import ApplicationsScreen from "./components/main/userValidation/Applications";
 import ApplicationConfScreen from "./components/main/ApplicationConf";
+import VocabEditQuestion from "./components/main/courseQuiz/Vocabulary/VocabEditQuestion"
 // import SpeechScreen from "./components/main/Speech";
 import UserContributionScreen from "./components/main/UserContribution";
 import CultureScreen from "./components/main/AboutCulture";
@@ -740,8 +741,37 @@ export class App extends Component {
               }}
             />
             <Stack.Screen
+              name="EditVocabQuiz"
+              component={EditVocabQuizList}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
               name="AddAnotherQuestion"
               component={AddAnotherQuestion}
+              options={{
+                title: "",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+          <Stack.Screen
+              name="VocabEditQuestion"
+              component={VocabEditQuestion}
               options={{
                 title: "",
                 headerShadowVisible: false,
@@ -771,6 +801,21 @@ export class App extends Component {
             <Stack.Screen
               name="EditSpeechQuestionItem"
               component={EditSpeechQuestionItem}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="EditVocabQuestionItem"
+              component={EditVocabQuestionItem}
               options={{
                 title: "Edit Question",
                 headerShadowVisible: false,

@@ -78,13 +78,29 @@ const EditQuestionsList = ({route, navigation, language,data}) => {
 }
 
 export default EditQuestionsList;
+const COLORS = {
+  primary: "#215A88",
+  secondary: "#000020",
 
+  success: "#00C851",
+  error: "#ff4444",
+
+  black: "#171717",
+  white: "#FFFFFF",
+  background: "#f4f4f4",
+  border: "#F5F5F7",
+};
 const styles = StyleSheet.create({
     container: {
-      alignContent: "center",
-      top: 1,
-      paddingVertical: 20,
-      paddingHorizontal: 20,
+      padding: 20,
+            borderRadius: 5,
+            marginVertical: 5,
+            marginHorizontal: 10,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            backgroundColor: COLORS.white,
+            elevation: 2,
     },
     bodycontainer: {
       paddingVertical: 3,
@@ -142,9 +158,7 @@ const styles = StyleSheet.create({
       borderBottomLeftRadius: 10,
     },
     inKagan: {
-      fontSize: 20,
-      fontWeight: "bold",
-      letterSpacing: 0.3,
+      fontSize: 16,
     },
     inFilipino: {
       fontSize: 11,

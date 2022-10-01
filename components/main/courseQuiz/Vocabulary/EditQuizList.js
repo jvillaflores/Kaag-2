@@ -88,7 +88,8 @@ const EditQuizList = ({ navigation, route }) => {
               backgroundColor: COLORS.primary + "20",
             }}
             onPress={() => {
-              navigation.navigate("EditVocabQuestion", {
+              // EditVocabQuestion
+              navigation.navigate("VocabEditQuestion", {
                 data: quiz,
                 language: language,
               });
