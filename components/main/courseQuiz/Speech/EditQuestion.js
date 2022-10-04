@@ -18,10 +18,15 @@ import {
   import firebase from "firebase";
   require("firebase/firestore");
   require("firebase/firebase-storage");
+  import { Audio } from "expo-av";
+  import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
   
+
   {
     /* Form Input */
   }
+ 
+  
   export const FormInput = ({
     labelText = "",
     placeholderText = "",
@@ -91,7 +96,9 @@ import {
     const { language } = route?.params ?? {};
     const { currentData } = route?.params ?? {};
     const { data } = route?.params ?? {};
+    const { item } = route?.params ?? {};
   
+    console.log(item)
     const [question, setQuestion] = useState(currentData?.question);
     const [correctAnswer, setCorrectAnswer] = useState(
       currentData?.correct_answer
@@ -107,10 +114,43 @@ import {
     const handleQuestionSave = () => {
       createQuestion();
     };
-    const save = () => {
-      createQuestion();
+    const handleAudioSave = () => {
+      updateAudio();
+    };
+    const downloadAudio = async () => {
+      //function for playing the audio of the dictionary data
+     
+      let SoundObject = new Audio.Sound();
+      try {
+        
+        await SoundObject.loadAsync({ uri: currentData.audio });
+        const status = await SoundObject.playAsync();
+        setTimeout(() => {
+          SoundObject.unloadAsync();
+        }, status.playableDurationMillis + 1000);
+      } catch (error) {
+        console.log(error);
+        await SoundObject.unloadAsync(); // Unload any sound loaded
+        SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+        retryPlaySound();
+      }
     };
   
+    const retryPlaySound = () => downloadAudio();
+    const chooseFile = async () => {
+      let result = await DocumentPicker.getDocumentAsync({
+        type: "audio/*",
+        copyToCacheDirectory: false,
+      });
+      // Alert.alert("Audio File", result.name);
+  
+      console.log(result);
+      if (result.type === "success") {
+        setAudio(result);
+      } else {
+        alert("Please choose a file.");
+      }
+    };
     const createQuestion = () => {
       return firebase
         .firestore()
@@ -122,6 +162,26 @@ import {
         .doc(`${currentData?.id}`)
         .update({
           question,
+          correct_answer: correctAnswer,
+          incorrect_answers: [OptionTwo, OptionThree, OptionFour],
+        })
+  
+        .then(() => {
+          alert("Question updated!");
+        });
+    };
+    const updateAudio = () => {
+      return firebase
+        .firestore()
+        .collection("languages")
+        .doc(language)
+        .collection("SpeechQuiz")
+        .doc(`${data?.id}`)
+        .collection("QNA")
+        .doc(`${currentData?.id}`)
+        .update({
+          question,
+          audio: item.downloadURL,
           correct_answer: correctAnswer,
           incorrect_answers: [OptionTwo, OptionThree, OptionFour],
         })
@@ -152,7 +212,24 @@ import {
             <Text style={{ textAlign: "center", marginBottom: 20 }}>
               For {data?.title}
             </Text>
-  
+            <View>
+              <Pressable onPress={() => navigation.navigate("EditAudioList", {language : language})}>
+                <Text style={styles.edit_audio}> Change Audio </Text>
+              </Pressable>
+            </View>
+            <TouchableOpacity
+                      style={styles.buttonAudio}
+                      onPress={() => downloadAudio(data)}
+                      >
+                      {/* {console.log(item)} */}
+                      <View>
+                        <MaterialCommunityIcons
+                          name="volume-high"
+                          size={26}
+                          color="#215a88"
+                        />
+                      </View>
+                    </TouchableOpacity>
             <FormInput
               labelText="Question"
               placeholderText={question}
@@ -195,6 +272,10 @@ import {
               handleOnPress={handleQuestionSave}
             />
             <FormButton
+              labelText="Update Audio and Save"
+              handleOnPress={handleAudioSave}
+            />
+            <FormButton
               labelText="Done & Go Home"
               isPrimary={false}
               handleOnPress={() => {
@@ -225,7 +306,17 @@ import {
     background: "#f4f4f4",
     border: "#F5F5F7",
   };
-  
+  const styles = StyleSheet.create({
+    buttonAudio: {
+      padding:20,
+      alignItems:'center'
+    }, edit_audio: {
+      fontSize: 15,
+      fontStyle: "italic",
+      color: "#215A88",
+      marginLeft: 120,
+    },
+  })
   export const SIZES = {
     base: 10,
   };

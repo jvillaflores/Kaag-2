@@ -24,6 +24,7 @@ function AddAnotherQuestion({ route, navigation}) {
   const { language } = route?.params ?? {};
   const { data } = route?.params ?? {};
   console.log(data?.id)
+  console.log(language)
   return (
     
     <SafeAreaView style={styles.container}>
@@ -52,7 +53,7 @@ function AddAnotherQuestion({ route, navigation}) {
     <TouchableOpacity
       style={styles.button}
       onPress={() =>
-        navigation.navigate("AddAbout", { language: language })
+        navigation.navigate("EditAddSpeechQuestionItem", {data: data , language: language })
       }
     >
       <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />

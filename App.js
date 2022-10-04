@@ -77,6 +77,8 @@ import AddAnotherQuestion from "./components/main/courseQuiz/Speech/EdAddQuestio
 import SPAddQ from "./components/main/courseQuiz/Speech/SPAddQ";
 import AudioList from "./components/main/courseQuiz/Speech/AudioList";
 import AudioList2 from "./components/main/courseQuiz/Speech/AudioList2";
+import AudioList3 from "./components/main/courseQuiz/Speech/AudioList3";
+import AudioList4 from "./components/main/courseQuiz/Speech/AudioList4";
 import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
 
 import EditOptionQuiz from "./components/main/courseQuiz/EditOptionQuiz";
@@ -114,6 +116,9 @@ import NewConsent from "./components/main/NewConsent";
 import DeleteAbout from "./components/main/CultureFlatList/DeleteAbout";
 import EditSpeechQuestionItem from "./components/main/courseQuiz/Speech/EditQuestion";
 import EditVocabQuestionItem from "./components/main/courseQuiz/Vocabulary/EditQuestion";
+import EditAudioList from "./components/main/courseQuiz/Speech/EditAudioList";
+import EditAddSpeechQuestionItem from "./components/main/courseQuiz/Speech/EditAddQuestionItem";
+import EditAddSpeechQuestionItem2 from "./components/main/courseQuiz/Speech/EditAddSpeechQuestionItem2";
 
 const Stack = createStackNavigator();
 
@@ -688,7 +693,35 @@ export class App extends Component {
               name="AudioList2"
               component={AudioList2}
               options={{
-                title: "Audio List2",
+                title: "Audio List",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="AudioList3"
+              component={AudioList3}
+              options={{
+                title: "Audio List",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="AudioList4"
+              component={AudioList4}
+              options={{
+                title: "Audio List",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
@@ -801,6 +834,48 @@ export class App extends Component {
             <Stack.Screen
               name="EditSpeechQuestionItem"
               component={EditSpeechQuestionItem}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditAudioList"
+              component={EditAudioList}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditAddSpeechQuestionItem"
+              component={EditAddSpeechQuestionItem}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditAddSpeechQuestionItem2"
+              component={EditAddSpeechQuestionItem2}
               options={{
                 title: "Edit Question",
                 headerShadowVisible: false,
