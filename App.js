@@ -119,6 +119,7 @@ import EditVocabQuestionItem from "./components/main/courseQuiz/Vocabulary/EditQ
 import EditAudioList from "./components/main/courseQuiz/Speech/EditAudioList";
 import EditAddSpeechQuestionItem from "./components/main/courseQuiz/Speech/EditAddQuestionItem";
 import EditAddSpeechQuestionItem2 from "./components/main/courseQuiz/Speech/EditAddSpeechQuestionItem2";
+import EditAddVocabularyQuestion from "./components/main/courseQuiz/Vocabulary/EditAddQuestion";
 
 const Stack = createStackNavigator();
 
@@ -906,6 +907,20 @@ export class App extends Component {
             <Stack.Screen
               name="EditVocabQuestion"
               component={EditVocabQuestionsList}
+              options={{
+                title: "Edit Question",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="EditAddVocabularyQuestion"
+              component={EditAddVocabularyQuestion}
               options={{
                 title: "Edit Question",
                 headerShadowVisible: false,

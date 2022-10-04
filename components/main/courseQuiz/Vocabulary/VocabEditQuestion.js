@@ -52,7 +52,7 @@ function VocabEditQuestion({ route, navigation}) {
     <TouchableOpacity
       style={styles.button}
       onPress={() =>
-        navigation.navigate("AddAbout", { language: language })
+        navigation.navigate("EditAddVocabularyQuestion", { language: language,data: data })
       }
     >
       <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
