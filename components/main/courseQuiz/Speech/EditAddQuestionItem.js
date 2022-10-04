@@ -169,19 +169,26 @@ import {
         >
           <View style={{ padding: 20 }}>
             <Text
-              style={{ fontSize: 20, textAlign: "center", color: COLORS.black }}
+              style={{ fontSize: 16, textAlign: "left", color: COLORS.black, paddingBottom:15 }}
             >
-              Add Question
+              Create or edit a question for {currentQuizTitle}.
             </Text>
   
+  
+            <FormInput
+              labelText="Question"
+              placeholderText="Create a question"
+              onChangeText={(val) => setQuestion(val)}
+              value={question}
+            />
             <TouchableOpacity
               style={styles.buttonVocab}
               onPress={() => navigation.navigate("AudioList3", {language : language})}
             >
              { data?.downloadURL ? ( <MaterialCommunityIcons
-                      style={styles.addAudio}
+                      style={{alignSelf: "center",}}
                       name="volume-high"
-                      color={"#707070"}
+                      color={"#7F7F7F"}
                       size={26}
                     />) :(<View style={styles.contextButton}>
                 <View style={styles.text_Context}>
@@ -191,18 +198,6 @@ import {
              
             </TouchableOpacity>
   
-            <Text style={{ textAlign: "center", marginBottom: 20 }}>
-              For {currentQuizTitle}
-            </Text>
-  
-            <FormInput
-              labelText="Question"
-              placeholderText="enter question"
-              onChangeText={(val) => setQuestion(val)}
-              value={question}
-            />
-  
-            {/* Image upload */}
   
             {/* Options */}
             <View style={{ marginTop: 30 }}>
@@ -251,17 +246,16 @@ import {
   export default EditAddQuestionItem;
   const styles = StyleSheet.create({
     buttonVocab: {
-      width: "47.5%",
-      elevation: 0.7,
+      width: "100%",
       backgroundColor: "#ffffff",
-      borderRadius: 10,
+      borderRadius: 6,
       paddingVertical: 15,
-      margin: 5,
+      borderWidth:0.9,
+      borderColor:'#E2E2E2',
   
     },
     textVocab: {
       fontSize: 15,
-      fontWeight: "bold",
       color: "black",
     },
     contextButton: {

@@ -162,12 +162,9 @@ import {
         >
           <View style={{ padding: 20 }}>
             <Text
-              style={{ fontSize: 20, textAlign: "center", color: COLORS.black }}
+              style={{ fontSize: 16, textAlign: "left", color: COLORS.black, paddingBottom:20 }}
             >
-              Add Question
-            </Text>
-            <Text style={{ textAlign: "center", marginBottom: 20 }}>
-              For {currentQuizTitle}
+              Create or edit a question for {currentQuizTitle}.
             </Text>
   
             <FormInput

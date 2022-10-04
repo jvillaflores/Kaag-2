@@ -10,6 +10,8 @@ import {
   } from "react-native";
 import React, { useEffect, useState } from "react";
 import firebase from "firebase";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
@@ -67,6 +69,12 @@ const EditQuestionsList = ({route, navigation, language,data}) => {
              onPress={() => navigation.navigate("EditSpeechQuestionItem", { currentData: item, language: language, data: data})}
            >
              <View style={styles.bodycontainer}>
+             <MaterialCommunityIcons
+                      style={{paddingRight:15}}
+                      name="menu"
+                      color={"#c2c2c2"}
+                      size={20}
+                    />
                <Text style={styles.inKagan}>{item.question} </Text>
                
              </View>
@@ -99,12 +107,11 @@ const styles = StyleSheet.create({
             flexDirection: "row",
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: COLORS.white,
-            elevation: 2,
     },
     bodycontainer: {
       paddingVertical: 3,
       paddingHorizontal: 15,
+      flexDirection:'row',
     },
     headLine: {
       flexDirection: "column",

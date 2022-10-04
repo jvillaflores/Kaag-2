@@ -171,32 +171,13 @@ import {
           }}
         >
           <View style={{ padding: 20 }}>
-            <Text
-              style={{ fontSize: 20, textAlign: "center", color: COLORS.black }}
+          <Text
+              style={{ fontSize: 16, textAlign: "left", color: COLORS.black, paddingBottom:20 }}
             >
-              Add Question
+              Create or edit a question for {currentQuizTitle}.
             </Text>
   
-            <TouchableOpacity
-              style={styles.buttonVocab}
-              onPress={() => navigation.navigate("AudioList4", {language : language})}
-            >
-             { data?.downloadURL ? ( <MaterialCommunityIcons
-                      style={styles.addAudio}
-                      name="volume-high"
-                      color={"#707070"}
-                      size={26}
-                    />) :(<View style={styles.contextButton}>
-                <View style={styles.text_Context}>
-                  <Text style={styles.textVocab}>Add Audio</Text>
-                </View>
-              </View>) } 
-             
-            </TouchableOpacity>
-  
-            <Text style={{ textAlign: "center", marginBottom: 20 }}>
-              For {currentQuizTitle}
-            </Text>
+            
   
             <FormInput
               labelText="Question"
@@ -205,7 +186,22 @@ import {
               value={question}
             />
   
-            {/* Image upload */}
+            <TouchableOpacity
+              style={styles.buttonVocab}
+              onPress={() => navigation.navigate("AudioList3", {language : language})}
+            >
+             { data?.downloadURL ? ( <MaterialCommunityIcons
+                      style={{alignSelf: "center",}}
+                      name="volume-high"
+                      color={"#7F7F7F"}
+                      size={26}
+                    />) :(<View style={styles.contextButton}>
+                <View style={styles.text_Context}>
+                  <Text style={styles.textVocab}>Add Audio</Text>
+                </View>
+              </View>) } 
+             
+            </TouchableOpacity>
   
             {/* Options */}
             <View style={{ marginTop: 30 }}>
@@ -254,17 +250,16 @@ import {
   export default EditAddSpeechQuestionItem2;
   const styles = StyleSheet.create({
     buttonVocab: {
-      width: "47.5%",
-      elevation: 0.7,
+      width: "100%",
       backgroundColor: "#ffffff",
-      borderRadius: 10,
+      borderRadius: 6,
       paddingVertical: 15,
-      margin: 5,
+      borderWidth:0.9,
+      borderColor:'#E2E2E2',
   
     },
     textVocab: {
       fontSize: 15,
-      fontWeight: "bold",
       color: "black",
     },
     contextButton: {
