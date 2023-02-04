@@ -41,7 +41,7 @@ function EditEvent({ route, navigation}) {
       })}
     >
       <Tab.Screen
-        name="Language"
+        name="More Information"
         children={(props) => <AboutScreen language={language} {...props} />}
       />
       

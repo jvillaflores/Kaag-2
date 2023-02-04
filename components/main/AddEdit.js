@@ -1,123 +1,244 @@
 import {
-  View,
-  TextInput,
-  Image,
-  Button,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-  Pressable,
-  ScrollView,
-  Alert,
-  FlatList,
-} from "react-native";
-import React, { useState, useEffect } from "react";
-import firebase from "firebase";
-require("firebase/firestore");
-require("firebase/firebase-storage");
+    View,
+    TextInput,
+    Image,
+    Button,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+    Pressable,
+    ScrollView,
+    Alert,
+    FlatList,
+    KeyboardAvoidingView,
+    ToastAndroid,
+  } from "react-native";
+  import React, { useState, useEffect } from "react";
+  import firebase from "firebase";
+  require("firebase/firestore");
+  require("firebase/firebase-storage");
+  import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const AddEdit = ({ navigation, route }) => {
-  const { language } = route?.params ?? {};
-
-  const [allQuizzes, setAllQuizzes] = useState([]);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const getQuizzes = () => {
-    return firebase
-      .firestore()
-      .collection("languages")
-      .doc(language)
-      .collection("SpeechQuiz")
-      .get();
-  };
-
-  const getAllQuizzes = async () => {
-    setRefreshing(true);
-    const quizzes = await getQuizzes();
-
-    // Transform quiz data
-    let tempQuizzes = [];
-    await quizzes.docs.forEach(async (quiz) => {
-      await tempQuizzes.push({ id: quiz.id, ...quiz.data() });
-    });
-    await setAllQuizzes([...tempQuizzes]);
-
-    setRefreshing(false);
-  };
-
-  useEffect(() => {
-    getAllQuizzes();
-  }, []);
-
-  return (
-    <FlatList
-      data={allQuizzes}
-      onRefresh={getAllQuizzes}
-      refreshing={refreshing}
-      showsVerticalScrollIndicator={false}
-      style={{
-        paddingVertical: 20,
-      }}
-      renderItem={({ item: quiz }) => (
-        <View
+{
+    /*Button Form */
+  }
+  export const FormButton = ({
+    labelText = "",
+    handleOnPress = null,
+    style,
+    isPrimary = true,
+    ...more
+  }) => {
+    return (
+      <TouchableOpacity
+        style={{
+          paddingVertical: 10,
+          backgroundColor: isPrimary ? COLORS.primary : COLORS.white,
+          borderWidth: 1,
+          borderColor: COLORS.primary,
+          borderRadius: 5,
+          ...style,
+        }}
+        activeOpacity={0.9}
+        onPress={handleOnPress}
+        {...more}
+      >
+        <Text
           style={{
-            padding: 20,
-            borderRadius: 5,
-            marginVertical: 5,
-            marginHorizontal: 10,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: COLORS.white,
-            elevation: 2,
+            textAlign: "center",
+            fontSize: 18,
+            color: isPrimary ? COLORS.white : COLORS.primary,
           }}
         >
-          <View style={{ flex: 1, paddingRight: 10 }}>
-            <Text style={{ fontSize: 18, color: COLORS.black }}>
-              {quiz.title}
-            </Text>
-            {quiz.description != "" ? (
-              <Text style={{ opacity: 0.5 }}>{quiz.description}</Text>
-            ) : null}
-          </View>
-          <TouchableOpacity
-            style={{
-              paddingVertical: 10,
-              paddingHorizontal: 30,
-              borderRadius: 50,
-              backgroundColor: COLORS.primary + "20",
-            }}
-            onPress={() => {
-              navigation.navigate("PlaySpeechQuizScreen", {
-                quizId: quiz.id,
-                language: language,
-              });
-            }}
-          >
-            <Text style={{ color: COLORS.primary }}>Edit</Text>
-          </TouchableOpacity>
+          {labelText}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
 
-          
-        </View>
-      )}
-    />
-  );
-};
+const AddEdit = ({navigation, route}) => {
+    const { language } = route?.params ?? {};
+  console.log(language);
+
+  const [filteredDataSource, setFilteredDataSource] = useState("");
+  const [masterDataSource, setMasterDataSource] = useState("");
+  const [datalist, setDatalist] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("languages")
+        .doc(language)
+        .collection('Quizzes')
+        .get()
+        .then((snapshot) => {
+          let masterDataSource = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+
+          setDatalist(masterDataSource);
+          setFilteredDataSource(masterDataSource);
+          setMasterDataSource(masterDataSource);
+          console.log(masterDataSource);
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  return (
+    
+   <View>
+       <FlatList
+        nestedScrollEnabled
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={1}
+        horizontal={false}
+        data={masterDataSource}
+        style={{ flex: 1 }}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              style={styles.container}
+              onPress={() => navigation.navigate("Edit", { data: item , language: language})}
+            >
+              <View style={styles.bodycontainer}>
+                <Text style={styles.inKagan}>{item.title} </Text>
+                <Text style={styles.meaning}>{item.description}</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+      />
+      
+          {/* <Pressable
+        style={styles.buttonss}
+        onPress={() =>
+          navigation.navigate("AddQuestions", { language: language })
+        }
+        //onPress={() => navigation.navigate("NewContribution")}
+      >
+        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+      </Pressable> */}
+   </View>
+    
+    
+  )
+}
 
 export default AddEdit;
 const COLORS = {
-  primary: "#215A88",
-  secondary: "#000020",
-
-  success: "#00C851",
-  error: "#ff4444",
-
-  black: "#171717",
-  white: "#FFFFFF",
-  background: "#f4f4f4",
-  border: "#F5F5F7",
-};
-
-export const SIZES = {
-  base: 10,
-};
+    primary: "#4630EB",
+    secondary: "#000020",
+  
+    success: "#00C851",
+    error: "#ff4444",
+  
+    black: "#171717",
+    white: "#FFFFFF",
+    background: "#f4f4f4",
+    border: "#F5F5F7",
+  };
+  
+  export const SIZES = {
+    base: 10,
+  };
+  const styles = StyleSheet.create({
+    buttonss: {
+      position: "absolute",
+      width: 70,
+      height: 70,
+      borderRadius: 70 / 2,
+      alignItems: "center",
+      justifyContent: "center",
+      shadowRadius: 10,
+      shadowColor: "#F02A4B",
+      shadowOpacity: 0.3,
+      shadowOffset: { height: 10 },
+      backgroundColor: "#91B2EB",
+      bottom: 0,
+      right: 30,
+      elevation: 9,
+    },
+    container: {
+      alignContent: "center",
+      top: 1,
+      marginTop: 500,
+      paddingVertical: 20,
+      paddingHorizontal: 20,
+    },
+    bodycontainer: {
+      paddingVertical: 3,
+      paddingHorizontal: 15,
+    },
+    headLine: {
+      flexDirection: "column",
+      width: "100%",
+      height: 200,
+      backgroundColor: "#215a88",
+      padding: 10,
+    },
+  
+    title: {
+      paddingHorizontal: 20,
+      paddingVertical: 50,
+      alignItems: "center",
+    },
+    textHead: {
+      flexDirection: "row",
+      fontSize: 22,
+      fontWeight: "bold",
+      lineHeight: 21,
+      letterSpacing: 0.25,
+      color: "#91B2EB",
+    },
+    textSubHead: {
+      flexDirection: "row",
+      fontSize: 15,
+      lineHeight: 21,
+      letterSpacing: 0,
+      color: "white",
+    },
+  
+    input: {
+      height: 45,
+      width: "90%",
+      backgroundColor: "white",
+      margin: 12,
+      paddingLeft: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
+      borderBottomLeftRadius: 10,
+    },
+    input1: {
+      height: 45,
+      width: "50%",
+      backgroundColor: "white",
+      margin: 12,
+      paddingLeft: 20,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+      borderBottomRightRadius: 10,
+      borderBottomLeftRadius: 10,
+    },
+    inKagan: {
+      fontSize: 20,
+      fontWeight: "bold",
+      letterSpacing: 0.3,
+    },
+    inFilipino: {
+      fontSize: 11,
+      color: "#215a88",
+      fontStyle: "italic",
+    },
+    meaning: {
+      fontSize: 13,
+      letterSpacing: 0.25,
+      color: "black",
+      textAlign: "justify",
+    },
+});

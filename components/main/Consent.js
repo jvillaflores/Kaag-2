@@ -642,31 +642,8 @@ function ContributionWord({ currentUser, navigation, route }) {
                 }
               />
             </View>
-
-            <View style={styles.paddingLeft}>
-              <Text style={styles.title_text}>
-                Audio<Text style={{ color: "red" }}>*</Text>
-              </Text>
-              
-              
-              <TouchableOpacity
-                title={recording ? 'Stop Recording' : 'Start Recording'}
-                style={styles.audioButton}
-                onPress={() => chooseFile()}
-              >
-                <View>
-                  {recording ? (
-                    <Text>Stop Recording</Text>
-                  ) : (
-                    <Text>Start Recording</Text>
-                  )}
-                </View>
-              </TouchableOpacity>
-              <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Show Modal</Text>
-      </Pressable>   
-
-            </View>
+Q 1XDCFVGBH NM,
+             vczxQ  1XDCFVGBH NM,
 
             {/* AUDIO */}
             <View style={styles.paddingLeft}>
