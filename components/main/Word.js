@@ -67,15 +67,15 @@ const Word = ({ route }) => {
       <View style={styles.container}>
         <View style={{ paddingVertical: 8 }}>
         <Text style={[styles.classy]}> </Text>
-          <Text style={styles.boldText}>Definition in {data?.language} </Text>
+          <Text style={styles.boldText}>Definition in Cebuano</Text>
           <Text style={styles.contextText}>{data?.meaning} </Text>
         </View>
         <View style={{ paddingVertical: 8 }}>
           <Text style={styles.boldText}>Additional Information </Text>
           <View style={{ paddingHorizontal: 10 }}>
-            <Text style={{ color: "#215a88" }}>Translation in Filipino</Text>
-            <Text style={[styles.contextText]}>{data?.filipino} </Text>
             <Text style={{ color: "#215a88" }}>Definition in Filipino</Text>
+            <Text style={[styles.contextText]}>{data?.filipino} </Text>
+            <Text style={{ color: "#215a88" }}>Definition in English</Text>
             <Text style={[styles.contextText]}>{data?.englishMeaning}</Text>
             <Text style={{ color: "#215a88" }}>Origin</Text>
             <Text style={[styles.contextText]}>{data?.originated} </Text>
