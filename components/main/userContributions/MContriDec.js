@@ -46,7 +46,7 @@ function MContriDec({ currentUser, navigation, props, language }) {
       .where("status", "==", "2")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let dictionaryAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

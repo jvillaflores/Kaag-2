@@ -214,6 +214,20 @@ function Settings({ currentUser, navigation, route }) {
                 <Text style={styles.menuItemText}>Check Submissions</Text>
               </View>
             </TouchableRipple>
+            <TouchableRipple
+              onPress={() =>
+                navigation.navigate("ImageValidation", { language: language })
+              }
+            >
+              <View style={styles.menuItem}>
+                <Icon
+                  name="image-edit"
+                  color="#777777"
+                  size={25}
+                />
+                <Text style={styles.menuItemText}>Validate Images</Text>
+              </View>
+            </TouchableRipple>
 
             <TouchableRipple onPress={() => onLogout()}>
               <View style={styles.menuItem}>

@@ -41,7 +41,7 @@ function VWConf({ navigation, language }) {
       .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let dictionaryAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
@@ -82,7 +82,9 @@ function VWConf({ navigation, language }) {
             <Text>{item?.meaning}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
+            <Text style={{fontSize:9}}>
+              {item?.creation.toDate().toDateString()}
+              </Text>
           </View>
         </View>
 

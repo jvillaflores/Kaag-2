@@ -39,7 +39,7 @@ function VWDec({ navigation, language }) {
       .where("status", "==", "2")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let dictionaryAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
@@ -81,7 +81,9 @@ function VWDec({ navigation, language }) {
           </View>
           <View style={styles.itemBody}>
             
-            <Text style={{fontSize:9}}>{item?.creation.toDate().toDateString()}</Text>
+            <Text style={{fontSize:9}}>
+              {/* {item?.creation.toDate().toDateString()} */}
+              </Text>
           </View>
         </View>
 

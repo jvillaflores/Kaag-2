@@ -46,7 +46,7 @@ const Word = ({ route }) => {
       <View style={styles.headLine}>
         <View style={styles.header_line}>
           <Text style={styles.inKagan}> {data?.word} </Text>
-          <Text style={styles.inPronounciation}> /{data?.pronunciation}/ </Text>
+          <Text style={styles.inPronounciation}> {data?.pronunciation} </Text>
           
           <TouchableOpacity
             style={styles.buttonAudio}
@@ -78,7 +78,13 @@ const Word = ({ route }) => {
             <Text style={{ color: "#215a88" }}>Definition in English</Text>
             <Text style={[styles.contextText]}>{data?.englishMeaning}</Text>
             <Text style={{ color: "#215a88" }}>Origin</Text>
-            <Text style={[styles.contextText]}>{data?.originated} </Text>
+            
+            {data?.gathered == 1 ? (
+                <Text style={[styles.contextText]}> Data collected from the community.</Text>
+              ) : null}
+              {data?.gathered == 0 ? (
+            <Text style={[styles.contextText]}>{data?.originated}</Text>
+              ) : null}
           </View>
         </View>
 

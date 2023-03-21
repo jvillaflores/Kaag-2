@@ -7,55 +7,44 @@ import {
   Pressable,
   TextInput,
   FlatList,
-  SafeAreaView,
-  ScrollView,
   RefreshControl,
+  SafeAreaView,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import AddButton from "./AddButton";
 import firebase from "firebase";
+import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
-// import SeeMore from "react-native-see-more-inline";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Language from "../Language";
 
-import { Dimensions } from "react-native";
-import Clothing from "./Clothing";
-
-function Feed({ navigation, route, language, currentUser }) {
-  const dimensions = Dimensions.get("window");
-  //const imageHeight = Math.round(dimensions.width * 1 / 1);
-  const imageWidth = dimensions.width;
+function IWDec({ navigation, language }) {
+  const [status, setStatus] = useState("All");
   const [datalist, setDatalist] = useState("");
   const [refreshing, setRefreshing] = useState(true);
-  const [uid, setUid] = useState(`${currentUser?.uid}`)
-
-  console.log(currentUser?.email)
-
+  
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
     //Service to get the data from the server to render
-    // Fetch the data that are posted by all of the users.
-   
+    //Applicant == 1 , basic user that has applied to be a validator
     firebase
       .firestore()
       .collection("languages")
       .doc(language)
       .collection("posts")
-      .where("uid", "==", currentUser?.uid)
-      .orderBy("creation", "desc")
+      .where("status", "==", "2")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
-        let postsAll = snapshot.docs.map((doc) => {
+        let posts = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
           return { id, ...data };
         });
-        setDatalist(postsAll);
+        setDatalist(posts);
         setRefreshing(false);
       });
   };
@@ -71,7 +60,7 @@ function Feed({ navigation, route, language, currentUser }) {
     return (
       
       <TouchableOpacity 
-          onPress={() => navigation.navigate("DeleteImage", { data: item })}
+          onPress={() => navigation.navigate("ValidateImage", { data: item })}
           style={styles.container}>
           
           <View>  
@@ -89,16 +78,7 @@ function Feed({ navigation, route, language, currentUser }) {
                 <Text numberOfLines={3} style={{fontSize:10}}>{item.description}</Text>
               </View> 
               <View style={{ marginTop: 20}}>
-                <Text numberOfLines={3} style={{fontSize:11, color: "grey"}}>Status:  {item.status == "0" ? (
-                    <Text> Pending</Text>
-                  ) : (null)}
-                 {item.status == "1" ? (
-                    <Text> Accepted</Text>
-                  ) : (null)}
-                  {item.status == "2" ? (
-                    <Text> Declined</Text>
-                  ) : (null)}
-                  </Text>
+                <Text numberOfLines={3} style={{fontSize:11, color: "grey"}}>Contributed by: {item.username}</Text>
               </View> 
             </View>
             <View style={{justifyContent:'center'}}>
@@ -140,7 +120,7 @@ function Feed({ navigation, route, language, currentUser }) {
   );
 }
 
-export default Feed;
+export default IWDec;
 
 const styles = StyleSheet.create({
   container: {

@@ -64,6 +64,7 @@ export default class Register extends ValidationComponent {
             status: "0",
             terms:"0",
             userImage: " ",
+            uid: firebase.auth().currentUser.uid,
           });
         console.log(result);
       })

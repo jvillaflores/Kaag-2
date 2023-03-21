@@ -19,7 +19,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Dimensions } from "react-native";
 import Checkbox from "expo-checkbox";
 
-function DeleteAbout({ route, navigation, currentUser }) {
+function ValidateImage({ route, navigation, currentUser }) {
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
@@ -62,17 +62,17 @@ function DeleteAbout({ route, navigation, currentUser }) {
                     }}>{data?.title}</Text>
         <Image
           style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: data?.downloadURL }}/>
+          source={{ uri: data?.image }}/>
         <View style={styles.padding}>
           <TextInput
             multiline={true}
             editable={false}
-            style={styles.textInput}>{data?.description}</TextInput>
+            style={styles.textInput}>{data?.desc}</TextInput>
         </View>  
       </View>
       <View style={styles.center}>
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Delete ( {data?.title} ) </Text>
+          <Text style={styles.title_text}>Delete {data?.word} </Text>
           <Text style={styles.guidelines}>
             Are you sure that you want to delete your contribution {data?.word}?
             Deleting this will permanently remove it from the database. If not
@@ -113,7 +113,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 
-export default connect(mapStateToProps, null)(DeleteAbout);
+export default connect(mapStateToProps, null)(ValidateImage);
 const styles = StyleSheet.create({
   container: {
     flex:1,

@@ -25,7 +25,7 @@ function VWAll({ navigation, language }) {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState("");
   const [masterDataSource, setMasterDataSource] = useState("");
-
+  
   useEffect(() => {
     getData();
   }, []);
@@ -42,7 +42,7 @@ function VWAll({ navigation, language }) {
       .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let masterDataSource = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
@@ -95,7 +95,9 @@ function VWAll({ navigation, language }) {
   };
 
   const renderItem = ({ item, index }) => {
+    
     return (
+      
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}

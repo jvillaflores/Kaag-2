@@ -61,6 +61,8 @@ import DeclineScreen from "./components/main/Decline";
 import ApplicationsScreen from "./components/main/userValidation/Applications";
 import ApplicationConfScreen from "./components/main/ApplicationConf";
 import VocabEditQuestion from "./components/main/courseQuiz/Vocabulary/VocabEditQuestion"
+import ImageValidation from "./components/main/imageValidation/imageValidation"
+import ValidateImage from "./components/main/imageValidation/ValidateImage";
 // import SpeechScreen from "./components/main/Speech";
 import UserContributionScreen from "./components/main/UserContribution";
 import CultureScreen from "./components/main/AboutCulture";
@@ -493,6 +495,34 @@ export class App extends Component {
               component={ApplicationConfScreen}
               options={{
                 title: "Validator Confirmation",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="ImageValidation"
+              component={ImageValidation}
+              options={{
+                title: "Image Validation",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="ValidateImage"
+              component={ValidateImage}
+              options={{
+                title: "Image Validation",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

@@ -41,7 +41,7 @@ function Applications({ navigation }) {
       .where("status", "==", "2")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let users = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

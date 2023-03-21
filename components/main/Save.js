@@ -19,12 +19,14 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useValidation } from "react-native-form-validator";
 import { FloatingLabelInput } from "react-native-floating-label-input";
+import { Picker } from "@react-native-picker/picker";
 
 function Save({ currentUser, route, navigation }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [image, setImage] = useState(null);
+  const [category, setCategory] = useState(null)
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(null);
   const { language } = route?.params ?? {};
@@ -75,31 +77,7 @@ function Save({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
 
-  const saveAllPostData = (downloadURL) => {
-    firebase
-      .firestore()
-      .collection("languages")
-      .doc(language)
-      .collection("posts")
-      .doc(firebase.auth().currentUser.uid)
-      .collection("userPosts")
-      .add({
-        uid: firebase.auth().currentUser.uid,
-        username: currentUser.name,
-        userImage: currentUser.userImage,
-        downloadURL,
-        language: language,
-        title,
-        description,
-        tags,
-        creation: firebase.firestore.FieldValue.serverTimestamp(),
-      })
-      .then(function () {
-        alert("Image Posted");
-        setLoading(null);
-        navigation.navigate("Community", { language: language });
-      });
-  };
+  
   const savePostData = (downloadURL) => {
     firebase
       .firestore()
@@ -113,7 +91,9 @@ function Save({ currentUser, route, navigation }) {
         downloadURL,
         title,
         description,
+        category,
         tags,
+        status: "0",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
@@ -151,6 +131,33 @@ function Save({ currentUser, route, navigation }) {
           />
         </View>
 
+      
+        <View style={{ marginVertical: -10 }}>
+          <Text style={[styles.text, { fontSize: 16 }]}>Category </Text>
+          <Text
+            style={[styles.textItalized, { fontSize: 14, color: "#707070" }]}
+          >
+            {" "}
+            What category does your uploaded image belong to.
+          </Text>
+          {isFieldInError("title") &&
+            getErrorsInField("title").map((errorMessage) => (
+              <Text style={{ color: "red" }}>Required</Text>
+            ))}
+          <Picker
+                style={[styles.addButton]}
+                selectedValue={category}
+                onValueChange={(itemValue, itemIndex) =>
+                  setCategory(itemValue)
+                }
+              >
+                <Picker.Item label="Select Category" value="" />
+                <Picker.Item label="Food" value="food" />
+                <Picker.Item label="Events" value="event" />
+                <Picker.Item label="Clothing" value="clothing" />
+              </Picker>
+        </View>
+              
         <View style={{ marginVertical: 10 }}>
           <Text style={[styles.text, { fontSize: 16 }]}>Description </Text>
           <Text
@@ -213,6 +220,7 @@ function Save({ currentUser, route, navigation }) {
           </TouchableOpacity>
         </View>
       </View>
+      
     </ScrollView>
   );
 }

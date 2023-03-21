@@ -18,6 +18,9 @@ import firebase from "firebase";
 require("firebase/firestore");
 import FeedScreen from "./Feed";
 import SocialScreen from "./Social";
+import FoodScreen from "./Food";
+import ClothingScreen from "./Clothing";
+import EventScreen from "./Event";
 import { NavigationContainer } from "@react-navigation/native";
 
 const Tab = createMaterialTopTabNavigator();
@@ -27,7 +30,7 @@ function Community({ currentUser, route, navigation }) {
   const { language } = route?.params ?? {};
   console.log(language);
   // console.log(datalist);
-  console.log(datalist);
+  
 
   useEffect(() => {
     setDatalist(currentUser);
@@ -64,27 +67,68 @@ function Community({ currentUser, route, navigation }) {
         </View>
       </View>
       <Tab.Navigator
+        labeled="false"
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
             backgroundColor: "#f2f2f2",
           },
+          tabBarLabelStyle: { fontSize: 12 },
           tabBarActiveTintColor: "#215a88",
           tabBarInactiveTintColor: "#B2B2B2",
-
+          tabBarShowLabel: false,
           tabBarPressColor: "#215a88",
-          tabBarLabelStyle: {
-            fontSize: 15,
-            fontWeight: "bold",
-          },
+          
+           
+          
+          
         })}
+        
       >
         <Tab.Screen
-          name="Feed"
+          name="Social"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="view-dashboard" color={color} size={26} />
+            )
+          }}
           children={(props) => <SocialScreen language={language} {...props} />}
         />
+        
         <Tab.Screen
-          name="Social"
-          children={(props) => <FeedScreen language={language} {...props} />}
+          name="Food"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="silverware-spoon" color={color} size={26} />
+            )
+          }}
+          children={(props) => <FoodScreen language={language} {...props} />}
+        />
+        <Tab.Screen
+          name="Clothes"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="tshirt-crew" color={color} size={26} />
+            )
+          }}
+          children={(props) => <ClothingScreen language={language} {...props} />}
+        />
+        <Tab.Screen
+          name="Events"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="party-popper" color={color} size={26} />
+            )
+          }}
+          children={(props) => <EventScreen language={language} {...props} />}
+        />
+        <Tab.Screen
+          name="User"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account-star" color={color} size={26} />
+            )
+          }}
+          children={(props) => <FeedScreen language={language} currentUser = {currentUser}  {...props} />}
         />
         
       </Tab.Navigator>

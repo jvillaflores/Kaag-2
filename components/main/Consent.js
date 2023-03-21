@@ -11,15 +11,12 @@ import {
 
 import { Title, TextInput, Text, TouchableRipple } from "react-native-paper";
 
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { connect } from "react-redux";
 import firebase from "firebase";
-import { NavigationContainer } from "@react-navigation/native";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { NavigationEvents } from "react-navigation";
 import * as DocumentPicker from "expo-document-picker";
 import * as FileSystem from "expo-file-system";
 import { useValidation } from "react-native-form-validator";
@@ -47,70 +44,69 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [userTerm, setUserTerm] = useState("");
   const [recording, setRecording] = React.useState();
   const [recordings, setRecordings] = React.useState([]);
-  const [message, setMessage] = React.useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  
 
-  async function startRecording() {
-    try {
-      const permission = await Audio.requestPermissionsAsync();
+  // async function startRecording() {
+  //   try {
+  //     const permission = await Audio.requestPermissionsAsync();
 
-      if (permission.status === "granted") {
-        await Audio.setAudioModeAsync({
-          allowsRecordingIOS: true,
-          playsInSilentModeIOS: true,
-          shouldDuckAndroid: false,
-        });
+  //     if (permission.status === "granted") {
+  //       await Audio.setAudioModeAsync({
+  //         allowsRecordingIOS: true,
+  //         playsInSilentModeIOS: true,
+  //         shouldDuckAndroid: false,
+  //       });
         
-        const { recording } = await Audio.Recording.createAsync(
-          // Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY //low qual
-          Audio.RecordingOptionsPresets.HIGH_QUALITY //higher qual
-        );
+  //       const { recording } = await Audio.Recording.createAsync(
+  //         // Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY //low qual
+  //         Audio.RecordingOptionsPresets.HIGH_QUALITY //higher qual
+  //       );
 
-        setRecording(recording);
-      } else {
-        setMessage("Please grant permission to app to access microphone");
-      }
-    } catch (err) {
-      console.error('Failed to start recording', err);
-    }
-  }
+  //       setRecording(recording);
+  //     } else {
+  //       setMessage("Please grant permission to app to access microphone");
+  //     }
+  //   } catch (err) {
+  //     console.error('Failed to start recording', err);
+  //   }
+  // }
 
-  async function stopRecording() {
-    setRecording(undefined);
-    await recording.stopAndUnloadAsync();
+  // async function stopRecording() {
+  //   setRecording(undefined);
+  //   await recording.stopAndUnloadAsync();
 
-    let updatedRecordings = [...recordings];
-    const { sound, status } = await recording.createNewLoadedSoundAsync();
-    updatedRecordings.push({
-      sound: sound,
-      duration: getDurationFormatted(status.durationMillis),
-      file: recording.getURI()
-    });
+  //   let updatedRecordings = [...recordings];
+  //   const { sound, status } = await recording.createNewLoadedSoundAsync();
+  //   updatedRecordings.push({
+  //     sound: sound,
+  //     duration: getDurationFormatted(status.durationMillis),
+  //     file: recording.getURI()
+  //   });
 
-    setRecordings(updatedRecordings);
-  }
+  //   setRecordings(updatedRecordings);
+  // }
 
-  function getDurationFormatted(millis) {
-    const minutes = millis / 1000 / 60;
-    const minutesDisplay = Math.floor(minutes);
-    const seconds = Math.round((minutes - minutesDisplay) * 60);
-    const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
-    return `${minutesDisplay}:${secondsDisplay}`;
-  }
+  // function getDurationFormatted(millis) {
+  //   const minutes = millis / 1000 / 60;
+  //   const minutesDisplay = Math.floor(minutes);
+  //   const seconds = Math.round((minutes - minutesDisplay) * 60);
+  //   const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
+  //   return `${minutesDisplay}:${secondsDisplay}`;
+  // }
 
-  function getRecordingLines() {
-    return recordings.map((recordingLine, index) => {
-      return (
-        <View key={index} style={styles.row}>
-          <Text style={styles.fill}>Recording {index + 1} - {recordingLine.duration}</Text>
-          <Button style={styles.button} onPress={() => recordingLine.sound.replayAsync()} title="Play"></Button>
-          <Button style={styles.button} onPress={() => Sharing.shareAsync(recordingLine.file)} title="Share"></Button>
-          <Button style={styles.button}  title="Add"></Button>
-        </View>
+  // function getRecordingLines() {
+  //   return recordings.map((recordingLine, index) => {
+  //     return (
+  //       <View key={index} style={styles.row}>
+  //         <Text style={styles.fill}>Recording {index + 1} - {recordingLine.duration}</Text>
+  //         <Button style={styles.button} onPress={() => recordingLine.sound.replayAsync()} title="Play"></Button>
+  //         <Button style={styles.button} onPress={() => Sharing.shareAsync(recordingLine.file)} title="Share"></Button>
+  //         <Button style={styles.button}  title="Add"></Button>
+  //       </View>
         
-      );
-    });
-  }
+  //     );
+  //   });
+  // }
 
   useEffect(() => {
     //used for fetching the dictionary data from the firestore
@@ -335,6 +331,7 @@ function ContributionWord({ currentUser, navigation, route }) {
         meaning: filteredMeaning,
         status: "0",
         upload: "1",
+        gathered: "0",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
@@ -642,8 +639,7 @@ function ContributionWord({ currentUser, navigation, route }) {
                 }
               />
             </View>
-Q 1XDCFVGBH NM,
-             vczxQ  1XDCFVGBH NM,
+
 
             {/* AUDIO */}
             <View style={styles.paddingLeft}>

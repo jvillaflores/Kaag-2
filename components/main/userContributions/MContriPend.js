@@ -44,7 +44,7 @@ function MContriPend({ navigation, language }) {
       .where("status", "==", "0")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let dictionaryAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;
