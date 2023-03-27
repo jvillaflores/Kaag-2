@@ -14,6 +14,7 @@ import {
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AddButton from "./AddButton";
+import Checkbox from "expo-checkbox";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
@@ -28,7 +29,8 @@ function Feed({ navigation, route, language, currentUser }) {
   const imageWidth = dimensions.width;
   const [datalist, setDatalist] = useState("");
   const [refreshing, setRefreshing] = useState(true);
-  const [uid, setUid] = useState(`${currentUser?.uid}`)
+  const [uid, setUid] = useState(`${currentUser?.uid}`);
+  const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
   console.log(currentUser?.email)
 
@@ -71,7 +73,7 @@ function Feed({ navigation, route, language, currentUser }) {
     return (
       
       <TouchableOpacity 
-          onPress={() => navigation.navigate("DeleteImage", { data: item })}
+          onPress={() => navigation.navigate("DeleteImageScreen", { data: item , language : language, currentUser: currentUser })}
           style={styles.container}>
           
           <View>  
@@ -100,6 +102,7 @@ function Feed({ navigation, route, language, currentUser }) {
                   ) : (null)}
                   </Text>
               </View> 
+              
             </View>
             <View style={{justifyContent:'center'}}>
               <MaterialCommunityIcons
@@ -115,6 +118,8 @@ function Feed({ navigation, route, language, currentUser }) {
       
     );
   };
+
+
   
   const separator = () => {
     return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;

@@ -552,7 +552,7 @@ function ContributionWord({ currentUser, navigation, route }) {
             {/* In Filipino */}
             <View style={styles.paddingLeft}>
               <Text style={styles.title_text}>
-                In Filipino<Text style={{ color: "red" }}>*</Text>
+                Filipino Definition<Text style={{ color: "red" }}>*</Text>
               </Text>
               <Text style={styles.guidelines}>
                 Translate the word you have suggested to Filipino{" "}
@@ -573,7 +573,7 @@ function ContributionWord({ currentUser, navigation, route }) {
 
             {/* Filipino Definition */}
             <View style={styles.paddingLeft}>
-              <Text style={styles.title_text}>Filipino Definition</Text>
+              <Text style={styles.title_text}>English Definition</Text>
               <Text style={styles.guidelines}>
                 Define the word you have suggested in Filipino.
               </Text>

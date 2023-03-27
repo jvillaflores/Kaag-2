@@ -60,7 +60,7 @@ function IWConf({ navigation, language }) {
     return (
       
       <TouchableOpacity 
-          onPress={() => navigation.navigate("ValidateImage", { data: item })}
+          onPress={() => navigation.navigate("ValidateImage", { data: item , language : language})}
           style={styles.container}>
           
           <View>  

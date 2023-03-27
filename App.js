@@ -116,6 +116,7 @@ import AgainContrib from "./components/main/AgainContrib";
 import Consent from "./components/main/Consent";
 import NewConsent from "./components/main/NewConsent";
 import DeleteAbout from "./components/main/CultureFlatList/DeleteAbout";
+import DeleteImageScreen from "./components/main/DeleteImageScreen";
 import EditSpeechQuestionItem from "./components/main/courseQuiz/Speech/EditQuestion";
 import EditVocabQuestionItem from "./components/main/courseQuiz/Vocabulary/EditQuestion";
 import EditAudioList from "./components/main/courseQuiz/Speech/EditAudioList";
@@ -625,6 +626,20 @@ export class App extends Component {
               component={DeleteAbout}
               options={{
                 title: "Delete",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="DeleteImageScreen"
+              component={DeleteImageScreen}
+              options={{
+                title: "Delete Contribution",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

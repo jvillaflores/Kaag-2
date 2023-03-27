@@ -18,18 +18,19 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Dimensions } from "react-native";
 import Checkbox from "expo-checkbox";
+import AddLanguage from "./AddLanguage";
 
-function DeleteAbout({ route, navigation, currentUser }) {
+function DeleteImage({ route, navigation, currentUser }) {
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
+  const { language } = route?.params ?? {};
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  console.log(data?.language);
+  console.log(language);
   console.log(data?.id);
-  console.log(data?.type)
   const Reject = () => {
     setLoading(true);
     rejectDictionaryAll();
@@ -39,8 +40,8 @@ function DeleteAbout({ route, navigation, currentUser }) {
     firebase
       .firestore()
       .collection("languages")
-      .doc(data?.language)
-      .collection(data?.type)
+      .doc(language)
+      .collection("posts")
       .doc(`${data?.id}`)
       .delete()
       .then((result) => {
@@ -58,16 +59,17 @@ function DeleteAbout({ route, navigation, currentUser }) {
         <Text style={{
                     textAlign:"center",
                     fontSize:20,
+                    paddingVertical: 20,
                     fontWeight:'bold'
                     }}>{data?.title}</Text>
         <Image
           style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: data?.image }}/>
+          source={{ uri: data?.downloadURL }}/>
         <View style={styles.padding}>
           <TextInput
             multiline={true}
             editable={false}
-            style={styles.textInput}>{data?.desc}</TextInput>
+            style={styles.textInput}>{data?.description}</TextInput>
         </View>  
       </View>
       <View style={styles.center}>
@@ -113,7 +115,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 
-export default connect(mapStateToProps, null)(DeleteAbout);
+export default connect(mapStateToProps, null)(DeleteImage);
 const styles = StyleSheet.create({
   container: {
     flex:1,

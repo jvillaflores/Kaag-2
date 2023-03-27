@@ -261,7 +261,7 @@ function Validation({ currentUser, route, navigation }) {
         </View>
 
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>In Filipino </Text>
+          <Text style={styles.title_text}>Filipino Definition </Text>
 
           <TextInput
             style={styles.input}
@@ -272,7 +272,7 @@ function Validation({ currentUser, route, navigation }) {
         </View>
 
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Filipino Definition </Text>
+          <Text style={styles.title_text}>English Definition </Text>
           <TextInput
             style={styles.input}
             value={englishMeaning}

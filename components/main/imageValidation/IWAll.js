@@ -59,7 +59,7 @@ function IWAll({ navigation, language }) {
     return (
       
       <TouchableOpacity 
-          onPress={() => navigation.navigate("DeleteAbout", { data: item })}
+          onPress={() => navigation.navigate("ValidateImage", { data: item , language : language})}
           style={styles.container}>
           
           <View>  

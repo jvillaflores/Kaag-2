@@ -14,6 +14,7 @@ import {
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import firebase from "firebase";
 require("firebase/firestore");
 import FeedScreen from "./Feed";
@@ -21,17 +22,19 @@ import SocialScreen from "./Social";
 import FoodScreen from "./Food";
 import ClothingScreen from "./Clothing";
 import EventScreen from "./Event";
+
 import { NavigationContainer } from "@react-navigation/native";
 
+import DeleteImageScreen from "./DeleteImageScreen";
+
 const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 function Community({ currentUser, route, navigation }) {
   const [datalist, setDatalist] = useState("");
   const { language } = route?.params ?? {};
-  console.log(language);
+  // console.log(language);
   // console.log(datalist);
-  
-
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -55,6 +58,10 @@ function Community({ currentUser, route, navigation }) {
 
     return unsubscribe;
   }, [navigation]);
+
+
+  
+
   return (
     <NavigationContainer independent={true}>
       <View style={styles.container}>
@@ -66,7 +73,52 @@ function Community({ currentUser, route, navigation }) {
           </Text>
         </View>
       </View>
-      <Tab.Navigator
+      <Stack.Navigator>
+        <Stack.Screen
+          name="TopTab"
+          component={TopTab}
+          options={{ headerShown: false }}
+          initialParams={{data:language, currentUser:currentUser}}
+        />
+        <Stack.Screen name="DeleteImageScreen" component={DeleteImageScreen}
+         options={{
+          title: "Delete Image Contribution",
+          headerShadowVisible: false,
+          headerTintColor: "black",
+          headerStyle: {
+            
+            backgroundColor: "#f2f2f2",
+            borderBottomWidth: 0,
+          },
+        }} />
+      </Stack.Navigator>
+
+      <Pressable
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate("MainContribution", { language: language })
+        }
+        //onPress={() => navigation.navigate("NewContribution")}
+      >
+        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
+      </Pressable>
+    </NavigationContainer>
+    // <View>
+    //   <Text>{language}</Text>
+    // </View>
+  );
+}
+
+function TopTab({route,navigation}) {
+ 
+   const { data } = route?.params ?? {};
+   const {currentUser} = route?.params??{};
+  console.log(data)
+  console.log(currentUser)
+ 
+
+  return(
+    <Tab.Navigator
         labeled="false"
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
@@ -91,7 +143,7 @@ function Community({ currentUser, route, navigation }) {
               <MaterialCommunityIcons name="view-dashboard" color={color} size={26} />
             )
           }}
-          children={(props) => <SocialScreen language={language} {...props} />}
+          children={(props) => <SocialScreen language={data} currentUser={currentUser} {...props} />}
         />
         
         <Tab.Screen
@@ -101,7 +153,7 @@ function Community({ currentUser, route, navigation }) {
               <MaterialCommunityIcons name="silverware-spoon" color={color} size={26} />
             )
           }}
-          children={(props) => <FoodScreen language={language} {...props} />}
+          children={(props) => <FoodScreen language={data} {...props} />}
         />
         <Tab.Screen
           name="Clothes"
@@ -110,7 +162,7 @@ function Community({ currentUser, route, navigation }) {
               <MaterialCommunityIcons name="tshirt-crew" color={color} size={26} />
             )
           }}
-          children={(props) => <ClothingScreen language={language} {...props} />}
+          children={(props) => <ClothingScreen language={data} {...props} />}
         />
         <Tab.Screen
           name="Events"
@@ -119,7 +171,7 @@ function Community({ currentUser, route, navigation }) {
               <MaterialCommunityIcons name="party-popper" color={color} size={26} />
             )
           }}
-          children={(props) => <EventScreen language={language} {...props} />}
+          children={(props) => <EventScreen language={data} {...props} />}
         />
         <Tab.Screen
           name="User"
@@ -128,26 +180,17 @@ function Community({ currentUser, route, navigation }) {
               <MaterialCommunityIcons name="account-star" color={color} size={26} />
             )
           }}
-          children={(props) => <FeedScreen language={language} currentUser = {currentUser}  {...props} />}
+          children={(props) => <FeedScreen language={data} currentUser = {currentUser}  {...props} />}
         />
+        
         
       </Tab.Navigator>
 
-      <Pressable
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate("MainContribution", { language: language })
-        }
-        //onPress={() => navigation.navigate("NewContribution")}
-      >
-        <MaterialCommunityIcons name="plus" color={"#ffffff"} size={40} />
-      </Pressable>
-    </NavigationContainer>
-    // <View>
-    //   <Text>{language}</Text>
-    // </View>
-  );
+      
+  )
+  
 }
+
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,

@@ -19,34 +19,60 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Dimensions } from "react-native";
 import Checkbox from "expo-checkbox";
 
-function ValidateImage({ route, navigation, currentUser }) {
+function ValidateImage({ route, navigation, currentUser, }) {
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
+  const [loadingDecline, setLoadingDecline] = useState(false);
   const { data } = route?.params ?? {};
+  const { language } = route?.params ?? {};
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  console.log(data?.language);
+  console.log(language);
   console.log(data?.id);
-  console.log(data?.type)
+  console.log(data?.title)
   const Reject = () => {
-    setLoading(true);
-    rejectDictionaryAll();
+    setLoadingDecline(true);
+    DeclineImage();
   };
 
-  const deleteContribution = () => {
+  const Accept = () => {
+    setLoading(true);
+    AcceptImage();
+  };
+
+  const AcceptImage = () => {
     firebase
       .firestore()
       .collection("languages")
-      .doc(data?.language)
-      .collection(data?.type)
+      .doc(language)
+      .collection("posts")
       .doc(`${data?.id}`)
-      .delete()
+      .update({
+        status:"1",
+      })
       .then((result) => {
-        alert("Contribution Permanently Deleted!");
+        alert("Contribution Accepted!");
         navigation.pop();
         setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+  };
+  const DeclineImage = () => {
+    firebase
+      .firestore()
+      .collection("languages")
+      .doc(language)
+      .collection("posts")
+      .doc(`${data?.id}`)
+      .update({
+        status:"2",
+      })
+      .then((result) => {
+        alert("Contribution Declined!");
+        navigation.pop();
+        setLoadingDecline(false);
       })
       .catch((err) => console.log(err, "-=error"));
   };
@@ -58,51 +84,42 @@ function ValidateImage({ route, navigation, currentUser }) {
         <Text style={{
                     textAlign:"center",
                     fontSize:20,
-                    fontWeight:'bold'
+                    fontWeight:'bold',
+                    paddingVertical: 10,
                     }}>{data?.title}</Text>
         <Image
           style={{ width: imageWidth, height: imageWidth }}
-          source={{ uri: data?.image }}/>
-        <View style={styles.padding}>
-          <TextInput
-            multiline={true}
-            editable={false}
-            style={styles.textInput}>{data?.desc}</TextInput>
-        </View>  
-      </View>
-      <View style={styles.center}>
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Delete {data?.word} </Text>
-          <Text style={styles.guidelines}>
-            Are you sure that you want to delete your contribution {data?.word}?
-            Deleting this will permanently remove it from the database. If not
-            press the back button to cancel the deletion.
-          </Text>
-          <View style={styles.checkboxContainer}>
-            <Checkbox
-              style={styles.checkbox}
-              value={toggleCheckBox}
-              onValueChange={(newValue) => setToggleCheckBox(newValue)}
-              color={toggleCheckBox ? "#215a88" : undefined}
-            />
-            <Text style={styles.description}>
-              {" "}
-              I acknowlede the risks of deleting this data.
-            </Text>
-          </View>
-        </View>
+          source={{ uri: data?.downloadURL}}/>
+         
       </View>
       <View style={styles.padding}>
-        <TouchableOpacity
-          style={[
-            styles.button,
-            { backgroundColor: toggleCheckBox ? "#215a88" : "#91B2EB" },
-          ]}
-          disabled={!toggleCheckBox}
-          onPress={() => [deleteContribution()]}
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}> {data?.title} </Text>
+          <Text style={styles.guidelines}> Contributed by : {data?.username}</Text>
+          <Text style={styles.guidelines}> Category : {data?.category}</Text>
+          <Text style={styles.guidelines}>
+            {data?.description}
+          </Text>
+          
+        </View>
+      </View>
+      <View style={styles.row}>
+      <Pressable style={styles.buttonAccept} onPress={() => Accept()}>
+            <Text style={styles.subtitle}>
+              {loading ? "Accepting..." : "Accept"}
+            </Text>
+          </Pressable>
+        
+
+        <Pressable
+          style={styles.button}
+          onPress={() => Reject()}
+          
         >
-          <Text style={styles.subtitle}> Delete </Text>
-        </TouchableOpacity>
+          <Text style={styles.subtitle}><Text style={styles.subtitle}>
+              {loadingDecline ? "Declining..." : "Decline"}
+            </Text></Text>
+        </Pressable>
       </View>
       </View>
     </ScrollView>
@@ -138,14 +155,35 @@ const styles = StyleSheet.create({
     paddingHorizontal:30, 
     paddingVertical: 20, 
   },
-  button: {
-    alignSelf: "center",
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    marginBottom: 100,
+    marginTop: 30,
+  },
+  buttonAccept: {
+    // alignSelf: "flex-start",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 10,
-    elevation: 1,
-    width: "100%",
-    backgroundColor: "#215A88",
+    // elevation: 1,
+    width: "40%",
+    backgroundColor: "#73B504",
+    //top: 130,
+    // marginTop: 20,
+    // marginBottom: 80,
+  },
+  button: {
+    // alignSelf: "flex-end",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 10,
+    // elevation: 1,
+    width: "40%",
+    backgroundColor: "#8E2835",
+    //top: 130,
+    // marginBottom: 100,
   },
   textInput:{
     backgroundColor:"#e7e7e7", 

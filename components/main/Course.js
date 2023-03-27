@@ -95,7 +95,7 @@ return(
               {/* About Kagan options. */}
               <View style={styles.Row}>
                 {/* AboutCulture.js */}
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.buttonVocab}
                   onPress={() => navigation.navigate("Traditions", { language: language })}
                 >
@@ -110,7 +110,7 @@ return(
                             <Text style={styles.textVocabSub}>About the Culture</Text>
                       </View>
                   </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 {/* AboutEvents.js */}
                 <TouchableOpacity

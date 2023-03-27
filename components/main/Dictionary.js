@@ -124,7 +124,7 @@ function Dictionary({ route, navigation }) {
               onPress={() => navigation.navigate("Word", { data: item })}
             >
               <View style={styles.bodycontainer}>
-                <Text style={styles.inKagan}>{item.word} </Text>
+                <Text style={styles.inKagan}>{item.word.toLowerCase()} </Text>
                 <Text style={styles.inFilipino}>
                   {item.filipino} (in filipino)
                 </Text>

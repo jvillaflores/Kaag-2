@@ -30,7 +30,8 @@ function Settings({ currentUser, navigation, route }) {
   if (currentUser.type == "2") {
     // This will render all of the functions available for the superuser
     return (
-      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
+        <SafeAreaView>
         <View>
           <View style={styles.userInfoSelection}>
             <View  style={{alignItems:"center"}}>
@@ -82,7 +83,20 @@ function Settings({ currentUser, navigation, route }) {
             </View>
           </TouchableRipple>
           {/* Word Validation screen (end)*/}
-
+          <TouchableRipple
+              onPress={() =>
+                navigation.navigate("ImageValidation", { language: language })
+              }
+            >
+              <View style={styles.menuItem}>
+                <Icon
+                  name="image-edit"
+                  color="#777777"
+                  size={25}
+                />
+                <Text style={styles.menuItemText}>Validate Images</Text>
+              </View>
+            </TouchableRipple>
           {/* Add Language screen (start)*/}
           <TouchableRipple
             onPress={() => navigation.navigate("AddLanguageScreen")}
@@ -160,7 +174,8 @@ function Settings({ currentUser, navigation, route }) {
             </View>
           </TouchableRipple>
         </View>
-      </SafeAreaView>
+        </SafeAreaView>
+      </ScrollView>
     );
   } else if (currentUser.type == "1") {
     if (
@@ -171,7 +186,7 @@ function Settings({ currentUser, navigation, route }) {
       // This will render all of the functions available for the validator user and;
       // has a secondary conditionthat if satisfied will render Check Submissions button
       return (
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
           <View>
             <View style={styles.userInfoSelection}>
             <View  style={{alignItems:"center"}}>
@@ -236,13 +251,13 @@ function Settings({ currentUser, navigation, route }) {
               </View>
             </TouchableRipple>
           </View>
-        </SafeAreaView>
+        </ScrollView>
       );
     } else {
       // This will render all of the functions available for the validator user and;
       // secondary condtion not satisfied therefore check submissions will not render
       return (
-        <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.container}>
           <View>
             <View style={styles.userInfoSelection}>
             <View  style={{alignItems:"center"}}>
@@ -278,13 +293,13 @@ function Settings({ currentUser, navigation, route }) {
               </View>
             </TouchableRipple>
           </View>
-        </SafeAreaView>
+        </ScrollView>
       );
     }
   } else {
     // This will render the Basic users functions
     return (
-      <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.container}>
         <View>
           <View style={styles.userInfoSelection}>
             <View  style={{alignItems:"center"}}>
@@ -329,7 +344,7 @@ function Settings({ currentUser, navigation, route }) {
             </View>
           </TouchableRipple>
         </View>
-      </SafeAreaView>
+      </ScrollView>
     );
   }
 }
@@ -343,6 +358,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 30,
+    marginBottom: 30,
   },
   userInfoSelection: {
     // paddingHorizontal: 30,
