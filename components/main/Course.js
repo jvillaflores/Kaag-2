@@ -44,7 +44,7 @@ return(
                     }
                   >
                     <View style={{}}>
-                      <Icon name="bookshelf" color="#b2b2b2" size={25} />
+                      <Icon name="bookshelf" color="#c2c2c2" size={25} />
                     </View>
                   </TouchableOpacity>
         </View>
@@ -58,7 +58,7 @@ return(
         {/* Kagan courses options. */}
         <View style={styles.Vertical}>
           <View>
-            <Text style={[styles.textKagan,{paddingVertical:10}]}>{language} Course</Text>
+            <Text style={[styles.textKagan]}>{language} Course</Text>
           </View>
 
           <View style={styles.Row}>
