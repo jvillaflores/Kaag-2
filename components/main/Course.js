@@ -26,28 +26,39 @@ return(
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
-        <View style={{marginHorizontal: 15,}}>
-          <TouchableOpacity 
-            
-            onPress={() =>
-              navigation.navigate("Language", { language: language })
-              //alert("This page is not yet available")
-            }
-          >
-            <View style={styles.menuItem}>
-              <Icon name="bookshelf" color="#777777" size={25} />
+        
+          <View style={{flexDirection:'row', alignItems:'center', marginLeft:15}}>
+            <View>
+                <Image
+                    style={{ width:65, height: 30, marginVertical: 10 }}
+                    source={require("../../assets/kaag2-2.png")}
+                  />
             </View>
-          </TouchableOpacity>
+            
+            <View style={{marginHorizontal: 15, marginLeft: 'auto'}}>
+                  <TouchableOpacity 
+                    
+                    onPress={() =>
+                      navigation.navigate("Language", { language: language })
+                      //alert("This page is not yet available")
+                    }
+                  >
+                    <View style={{}}>
+                      <Icon name="bookshelf" color="#b2b2b2" size={25} />
+                    </View>
+                  </TouchableOpacity>
         </View>
-          <View >
-            <Text style={[styles.textHead]}>Hello, {currentUser.name}! </Text>
           </View>
 
+
+        {/* <View>
+            <Text style={[styles.textHead]}>Hello, {currentUser.name}! </Text>
+        </View>             */}
 
         {/* Kagan courses options. */}
         <View style={styles.Vertical}>
           <View>
-            <Text style={styles.textKagan}>{language} Course</Text>
+            <Text style={[styles.textKagan,{paddingVertical:10}]}>{language} Course</Text>
           </View>
 
           <View style={styles.Row}>
