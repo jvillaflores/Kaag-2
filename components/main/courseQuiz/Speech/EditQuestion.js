@@ -117,6 +117,9 @@ import {
     const handleAudioSave = () => {
       updateAudio();
     };
+    const handleQuestionDelete = () => {
+      deleteQuestion();
+    }
     const downloadAudio = async () => {
       //function for playing the audio of the dictionary data
      
@@ -190,6 +193,24 @@ import {
           alert("Question updated!");
         });
     };
+    
+    const deleteQuestion = () => {
+      return firebase
+      .firestore()
+      .collection("languages")
+      .doc(language)
+      .collection("SpeechQuiz")
+      .doc(`${data?.id}`)
+      .collection("QNA")
+      .doc(`${currentData?.id}`)
+      .delete()
+      .then((result) => {
+        alert("Question Permanently Deleted!");
+        navigation.pop();
+        setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+    }
   
     return (
       <KeyboardAvoidingView
@@ -274,7 +295,18 @@ import {
             <FormButton
               labelText="Update Audio and Save"
               handleOnPress={handleAudioSave}
+              style={{
+                marginTop: 10,
+              }}
             />
+             <FormButton
+            labelText="Delete Question"
+            handleOnPress={handleQuestionDelete}
+            style={{
+              marginVertical: 10,
+              backgroundColor: "red",
+            }}
+          />
             <FormButton
               labelText="Done & Go Home"
               isPrimary={false}
@@ -282,9 +314,7 @@ import {
                 // s
                 navigation.goBack();
               }}
-              style={{
-                marginVertical: 20,
-              }}
+              
             />
           </View>
         </ScrollView>

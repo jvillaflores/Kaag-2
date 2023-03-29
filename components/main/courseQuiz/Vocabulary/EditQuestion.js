@@ -110,6 +110,9 @@ import {
     const save = () => {
       createQuestion();
     };
+    const handleQuestionDelete = () => {
+      deleteQuestion();
+    }
   
     const createQuestion = () => {
       return firebase
@@ -130,6 +133,24 @@ import {
           alert("Question updated!");
         });
     };
+
+    const deleteQuestion = () => {
+      return firebase
+      .firestore()
+      .collection("languages")
+      .doc(language)
+      .collection("Quizzes")
+      .doc(`${data?.id}`)
+      .collection("QNA")
+      .doc(`${currentData?.id}`)
+      .delete()
+      .then((result) => {
+        alert("Question Permanently Deleted!");
+        navigation.pop();
+        setLoading(false);
+      })
+      .catch((err) => console.log(err, "-=error"));
+    }
   
     return (
       <KeyboardAvoidingView
@@ -195,15 +216,21 @@ import {
               handleOnPress={handleQuestionSave}
             />
             <FormButton
+            labelText="Delete Question"
+            handleOnPress={handleQuestionDelete}
+            style={{
+              marginVertical: 10,
+              backgroundColor: "red",
+            }}
+          />
+            <FormButton
               labelText="Done & Go Home"
               isPrimary={false}
               handleOnPress={() => {
                 // s
                 navigation.goBack();
               }}
-              style={{
-                marginVertical: 20,
-              }}
+             
             />
           </View>
         </ScrollView>

@@ -195,6 +195,10 @@ const Edits = ({ route }) => {
             handleOnPress={handleQuestionSave}
           />
           <FormButton
+            labelText="Save Question"
+            handleOnPress={handleQuestionSave}
+          />
+          <FormButton
             labelText="Done & Go Home"
             isPrimary={false}
             handleOnPress={() => {
@@ -225,6 +229,12 @@ const COLORS = {
   background: "#f4f4f4",
   border: "#F5F5F7",
 };
+
+const styles = StyleSheet.create({
+  delete:{
+    color: "red",
+  }
+})
 
 export const SIZES = {
   base: 10,
