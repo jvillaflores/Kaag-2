@@ -68,7 +68,7 @@ function AboutCulture  ({ navigation,route }) {
        <Image
           style={{ width: imageWidth, height: imageWidth, }}
           source={{ uri: item.image }}/>
-        <Text style={{textAlign:"right", color:"#707070", fontSize:12,}}>Image from: {item.credits}</Text>
+        <Text style={{textAlign:"right", color:"#707070", fontSize:12, }}>Image from: {item.credits}</Text>
         <View style={{ padding: 30 }}>
           <Text style={styles.textVocab}>{item.desc}</Text>
           <Text style={{color:"#707070", fontSize:10, paddingVertical:15}}>Source: {item.source}</Text>

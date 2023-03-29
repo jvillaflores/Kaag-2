@@ -1,4 +1,5 @@
-import React from "react";
+import route }) {
+  const { language } = route?.params ?? {}; from "react";
 import {
   View,
   Text,
@@ -9,10 +10,13 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
+  TouchableRipple,
 } from "react-native";
 
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
 import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 
 function Course({ currentUser, navigation, language }) {
   console.log(language);
@@ -23,6 +27,14 @@ return(
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
+          <TouchableRipple 
+            onPress={() => navigation.navigate("Language")}>
+            <View style={styles.menuItem}>
+              <Icon name="bookshelf" color="#777777" size={25} />
+              <Text style={styles.menuItemText}> View Languages</Text>
+            </View>
+          </TouchableRipple>
+
           <View >
             <Text style={[styles.textHead]}>Hello, {currentUser.name}! </Text>
           </View>
