@@ -1,5 +1,4 @@
-import route }) {
-  const { language } = route?.params ?? {}; from "react";
+import React from "react";
 import {
   View,
   Text,
