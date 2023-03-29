@@ -26,14 +26,19 @@ return(
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
       >
-          <TouchableRipple 
-            onPress={() => navigation.navigate("Language")}>
+        <View style={{marginHorizontal: 15,}}>
+          <TouchableOpacity 
+            
+            onPress={() =>
+              navigation.navigate("Language", { language: language })
+              //alert("This page is not yet available")
+            }
+          >
             <View style={styles.menuItem}>
               <Icon name="bookshelf" color="#777777" size={25} />
-              <Text style={styles.menuItemText}> View Languages</Text>
             </View>
-          </TouchableRipple>
-
+          </TouchableOpacity>
+        </View>
           <View >
             <Text style={[styles.textHead]}>Hello, {currentUser.name}! </Text>
           </View>
