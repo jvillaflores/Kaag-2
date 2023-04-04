@@ -165,6 +165,17 @@ function Settings({ currentUser, navigation, route }) {
           </TouchableRipple>
           {/* Edit About screen (end)*/}
 
+            {/* EditAbout.js */}
+          <TouchableRipple
+            onPress={() =>
+              navigation.navigate("EditAbout", { language: language })
+            }
+          >
+            <View style={styles.menuItem}>
+              <Icon name="information-outline" color="#777777" size={25} />
+              <Text style={styles.menuItemText}>About KAAG</Text>
+            </View>
+          </TouchableRipple>
 
 
           <TouchableRipple onPress={() => onLogout()}>

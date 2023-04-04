@@ -82,7 +82,7 @@ import AudioList2 from "./components/main/courseQuiz/Speech/AudioList2";
 import AudioList3 from "./components/main/courseQuiz/Speech/AudioList3";
 import AudioList4 from "./components/main/courseQuiz/Speech/AudioList4";
 import OptionQuiz from "./components/main/courseQuiz/OptionQuiz";
-
+import AboutKAAGScreen from "./components/main/AboutKAAG";
 import EditOptionQuiz from "./components/main/courseQuiz/EditOptionQuiz";
 import EditSpeechQuizList from "./components/main/courseQuiz/Speech/EditQuizList";
 import EditVocabQuizList from "./components/main/courseQuiz/Vocabulary/EditQuizList";
@@ -655,6 +655,21 @@ export class App extends Component {
               component={AddLanguageScreen}
               options={{
                 title: "Add Language",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="AboutKAAGScreen"
+              component={AboutKAAGScreen}
+              options={{
+                title: "",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
