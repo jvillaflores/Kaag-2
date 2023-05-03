@@ -668,7 +668,7 @@ export class App extends Component {
               name="AboutKAAGScreen"
               component={AboutKAAGScreen}
               options={{
-                title: "",
+                title: "About KAAG",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

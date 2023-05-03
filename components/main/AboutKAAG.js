@@ -18,14 +18,10 @@ require("firebase/firebase-storage");
 import { Dimensions } from "react-native";
 
 function AboutKAAG  ({ navigation,route }) {
-
   const { language } = route?.params ?? {};
-  
-
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
   const imageWidth = dimensions.width;
-
   const [datalist, setDatalist] = useState("");
   const [refreshing, setRefreshing] = useState(true);
 
@@ -61,17 +57,36 @@ function AboutKAAG  ({ navigation,route }) {
   const ItemView = ({ item }) => {
     return (
       // Flat List Item
-      <View style={styles.container}>
+      <View style={styles.container}> 
         <Text style={styles.textKagan}>
           {" "} 
-          {item.title}
+          KAAG
         </Text>
        <Image
           style={{ width: imageWidth, height: imageWidth, }}
           source={{ uri: item.image }}/>
         <Text style={{textAlign:"left", color:"#707070", fontSize:12,}}>Image from: {item.credits}</Text>
         <View style={{ padding: 30 }}>
-          <Text style={styles.textVocab}>{item.desc}</Text>
+          <Text style={styles.textVocab}> KAAG is a software developed by MinNa-LProc, the research laboratoy of the 
+          University of The Immaculate Conception that is focused on researches that are targeted in preserving languages.
+          Kaag is an app designed to protect various languages spoken in the Philippines. It offers multiple features and has three different 
+          types of users. The basic user is able to access most functions of the app and can contribute texts to the 
+          dictionary and images to the community. However, contributions made by basic users are subject to verification by 
+          validators. Basic users can also apply to become validators themselves. Validator users have the same features as 
+          basic users but also have the ability to accept or reject contributions made in the form of images, audio, or text. {" "} </Text>
+          <Text style={styles.textVocab}> {""} </Text>
+          <Text style={styles.textVocab}> 
+          The KAAG will also work as a repository for the tribes' languages, helping to preserve and promote their endangered 
+          languages. It will benefit the tribes' people, the National Commission on Indigenous Peoples (NCIP), 
+          and Summer Institute Linguistics Philippines, which supports language preservation among IPs. 
+          Overall, the KAAG aims to sustain and ensure the existence of the tribes' languages and culture through time 
+          despite various influences. The KAAG's deployment will be a significant factor in the success of preserving the 
+          Kagan language and its culture, and it is already a way of preserving the language through the use of technology.
+          </Text>
+          <Text style={styles.textVocab}> {""} </Text>
+          <Text style={styles.textVocab}> 
+         
+ </Text>
           <Text style={{color:"#707070", fontSize:10, paddingVertical:15}}>Source: {item.source}</Text>
         </View>
       </View>

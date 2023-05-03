@@ -159,7 +159,7 @@ function Settings({ currentUser, navigation, route }) {
             {/* EditAbout.js */}
           <TouchableRipple
             onPress={() =>
-              navigation.navigate("EditAbout", { language: language })
+              navigation.navigate("AboutKAAGScreen", { language: language })
             }
           >
             <View style={styles.menuItem}>
