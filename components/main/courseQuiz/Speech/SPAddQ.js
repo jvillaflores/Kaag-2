@@ -89,8 +89,7 @@ import {
   
   const SPAddQ = ({ navigation, route }) => {
     const { language } = route.params;
-    console.log(language);
-  
+   
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
   

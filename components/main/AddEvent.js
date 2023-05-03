@@ -16,7 +16,6 @@ const AddEvent = ({navigation}) => {
 
     const { language } = route?.params ?? {};
     const { data } = route?.params ?? {};
-    console.log(language)
 
     const [title, setTitle] = useState(data?.title);
     const [desc, setDesc] = useState(data?.desc);

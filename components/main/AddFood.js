@@ -25,9 +25,6 @@ import * as ImagePicker from "expo-image-picker";
 
 const AddFood = ({navigation,route}) => {
     const { language } = route.params;
-    
-  console.log(language);
-  
 
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -76,7 +73,7 @@ const AddFood = ({navigation,route}) => {
         const childPath = `food/${
           firebase.auth().currentUser.uid
         }/${language}/${Math.random().toString(36)}`;
-        console.log(childPath);
+        
         const response = await fetch(uri);
         const blob = await response.blob();
     
@@ -84,19 +81,19 @@ const AddFood = ({navigation,route}) => {
     
         const taskProgress = (snapshot) => {
           setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          console.log(`transferred: ${snapshot.bytesTransferred}`);
+          
         };
     
         const taskCompleted = () => {
           task.snapshot.ref.getDownloadURL().then((snapshot) => {
             saveUserData(snapshot);
             setLoading(null);
-            console.log(snapshot);
+            
           });
         };
     
         const taskError = (snapshot) => {
-          console.log(snapshot);
+          
           setLoading(null);
         };
     

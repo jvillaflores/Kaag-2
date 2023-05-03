@@ -66,7 +66,7 @@ export default class Register extends ValidationComponent {
             userImage: " ",
             uid: firebase.auth().currentUser.uid,
           });
-        console.log(result);
+       
       })
       .catch((error) => {
         alert(error);

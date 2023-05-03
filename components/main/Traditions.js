@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 function Traditions({ currentUser, navigation, route }) {
 
   const { language } = route?.params ?? {};
-  console.log(language);
+  
 
   return (
     <SafeAreaView style={styles.container}>

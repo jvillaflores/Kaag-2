@@ -32,8 +32,7 @@ function Feed({ navigation, route, language, currentUser }) {
   const [uid, setUid] = useState(`${currentUser?.uid}`);
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
 
-  console.log(currentUser?.email)
-
+ 
   useEffect(() => {
     getData();
   }, []);
@@ -51,7 +50,7 @@ function Feed({ navigation, route, language, currentUser }) {
       .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

@@ -101,10 +101,10 @@ function ContributionWord({ currentUser, navigation, route }) {
     });
     // Alert.alert("Audio File", result.name);
 
-    console.log(result);
+    
     if (result.type === "success") {
       setAudio(result);
-      // console.log(result);
+      
     } else {
       alert("something went wrong!!");
     }
@@ -123,7 +123,7 @@ function ContributionWord({ currentUser, navigation, route }) {
     const childPath = `audio/${
       firebase.auth().currentUser.uid
     }/${Math.random().toString(36)}`;
-    console.log(childPath);
+    
     const uri = FileSystem.documentDirectory + audio.name;
 
     await FileSystem.copyAsync({
@@ -138,7 +138,7 @@ function ContributionWord({ currentUser, navigation, route }) {
 
     const taskProgress = (snapshot) => {
       setLoading((snapshot.bytesTransferred / audio?.size) * 100);
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
+    
     };
 
     const taskCompleted = () => {
@@ -151,14 +151,14 @@ function ContributionWord({ currentUser, navigation, route }) {
           savePostData(snapshot);
         }
         setLoading(null);
-        console.log(snapshot);
+        
       });
     };
 
     const taskError = (snapshot) => {
       setLoading(null);
       alert(snapshot);
-      console.log(snapshot);
+      
     };
 
     task.on("state_changed", taskProgress, taskError, taskCompleted);

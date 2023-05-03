@@ -33,8 +33,7 @@ const Stack = createStackNavigator();
 function Community({ currentUser, route, navigation }) {
   const [datalist, setDatalist] = useState("");
   const { language } = route?.params ?? {};
-  // console.log(language);
-  // console.log(datalist);
+ 
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -47,7 +46,7 @@ function Community({ currentUser, route, navigation }) {
         .doc(firebase.auth().currentUser.uid)
         .get()
         .then((snapshot) => {
-          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          
           if (snapshot.exists) {
             let currentUser = snapshot.data();
             setDatalist(currentUser);
@@ -113,10 +112,7 @@ function TopTab({route,navigation}) {
  
    const { data } = route?.params ?? {};
    const {currentUser} = route?.params??{};
-  console.log(data)
-  console.log(currentUser)
- 
-
+  
   return(
     <Tab.Navigator
         labeled="false"
@@ -130,11 +126,7 @@ function TopTab({route,navigation}) {
           tabBarShowLabel: false,
           tabBarPressColor: "#215a88",
           
-           
-          
-          
-        })}
-        
+        })}   
       >
         <Tab.Screen
           name="Social"

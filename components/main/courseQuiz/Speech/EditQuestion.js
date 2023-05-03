@@ -98,7 +98,6 @@ import {
     const { data } = route?.params ?? {};
     const { item } = route?.params ?? {};
   
-    console.log(item)
     const [question, setQuestion] = useState(currentData?.question);
     const [correctAnswer, setCorrectAnswer] = useState(
       currentData?.correct_answer
@@ -132,7 +131,7 @@ import {
           SoundObject.unloadAsync();
         }, status.playableDurationMillis + 1000);
       } catch (error) {
-        console.log(error);
+       
         await SoundObject.unloadAsync(); // Unload any sound loaded
         SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
         retryPlaySound();
@@ -147,7 +146,7 @@ import {
       });
       // Alert.alert("Audio File", result.name);
   
-      console.log(result);
+      
       if (result.type === "success") {
         setAudio(result);
       } else {
@@ -242,7 +241,7 @@ import {
                       style={styles.buttonAudio}
                       onPress={() => downloadAudio(data)}
                       >
-                      {/* {console.log(item)} */}
+                      
                       <View>
                         <MaterialCommunityIcons
                           name="volume-high"

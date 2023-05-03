@@ -30,7 +30,7 @@ function AudioList3({ route, navigation }) {
   const { language } = route?.params ?? {};
 
   var setLanguage = language;
- console.log(language)
+ 
 
   // const startLoading = () => {
   //   setLoading(true);

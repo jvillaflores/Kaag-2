@@ -41,7 +41,7 @@ export default class Login extends Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result);
+        
       })
       .catch((error) => {
         alert("Email or password is incorrect");

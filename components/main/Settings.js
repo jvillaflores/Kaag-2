@@ -129,15 +129,6 @@ function Settings({ currentUser, navigation, route }) {
             </View>
           </TouchableRipple>
           {/*Add Quiz (end)*/}
-          {/* TestPage 
-          <TouchableRipple onPress={() => navigation.navigate("Testpage", { language: language })}>
-            <View style={styles.menuItem}>
-              <Icon name="bookshelf" color="#777777" size={25} />
-              <Text style={styles.menuItemText}>TestPage</Text>
-            </View>
-          </TouchableRipple>
-          */}
-
           {/* Edit Quiz screen (start)*/}
           <TouchableRipple
             onPress={() =>
@@ -188,7 +179,9 @@ function Settings({ currentUser, navigation, route }) {
         </SafeAreaView>
       </ScrollView>
     );
-  } else if (currentUser.type == "1") {
+  } 
+  
+  else if (currentUser.type == "1") {
     if (
       currentUser.userLanguage == language ||
       currentUser.secondLanguage == language ||
@@ -264,7 +257,9 @@ function Settings({ currentUser, navigation, route }) {
           </View>
         </ScrollView>
       );
-    } else {
+    } 
+    
+    else {
       // This will render all of the functions available for the validator user and;
       // secondary condtion not satisfied therefore check submissions will not render
       return (

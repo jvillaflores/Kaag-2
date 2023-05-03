@@ -46,7 +46,7 @@ export class Main extends Component {
 
   render() {
     const { language } = this.props.route.params;
-    console.log(language);
+    
 
     return (
       <Tab.Navigator

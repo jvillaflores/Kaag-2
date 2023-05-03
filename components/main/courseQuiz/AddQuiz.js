@@ -88,7 +88,7 @@ export const FormButton = ({
 
 const AddQuestion = ({ navigation, route }) => {
   const { language } = route.params;
-  console.log(language);
+  
 
   const [currentQuizId, setcurrentQuizId] = useState(
     route.params.currentQuizId

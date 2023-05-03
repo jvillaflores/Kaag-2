@@ -91,7 +91,6 @@ import {
     const { language } = route.params;
     const { data } =route?.params?? {}
     
-    console.log(language);
     
     const [currentQuizId, setcurrentQuizId] = useState(
         route.params.currentQuizId
@@ -106,9 +105,7 @@ import {
     const [OptionTwo, setOptionTwo] = useState("");
     const [OptionThree, setOptionThree] = useState("");
     const [OptionFour, setOptionFour] = useState("");
-    // const audio= data?.downloadURL 
-    // const [audio1, setAudio] = useState(audio)
-    // console.log(audio1)
+    
     const handleQuestionSave = async () => {
       if (
         question == "" ||
@@ -123,7 +120,6 @@ import {
       let currentQuestionId = Math.floor(
         100000 + Math.random() * 9000
       ).toString();
-    console.log(currentQuestionId);
       // Add question to db
       await createQuestion(currentQuizId, currentQuestionId, {
         audio: data?.downloadURL,

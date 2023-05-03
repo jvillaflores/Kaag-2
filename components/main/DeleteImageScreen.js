@@ -29,8 +29,7 @@ function DeleteImage({ route, navigation, currentUser }) {
   const { data } = route?.params ?? {};
   const { language } = route?.params ?? {};
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  console.log(language);
-  console.log(data?.id);
+  
   const Reject = () => {
     setLoading(true);
     rejectDictionaryAll();

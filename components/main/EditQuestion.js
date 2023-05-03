@@ -39,7 +39,7 @@ const EditQuestion = ({ route,navigation}) => {
           setDatalist(masterDataSource);
           setFilteredDataSource(masterDataSource);
           setMasterDataSource(masterDataSource);
-          console.log(masterDataSource);
+          
         });
     });
 

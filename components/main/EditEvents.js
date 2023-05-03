@@ -22,9 +22,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const EditEvents = ({navigation,route}) => {
     const { language } = route.params;
     const { data } = route.params;
-  console.log(language);
-  console.log(data);
-
+  
   const [title, setTitle] = useState(data?.title);
   const [desc, setDesc] = useState(data?.desc);
   const [credits, setCredits] = useState(data?.credits);

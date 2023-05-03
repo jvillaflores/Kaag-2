@@ -17,10 +17,10 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 const PlayQuizScreen = ({ navigation, route }) => {
   const { language } = route.params;
-  console.log(language);
+ 
 
   const [currentQuizId, setCurrentQuizId] = useState(route.params.quizId);
-  console.log(currentQuizId);
+  
   const [title, setTitle] = useState("");
   const [questions, setQuestions] = useState([]);
   const [correctCount, setCorrectCount] = useState(0);
@@ -39,7 +39,7 @@ const PlayQuizScreen = ({ navigation, route }) => {
         SoundObject.unloadAsync();
       }, status.playableDurationMillis + 1000);
     } catch (error) {
-      console.log(error);
+      
       await SoundObject.unloadAsync(); // Unload any sound loaded
       SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
       retryPlaySound();
@@ -272,7 +272,7 @@ const PlayQuizScreen = ({ navigation, route }) => {
                       style={styles.buttonAudio}
                       onPress={() => downloadAudio(item)}
                       >
-                      {/* {console.log(item)} */}
+                      
                       <View>
                         <MaterialCommunityIcons
                           name="volume-high"

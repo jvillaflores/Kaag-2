@@ -17,7 +17,7 @@ require("firebase/firebase-storage");
 
 const EditAbout = ({ navigation, route }) => {
   const { language } = route?.params ?? {};
-  console.log(language);
+  
   const [filteredDataSource, setFilteredDataSource] = useState("");
   const [masterDataSource, setMasterDataSource] = useState("");
   const [datalist, setDatalist] = useState("");

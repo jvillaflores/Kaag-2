@@ -36,7 +36,7 @@ export default class ForgotPassword extends Component {
         alert("Please check your email...");
       })
       .catch(function (e) {
-        console.log(e);
+       
       });
   }
 

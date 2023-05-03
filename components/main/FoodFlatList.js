@@ -40,7 +40,7 @@ function CultureFlatList({ navigation, route, language }) {
       .collection("Food")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

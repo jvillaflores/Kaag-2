@@ -22,7 +22,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 function AboutFlatList  ({ navigation,route,language }) {
 
   
-  console.log(language)
+ 
 
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
@@ -46,7 +46,7 @@ function AboutFlatList  ({ navigation,route,language }) {
       .orderBy("title","asc")
       .get()
       .then((snapshot) => {
-        // console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

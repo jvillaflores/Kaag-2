@@ -18,7 +18,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 function Course({ currentUser, navigation, language }) {
-  console.log(language);
+  
 
 return(
   <SafeAreaView style={styles.container}>

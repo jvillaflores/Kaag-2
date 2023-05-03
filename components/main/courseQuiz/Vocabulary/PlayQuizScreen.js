@@ -14,10 +14,9 @@ require("firebase/firebase-storage");
 
 const PlayQuizScreen = ({ navigation, route }) => {
   const { language } = route.params;
-  console.log(language);
-
+  
   const [currentQuizId, setCurrentQuizId] = useState(route.params.quizId);
-  console.log(currentQuizId);
+  
   const [title, setTitle] = useState("");
   const [questions, setQuestions] = useState([]);
   const [correctCount, setCorrectCount] = useState(0);

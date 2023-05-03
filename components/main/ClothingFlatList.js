@@ -40,7 +40,7 @@ function ClothingFlatList({ navigation, route, language }) {
       .collection("Clothing")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

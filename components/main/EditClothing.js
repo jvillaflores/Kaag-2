@@ -43,7 +43,7 @@ const EditClothing = ({navigation, route}) => {
             setDatalist(masterDataSource);
             setFilteredDataSource(masterDataSource);
             setMasterDataSource(masterDataSource);
-            console.log(masterDataSource);
+            
           });
       });
   

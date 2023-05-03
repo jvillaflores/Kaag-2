@@ -17,9 +17,6 @@ require("firebase/firebase-storage");
 
 const OptionQuiz = ({ navigation, route }) => {
   const { language } = route?.params ?? {};
-  console.log(language);
-
-
   
 
   return (

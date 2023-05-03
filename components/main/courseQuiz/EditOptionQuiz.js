@@ -17,10 +17,6 @@ require("firebase/firebase-storage");
 
 const EditOptionQuiz = ({ navigation, route }) => {
   const { language } = route?.params ?? {};
-  console.log(language);
-
-
-  
 
   return (
     <SafeAreaView style={styles.container}>

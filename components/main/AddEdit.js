@@ -58,7 +58,6 @@ import {
 
 const AddEdit = ({navigation, route}) => {
     const { language } = route?.params ?? {};
-  console.log(language);
 
   const [filteredDataSource, setFilteredDataSource] = useState("");
   const [masterDataSource, setMasterDataSource] = useState("");
@@ -82,7 +81,7 @@ const AddEdit = ({navigation, route}) => {
           setDatalist(masterDataSource);
           setFilteredDataSource(masterDataSource);
           setMasterDataSource(masterDataSource);
-          console.log(masterDataSource);
+          
         });
     });
 

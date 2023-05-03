@@ -20,7 +20,7 @@ import { Dimensions } from "react-native";
 function AboutEvents  ({ navigation,route }) {
 
   const { language } = route?.params ?? {};
-  console.log(language)
+  
 
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
@@ -44,7 +44,7 @@ function AboutEvents  ({ navigation,route }) {
       .orderBy("title","asc")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

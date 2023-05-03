@@ -23,7 +23,7 @@ const Tab = createMaterialTopTabNavigator();
 function VocabEditQuestion({ route, navigation}) {
   const { language } = route?.params ?? {};
   const { data } = route?.params ?? {};
-  console.log(data?.id)
+  
   return (
     
     <SafeAreaView style={styles.container}>

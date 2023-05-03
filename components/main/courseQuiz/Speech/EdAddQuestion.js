@@ -23,8 +23,7 @@ const Tab = createMaterialTopTabNavigator();
 function AddAnotherQuestion({ route, navigation}) {
   const { language } = route?.params ?? {};
   const { data } = route?.params ?? {};
-  console.log(data?.id)
-  console.log(language)
+  
   return (
     
     <SafeAreaView style={styles.container}>

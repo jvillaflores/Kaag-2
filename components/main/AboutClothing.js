@@ -20,7 +20,6 @@ import { Dimensions } from "react-native";
 function AboutClothing ({ navigation,route }) {
 
   const { language } = route?.params ?? {};
-  console.log(language)
 
   const dimensions = Dimensions.get("window");
   const imageHeight = Math.round((dimensions.width * 1) / 1);
@@ -43,7 +42,7 @@ function AboutClothing ({ navigation,route }) {
       .collection("Clothing")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
+        
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

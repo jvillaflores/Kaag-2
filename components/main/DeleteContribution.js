@@ -28,8 +28,7 @@ function DeleteContribution({ route, navigation, currentUser }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  console.log(data?.language);
-  console.log(data?.id);
+  
   const Reject = () => {
     setLoading(true);
     rejectDictionaryAll();

@@ -89,7 +89,7 @@ export const FormButton = ({
 
 const AddQuestion = ({ navigation, route }) => {
   const { language } = route.params;
-  console.log(language);
+  
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

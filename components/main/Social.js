@@ -43,7 +43,6 @@ function Social({ navigation, route, language }) {
       .orderBy("creation", "desc")
       .get()
       .then((snapshot) => {
-        console.log(snapshot, "-=-=-=-=-=-=-=-=");
         let postsAll = snapshot.docs.map((doc) => {
           const data = doc.data();
           const id = doc.id;

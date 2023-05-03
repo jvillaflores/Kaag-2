@@ -49,9 +49,8 @@ import ContributionScreen from "./components/main/Contribution";
 import GrammarScreen from "./components/main/Grammar";
 import WordScreen from "./components/main/Word";
 import SaveScreen from "./components/main/Save";
-import NewDictionaryScreen from "./components/main/NewDictionary";
 import DeleteContributionScreen from "./components/main/DeleteContribution";
-import NewDictionaryReRenderScreen from "./components/main/NewDictionaryReRender";
+
 import MyContributionsScreen from "./components/main/userContributions/MyContributions";
 import BeAValidatorScreen from "./components/main/BeAValidator";
 import ValidatorAppScreen from "./components/main/ValidatorApplication";
@@ -97,7 +96,7 @@ import Edits from "./components/main/Edits";
 import Add from "./components/main/Add";
 import AddEdit from "./components/main/AddEdit";
 import AddQuestions from "./components/main/AddQuestions";
-import AddQuest from "./components/AddQuest";
+
 import EditAbout from "./components/main/EditAbout";
 import EditEvent from "./components/main/EditEvent";
 import EditEvents from "./components/main/EditEvents";
@@ -114,7 +113,7 @@ import EditCultures from "./components/main/EditCultures";
 import AddCulture from "./components/main/AddCulture";
 import AgainContrib from "./components/main/AgainContrib";
 import Consent from "./components/main/Consent";
-import NewConsent from "./components/main/NewConsent";
+
 import DeleteAbout from "./components/main/CultureFlatList/DeleteAbout";
 import DeleteImageScreen from "./components/main/DeleteImageScreen";
 import EditSpeechQuestionItem from "./components/main/courseQuiz/Speech/EditQuestion";
@@ -375,7 +374,7 @@ export class App extends Component {
                 //           )
               }}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
               name="NewDictionary"
               component={NewDictionaryScreen}
               options={({ navigation }) => ({
@@ -409,7 +408,7 @@ export class App extends Component {
                   backgroundColor: "#215A88",
                 },
               }}
-            />
+            /> */}
             <Stack.Screen
               name="Consent"
               component={Consent}
@@ -423,7 +422,7 @@ export class App extends Component {
               }}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="NewConsent"
               component={NewConsent}
               navigation={this.props.navigation}
@@ -433,7 +432,7 @@ export class App extends Component {
                   backgroundColor: "#215A88",
                 },
               }}
-            />
+            /> */}
 
             <Stack.Screen
               name="AgainContrib"
@@ -1156,7 +1155,7 @@ export class App extends Component {
               }}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
               name="AddQuest"
               component={AddQuest}
               options={{
@@ -1169,7 +1168,7 @@ export class App extends Component {
                   borderBottomWidth: 0,
                 },
               }}
-            />
+            /> */}
 
             <Stack.Screen
               name="EditAbout"

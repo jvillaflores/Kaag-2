@@ -42,72 +42,8 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const { language } = route?.params ?? {};
   const [userTerm, setUserTerm] = useState("");
-  const [recording, setRecording] = React.useState();
-  const [recordings, setRecordings] = React.useState([]);
   
-
-  // async function startRecording() {
-  //   try {
-  //     const permission = await Audio.requestPermissionsAsync();
-
-  //     if (permission.status === "granted") {
-  //       await Audio.setAudioModeAsync({
-  //         allowsRecordingIOS: true,
-  //         playsInSilentModeIOS: true,
-  //         shouldDuckAndroid: false,
-  //       });
-        
-  //       const { recording } = await Audio.Recording.createAsync(
-  //         // Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY //low qual
-  //         Audio.RecordingOptionsPresets.HIGH_QUALITY //higher qual
-  //       );
-
-  //       setRecording(recording);
-  //     } else {
-  //       setMessage("Please grant permission to app to access microphone");
-  //     }
-  //   } catch (err) {
-  //     console.error('Failed to start recording', err);
-  //   }
-  // }
-
-  // async function stopRecording() {
-  //   setRecording(undefined);
-  //   await recording.stopAndUnloadAsync();
-
-  //   let updatedRecordings = [...recordings];
-  //   const { sound, status } = await recording.createNewLoadedSoundAsync();
-  //   updatedRecordings.push({
-  //     sound: sound,
-  //     duration: getDurationFormatted(status.durationMillis),
-  //     file: recording.getURI()
-  //   });
-
-  //   setRecordings(updatedRecordings);
-  // }
-
-  // function getDurationFormatted(millis) {
-  //   const minutes = millis / 1000 / 60;
-  //   const minutesDisplay = Math.floor(minutes);
-  //   const seconds = Math.round((minutes - minutesDisplay) * 60);
-  //   const secondsDisplay = seconds < 10 ? `0${seconds}` : seconds;
-  //   return `${minutesDisplay}:${secondsDisplay}`;
-  // }
-
-  // function getRecordingLines() {
-  //   return recordings.map((recordingLine, index) => {
-  //     return (
-  //       <View key={index} style={styles.row}>
-  //         <Text style={styles.fill}>Recording {index + 1} - {recordingLine.duration}</Text>
-  //         <Button style={styles.button} onPress={() => recordingLine.sound.replayAsync()} title="Play"></Button>
-  //         <Button style={styles.button} onPress={() => Sharing.shareAsync(recordingLine.file)} title="Share"></Button>
-  //         <Button style={styles.button}  title="Add"></Button>
-  //       </View>
-        
-  //     );
-  //   });
-  // }
-
+  
   useEffect(() => {
     //used for fetching the dictionary data from the firestore
     const unsubscribe = navigation.addListener("focus", () => {
@@ -200,10 +136,10 @@ function ContributionWord({ currentUser, navigation, route }) {
     });
     // Alert.alert("Audio File", result.name);
 
-    console.log(result);
+    
     if (result.type === "success") {
       setAudio(result);
-      // console.log(result);
+      
     } else {
       alert("Something went wrong!");
     }
@@ -223,7 +159,7 @@ function ContributionWord({ currentUser, navigation, route }) {
     const childPath = `audio/${
       firebase.auth().currentUser.uid
     }/${Math.random().toString(36)}`;
-    console.log(childPath);
+    
     const uri = FileSystem.documentDirectory + audio.name;
 
     await FileSystem.copyAsync({
@@ -238,7 +174,7 @@ function ContributionWord({ currentUser, navigation, route }) {
 
     const taskProgress = (snapshot) => {
       setLoading((snapshot.bytesTransferred / audio?.size) * 100);
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
+      
     };
 
     const taskCompleted = () => {
@@ -251,14 +187,14 @@ function ContributionWord({ currentUser, navigation, route }) {
           savePostData(snapshot);
         }
         setLoading(null);
-        console.log(snapshot);
+        
       });
     };
 
     const taskError = (snapshot) => {
       setLoading(null);
       alert(snapshot);
-      console.log(snapshot);
+      
     };
 
     task.on("state_changed", taskProgress, taskError, taskCompleted);

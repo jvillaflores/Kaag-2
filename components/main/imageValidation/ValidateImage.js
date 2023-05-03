@@ -29,9 +29,7 @@ function ValidateImage({ route, navigation, currentUser, }) {
   const { data } = route?.params ?? {};
   const { language } = route?.params ?? {};
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
-  console.log(language);
-  console.log(data?.id);
-  console.log(data?.title)
+  
   const Reject = () => {
     setLoadingDecline(true);
     DeclineImage();

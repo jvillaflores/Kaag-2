@@ -43,7 +43,7 @@ const EditQuestionsList = ({route, navigation, language, data}) => {
           setDatalist(masterDataSource);
           setFilteredDataSource(masterDataSource);
           setMasterDataSource(masterDataSource);
-          console.log(masterDataSource);
+          
         });
     });
 

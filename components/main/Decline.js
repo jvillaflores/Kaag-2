@@ -27,8 +27,7 @@ function Decline({ route, navigation, currentUser }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
   const { language } = route?.params ?? {};
-  console.log(language);
-  console.log(data?.id);
+  
   const Reject = () => {
     setLoading(true);
     rejectDictionaryAll();

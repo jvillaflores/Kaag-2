@@ -89,8 +89,7 @@ import {
   const EditAddQuestion = ({ navigation, route }) => {
     const { language } = route.params;
     const { data } = route.params;
-    console.log(language);
-    console.log(data?.id);
+    
   
     const [currentQuizId, setcurrentQuizId] = useState(
       data?.id
