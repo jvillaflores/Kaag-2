@@ -34,6 +34,7 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [classification, setClassification] = useState("");
   const [originated, setOrigination] = useState("");
   const [englishMeaning, setEnglishMeaning] = useState("");
+  const [englishWord, setEnglishWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [pronunciation, setPronunciation] = useState("");
   const [audio, setAudio] = useState(null);
@@ -91,6 +92,9 @@ function ContributionWord({ currentUser, navigation, route }) {
   const clearEnglishMeaning = (val) => {
     setEnglishMeaning("");
   };
+  const clearEnglishWord = (val) => {
+    setEnglishWord("");
+  };
 
   const clearMeaning = (val) => {
     setMeaning("");
@@ -112,6 +116,7 @@ function ContributionWord({ currentUser, navigation, route }) {
   const filteredSentence = Capitalize(sentence);
   const filteredClassification = Capitalize(classification);
   const filteredEnglishMeaning = Capitalize(englishMeaning);
+  const filteredEnglishWord = Capitalize(englishWord);
   const filteredMeaning = Capitalize(meaning);
   const filteredPronunciation = Capitalize(pronunciation);
 
@@ -124,6 +129,7 @@ function ContributionWord({ currentUser, navigation, route }) {
         originated,
         pronunciation,
         englishMeaning,
+        englishWord,
         meaning,
         audio,
       },
@@ -153,6 +159,7 @@ function ContributionWord({ currentUser, navigation, route }) {
       pronunciation: { required: true },
       sentence: { required: true },
       englishMeaning: { required: true },
+      englishWord: { required: true },
       meaning: { required: true },
       audio: { required: true },
     });
@@ -222,6 +229,7 @@ function ContributionWord({ currentUser, navigation, route }) {
         pronunciation: filteredPronunciation,
         sentence: filteredSentence,
         englishMeaning: filteredEnglishMeaning,
+        englishWord: filteredEnglishWord,
         meaning: filteredMeaning,
         status: "0",
         upload: "1",
@@ -237,6 +245,7 @@ function ContributionWord({ currentUser, navigation, route }) {
         clearFilipino(filipino);
         clearSentence(sentence);
         clearEnglishMeaning(englishMeaning);
+        clearEnglishWord(englishWord);
         clearMeaning(meaning);
         clearPronunciation(pronunciation);
         clearAudio(audio);
@@ -264,6 +273,7 @@ function ContributionWord({ currentUser, navigation, route }) {
         pronunciation: filteredPronunciation,
         sentence: filteredSentence,
         englishMeaning: filteredEnglishMeaning,
+        englishWord: filteredEnglishWord,
         meaning: filteredMeaning,
         status: "0",
         upload: "1",
@@ -280,6 +290,7 @@ function ContributionWord({ currentUser, navigation, route }) {
         clearFilipino(filipino);
         clearSentence(sentence);
         clearEnglishMeaning(englishMeaning);
+        clearEnglishWord(englishWord);
         clearMeaning(meaning);
         clearPronunciation(pronunciation);
         clearAudio(audio);
@@ -412,11 +423,11 @@ function ContributionWord({ currentUser, navigation, route }) {
             {/* Specific Language Meaning */}
             <View style={styles.paddingLeft}>
               <Text style={styles.title_text}>
-                Specific Language Definition
+                Bisaya Definition
                 <Text style={{ color: "red" }}>*</Text>
               </Text>
               <Text style={styles.guidelines}>
-                Define the word you have suggested in specific language.
+                Define the word you have suggested in Bisaya.
               </Text>
               {isFieldInError("meaning") &&
                 getErrorsInField("meaning").map((errorMessage) => (
@@ -506,12 +517,33 @@ function ContributionWord({ currentUser, navigation, route }) {
                 onChangeText={(filipino) => setFilipino(filipino)}
               />
             </View>
-
+            
+            {/* Filipino Definition */}
+            <View style={styles.paddingLeft}>
+              <Text style={styles.title_text}>English Word</Text>
+              <Text style={styles.guidelines}>
+                Translation of the word in English.
+              </Text>
+              {isFieldInError("englishWord") &&
+                getErrorsInField("englishWord").map((errorMessage) => (
+                  <Text style={{ color: "red" }}>
+                    Please translate in English.
+                  </Text>
+                ))}
+              <TextInput
+                style={styles.description_input}
+                multiline={true}
+                value={englishWord}
+                onChangeText={(englishWord) =>
+                  setEnglishWord(englishWord)
+                }
+              />
+            </View>
             {/* Filipino Definition */}
             <View style={styles.paddingLeft}>
               <Text style={styles.title_text}>English Definition</Text>
               <Text style={styles.guidelines}>
-                Define the word you have suggested in Filipino.
+                Define the word you have suggested in English.
               </Text>
               {isFieldInError("englishMeaning") &&
                 getErrorsInField("englishMeaning").map((errorMessage) => (

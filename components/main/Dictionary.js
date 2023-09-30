@@ -52,8 +52,7 @@ function Dictionary({ route, navigation }) {
         .collection("languages")
         .doc(language)
         .collection("dictionary")
-        .orderBy("word","asc")
-        
+        .orderBy("englishWord","asc")
         .where("status", "==", "1")
         //add new index so it will limit by status=1
         //filtering all of the data from the cloud and only accepting status == 1, meaning only the accepted words
@@ -63,11 +62,13 @@ function Dictionary({ route, navigation }) {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
+          
           });
           //Preparing the states for the searchFilterFunction
           setDatalist(masterDataSource);
           setFilteredDataSource(masterDataSource);
           setMasterDataSource(masterDataSource);
+          
         });
     });
 
@@ -80,15 +81,28 @@ function Dictionary({ route, navigation }) {
       // Inserted text is not blank
       // Filter the masterDataSource
       // Update FilteredDataSource
-      const newData = masterDataSource.filter(function (item) {
-        const itemData = `${
-          item.word ? item.word.toUpperCase() : "".toUpperCase()
-        }`;
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
+      const newData = masterDataSource.filter((item) =>
+     
+        // const itemData = `${
+        //    text  ? item.word.toUpperCase() && item.englishMeaning.toUpperCase() :  "".toUpperCase() 
+        // }`;
+        
+        // // const itemDataFilipino = `${
+        // //   item ? item.filipino.toUpperCase() : "".toUpperCase()
+        // // }`;
+        // const textData = text.toUpperCase();
+        //   return itemData.indexOf(textData) > -1;
+      //  item.word.toUpperCase().includes(text.toUpperCase())
+      //  || 
+      item.englishWord.toUpperCase().startsWith(text.toUpperCase())
+      || item.word.toUpperCase().startsWith(text.toUpperCase()) 
+       
+       
+      ); 
+      
       setFilteredDataSource(newData);
       setSearch(text);
+      
     } else {
       // Inserted text is blank
       // Update FilteredDataSource with masterDataSource
@@ -118,17 +132,19 @@ function Dictionary({ route, navigation }) {
         data={filteredDataSource}
         style={{ flex: 1 }}
         renderItem={({ item }) => {
+          
           return (
             <TouchableOpacity
               style={styles.container}
               onPress={() => navigation.navigate("Word", { data: item })}
             >
+            
               <View style={styles.bodycontainer}>
-                <Text style={styles.inKagan}>{item.word.toLowerCase()} </Text>
+                <Text style={styles.inKagan}>{item.englishWord.toLowerCase()} </Text>
                 <Text style={styles.inFilipino}>
-                  {item.filipino} (in filipino)
+                  {item.filipino}
                 </Text>
-                <Text style={styles.meaning}>{item.meaning}</Text>
+                <Text style={styles.meaning}>{item.word} </Text>
               </View>
             </TouchableOpacity>
           );
@@ -208,12 +224,12 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   inFilipino: {
-    fontSize: 11,
+    fontSize: 13,
     color: "#215a88",
     fontStyle: "italic",
   },
   meaning: {
-    fontSize: 13,
+    fontSize: 15,
     letterSpacing: 0.25,
     color: "black",
     textAlign: "justify",

@@ -34,6 +34,7 @@ function Validation({ currentUser, route, navigation }) {
   const [audio, setAudio] = useState(null);
   const [classification, setClassification] = useState(data?.classification);
   const [englishMeaning, setEnglishMeaning] = useState(data?.englishMeaning);
+  const [englishWord, setEnglishWord] = useState(data?.englishWord);
   const [meaning, setMeaning] = useState(data?.meaning);
   const [pronunciation, setPronunciation] = useState(data?.pronunciation);
   const { language } = route?.params ?? {};
@@ -135,6 +136,7 @@ function Validation({ currentUser, route, navigation }) {
         sentence,
         pronunciation,
         englishMeaning,
+        englishWord,
         meaning,
       })
       .then((result) => {
@@ -162,6 +164,7 @@ function Validation({ currentUser, route, navigation }) {
         sentence,
         pronunciation,
         englishMeaning,
+        englishWord,
         meaning,
         downloadURL,
       })
@@ -189,7 +192,7 @@ function Validation({ currentUser, route, navigation }) {
         </View>
 
         <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Specific Language Definition</Text>
+          <Text style={styles.title_text}>Bisaya Definition</Text>
 
           <TextInput
             style={styles.input}
@@ -268,6 +271,16 @@ function Validation({ currentUser, route, navigation }) {
             value={filipino}
             multiline={true}
             onChangeText={(filipino) => setFilipino(filipino)}
+          />
+        </View>
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>English Word </Text>
+
+          <TextInput
+            style={styles.input}
+            value={englishWord}
+            multiline={true}
+            onChangeText={(englishWord) => setEnglishWord(englishWord)}
           />
         </View>
 
