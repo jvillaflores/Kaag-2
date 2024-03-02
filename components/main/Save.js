@@ -30,7 +30,7 @@ function Save({ currentUser, route, navigation }) {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(null);
   const { language } = route?.params ?? {};
-  console.log(language);
+  
 
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
