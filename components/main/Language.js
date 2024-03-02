@@ -7,6 +7,7 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Alert
 } from "react-native";
 
 import firebase from "firebase";
@@ -18,6 +19,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Audio } from "expo-av";
 import { Sound } from "expo-av/build/Audio";
+import NetInfo from '@react-native-community/netinfo';
 
 var head = require("../../assets/learning.svg");
 
@@ -28,7 +30,7 @@ function Language({ navigation }) {
   const [filteredDataSource, setFilteredDataSource] = useState("");
   const [masterDataSource, setMasterDataSource] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const [isConnected, setIsConnected] = useState(true);
   useEffect(() => {
     //Service to get the data from the server to render
     // Fetch the data that are being stored in the languages
@@ -55,6 +57,26 @@ function Language({ navigation }) {
 
     return unsubscribe;
   }, [navigation]);
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+      if (!state.isConnected) {
+        Alert.alert(
+          'Connection Lost',
+          'Please check your internet connection.',
+          [
+            {
+              text: 'OK',
+            },
+          ]
+        );
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank

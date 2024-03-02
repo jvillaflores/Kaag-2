@@ -50,18 +50,22 @@ export class Main extends Component {
 
     return (
       <Tab.Navigator
-        initialRouteName="Course"
-        labeled={false}
+        initialRouteName="Home"
+        
         activeColor="#215A88"
         inactiveColor="#B2B2B2"
         barStyle={{ backgroundColor: "#f2f2f2" }}
+        tabBarOptions={{
+          showLabel: true, // This option always shows labels
+          
+        }}
       >
         <Tab.Screen
-          name="Course"
+          name="Home"
           listeners={({ navigation }) => ({
             tabPress: (event) => {
               event.preventDefault();
-              navigation.navigate("Course", { language: language });
+              navigation.navigate("Home", { language: language });
             },
           })}
           options={{
@@ -89,6 +93,7 @@ export class Main extends Component {
                 size={26}
               />
             ),
+            tabBarLabel: 'Dictionary'
           }}
         />
         <Tab.Screen
@@ -112,14 +117,14 @@ export class Main extends Component {
           }}
         />
         <Tab.Screen
-          name="Consent"
+          name="Contribute"
           component={Consent}
           //navigation = {this.props.navigation}
           //to pass along the props inside it and make it easier the logic from the profile screen perspective
           listeners={({ navigation }) => ({
             tabPress: (event) => {
               event.preventDefault();
-              navigation.navigate("Consent", {
+              navigation.navigate("Contribute", {
                 language: language,
               });
             },

@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Camera } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
+import * as ImageManipulator from 'expo-image-manipulator';
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -60,11 +61,16 @@ export default function Contribution({ navigation, route }) {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [1, 1],
-      quality: 0.5,
+      quality: 0.7,
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      const compressedImage = await ImageManipulator.manipulateAsync(
+        result.uri,
+        [{ resize: { width: 800 } }],
+        { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
+      );
+      setImage(compressedImage.uri);
     }
   };
 

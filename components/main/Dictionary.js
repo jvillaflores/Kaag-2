@@ -7,6 +7,7 @@ import {
   Pressable,
   TextInput,
   FlatList,
+  Alert
 } from "react-native";
 
 import firebase from "firebase";
@@ -15,8 +16,10 @@ require("firebase/firebase-storage");
 import { NavigationContainer } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Audio } from "expo-av";
-import { Sound } from "expo-av/build/Audio";
+import Checkbox from "expo-checkbox";
+// import { Audio } from "expo-av";
+// import { Sound } from "expo-av/build/Audio";
+import NetInfo from '@react-native-community/netinfo';
 
 var head = require("../../assets/learning.svg");
 
@@ -26,6 +29,10 @@ function Dictionary({ route, navigation }) {
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState("");
   const [masterDataSource, setMasterDataSource] = useState("");
+  const [toggleCheckBox, setToggleCheckBox] = useState(true);
+  const [toggleCheckBox1, setToggleCheckBox1] = useState(false);
+  const [toggleCheckBox2, setToggleCheckBox2] = useState(false);
+  const [isConnected, setIsConnected] = useState(true);
   const [loading, setLoading] = useState(false);
   const { language } = route?.params ?? {};
 
@@ -75,35 +82,129 @@ function Dictionary({ route, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+      if (!state.isConnected) {
+        Alert.alert(
+          'Connection Lost',
+          'Please check your internet connection.',
+          [
+            {
+              text: 'OK',
+            },
+          ]
+        );
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  
+
+  const handleCheckboxChange = () => {
+    // Perform the first action when the checkbox is toggled
+    // For example, you can update the state or perform some other operation.
+    // In this example, we're just toggling the checkbox state.
+    setToggleCheckBox(true);
+    setToggleCheckBox1(false);
+    setToggleCheckBox2(false);
+  }
+  const handleCheckboxChange1 = () => {
+    // Perform the first action when the checkbox is toggled
+    // For example, you can update the state or perform some other operation.
+    // In this example, we're just toggling the checkbox state.
+    setToggleCheckBox1(true);
+    setToggleCheckBox(false);
+    setToggleCheckBox2(false);
+  }
+  const handleCheckboxChange2 = () => {
+    // Perform the first action when the checkbox is toggled
+    // For example, you can update the state or perform some other operation.
+    // In this example, we're just toggling the checkbox state.
+    setToggleCheckBox2(true);
+    setToggleCheckBox1(false);
+    setToggleCheckBox(false);
+  }
+
   const searchFilterFunction = (text) => {
     // Check if searched text is not blank
-    if (text) {
+    if (text && toggleCheckBox == true) {
       // Inserted text is not blank
       // Filter the masterDataSource
       // Update FilteredDataSource
+      
+    
       const newData = masterDataSource.filter((item) =>
-     
-        // const itemData = `${
-        //    text  ? item.word.toUpperCase() && item.englishMeaning.toUpperCase() :  "".toUpperCase() 
-        // }`;
-        
-        // // const itemDataFilipino = `${
-        // //   item ? item.filipino.toUpperCase() : "".toUpperCase()
-        // // }`;
-        // const textData = text.toUpperCase();
-        //   return itemData.indexOf(textData) > -1;
-      //  item.word.toUpperCase().includes(text.toUpperCase())
-      //  || 
-      item.englishWord.toUpperCase().startsWith(text.toUpperCase())
-      || item.word.toUpperCase().startsWith(text.toUpperCase()) 
-       
+      
+        item.englishWord.toUpperCase().startsWith(text.toUpperCase()) || item.word.toUpperCase().startsWith(text.toUpperCase()) 
+      
+      // else if (toggleCheckBox1 == true){
+      //   item.englishWord.toUpperCase().startsWith(text.toUpperCase()) 
+      // }
+      // else if (toggleCheckBox2 == true){
+      //    item.word.toUpperCase().startsWith(text.toUpperCase()) 
+      // }
+      
+    
        
       ); 
       
       setFilteredDataSource(newData);
       setSearch(text);
       
-    } else {
+    } 
+    else if (text && toggleCheckBox1 == true) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      setToggleCheckBox(false);
+      setToggleCheckBox2(false);
+      const newData = masterDataSource.filter((item) =>
+      
+        item.englishWord.toUpperCase().startsWith(text.toUpperCase())  
+      
+      // else if (toggleCheckBox1 == true){
+      //   item.englishWord.toUpperCase().startsWith(text.toUpperCase()) 
+      // }
+      // else if (toggleCheckBox2 == true){
+      //    item.word.toUpperCase().startsWith(text.toUpperCase()) 
+      // }
+      
+    
+       
+      ); 
+      
+      setFilteredDataSource(newData);
+      setSearch(text);
+      
+    } 
+    else if (text && toggleCheckBox2 == true) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter((item) =>
+      
+        item.word.toUpperCase().startsWith(text.toUpperCase())  
+      
+      // else if (toggleCheckBox1 == true){
+      //   item.englishWord.toUpperCase().startsWith(text.toUpperCase()) 
+      // }
+      // else if (toggleCheckBox2 == true){
+      //    item.word.toUpperCase().startsWith(text.toUpperCase()) 
+      // }
+      
+    
+       
+      ); 
+      
+      setFilteredDataSource(newData);
+      setSearch(text);
+      
+    } 
+    else {
       // Inserted text is blank
       // Update FilteredDataSource with masterDataSource
       setFilteredDataSource(masterDataSource);
@@ -122,6 +223,47 @@ function Dictionary({ route, navigation }) {
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
           ></TextInput>
+            <View style={styles.checkboxContainer1}>
+              <View style={styles.checkBoxCont}>
+                  <Checkbox
+                    style={styles.checkbox}
+                    value={toggleCheckBox}
+                    onValueChange={handleCheckboxChange}
+                    color={toggleCheckBox ? "#215a88" : undefined}
+                  />
+                  <Text style={styles.guidelines}>
+                    
+                    All
+                  </Text>
+              </View>
+              <View style={styles.checkBoxCont}>
+                  <Checkbox
+                    style={styles.checkbox}
+                    value={toggleCheckBox1}
+                    onValueChange={handleCheckboxChange1}
+                    color={toggleCheckBox1 ? "#215a88" : undefined}
+                  />
+                  <Text style={styles.guidelines}>
+                    
+                    English
+                  </Text>
+              </View>
+              
+              <View style={styles.checkBoxCont}>
+                  <Checkbox
+                    style={styles.checkbox}
+                    value={toggleCheckBox2}
+                    onValueChange={handleCheckboxChange2}
+                    color={toggleCheckBox2 ? "#215a88" : undefined}
+                  />
+                  <Text style={styles.guidelines}>
+                    
+                    {language}
+                  </Text>
+              </View>
+              
+              
+            </View>
         </View>
       </View>
       <FlatList
@@ -129,6 +271,11 @@ function Dictionary({ route, navigation }) {
         keyExtractor={(item, index) => index.toString()}
         numColumns={1}
         horizontal={false}
+        maxToRenderPerBatch={10}
+        initialNumToRender={10}
+        updateCellsBatchingPeriod={50}
+        windowSize={10}
+        removeClippedSubviews={true}
         data={filteredDataSource}
         style={{ flex: 1 }}
         renderItem={({ item }) => {
@@ -234,4 +381,30 @@ const styles = StyleSheet.create({
     color: "black",
     textAlign: "justify",
   },
+  checkBoxCont: {
+    flexDirection: "row",
+  },
+  checkboxContainer1: {
+    // flex:1,
+    flexDirection: "row",
+    // marginVertical: 10,
+    // alignItems:"center",
+    // marginRight: 50,
+    // paddingRight: 90,
+    // justifyContent: "flex-start",
+    // marginTop: -2,
+    
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    color: "#ffffff",
+  },
+  guidelines: {
+    fontSize: 15,
+    fontStyle: "bold",
+    color: "#ffffff",
+    paddingLeft: 5,
+    paddingRight:  30,
+  }
 });

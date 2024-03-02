@@ -130,6 +130,10 @@ function Feed({ navigation, route, language, currentUser }) {
       numColumns={1}
       horizontal={false}
       data={datalist}
+      maxToRenderPerBatch={10}
+        initialNumToRender={10}
+        updateCellsBatchingPeriod={50}
+        windowSize={10}
       style={{ flex: 1 }}
       ItemSeparatorComponent={separator}
       renderItem={ItemView}

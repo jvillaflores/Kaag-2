@@ -141,6 +141,10 @@ function VWPend({ navigation, language }) {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={datalist}
+        maxToRenderPerBatch={10}
+        initialNumToRender={10}
+        updateCellsBatchingPeriod={50}
+        windowSize={10}
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}

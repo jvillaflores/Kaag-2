@@ -184,6 +184,10 @@ function VWAll({ navigation, language }) {
       </View>
       <FlatList
         data={filteredDataSource}
+        maxToRenderPerBatch={10}
+        initialNumToRender={10}
+        updateCellsBatchingPeriod={50}
+        windowSize={10}
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}

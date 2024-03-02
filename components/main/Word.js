@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   View,
   Text,
@@ -21,22 +21,58 @@ var head = require("../../assets/learning.svg");
 
 const Word = ({ route }) => {
   const { data } = route?.params ?? {};
+  const soundObject = new Audio.Sound();
   const downloadAudio = async () => {
     //function for playing the audio of the dictionary data
-    let SoundObject = new Audio.Sound();
-    try {
-      await SoundObject.loadAsync({ uri: data.downloadURL });
-      const status = await SoundObject.playAsync();
-      setTimeout(() => {
-        SoundObject.unloadAsync();
-      }, status.playableDurationMillis + 1000);
-    } catch (error) {
-      console.log(error);
-      await SoundObject.unloadAsync(); // Unload any sound loaded
-      SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
-      retryPlaySound();
-    }
+    // let SoundObject = new Audio.Sound();
+    // try {
+    //   await SoundObject.loadAsync({ uri: data.downloadURL });
+    //   const status = await SoundObject.playAsync();
+    //   setTimeout(() => {
+    //     SoundObject.unloadAsync();
+    //   }, status.playableDurationMillis + 1000);
+    // } catch (error) {
+    //   console.log(error);
+    //   await SoundObject.unloadAsync(); // Unload any sound loaded
+    //   SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+    //   retryPlaySound();
+    // }
+    
   };
+ 
+    const playSoundWithDelay = async () => {
+      // Create a new instance of Audio.Sound
+
+      try {
+        // Load the sound file (replace 'soundfile.mp3' with your actual sound file)
+        const unload = await soundObject.unloadAsync();
+        await soundObject.loadAsync({uri:data.downloadURL});
+  
+        // Set the delay (in milliseconds) before playing the sound (e.g., 2000ms for 2 seconds)
+        const delayMillis = 2000;
+  
+        // Wait for the specified delay before playing the sound
+        await new Promise(resolve => setTimeout(resolve, delayMillis));
+  
+        // Play the loaded sound
+        await soundObject.playAsync();
+
+       
+      } catch (error) {
+        console.error('Error loading or playing the sound', error);
+      }
+    };
+  
+    useEffect(() => {
+      // Clean up the audio player when the component unmounts
+      return () => {
+        soundObject.unloadAsync();
+      };
+    }, []);
+  
+  
+    
+  
 
   const retryPlaySound = () => downloadAudio();
 
@@ -49,7 +85,7 @@ const Word = ({ route }) => {
           
           <TouchableOpacity
             style={styles.buttonAudio}
-            onPress={() => downloadAudio()}
+            onPress={() => playSoundWithDelay()}
           >
             <View>
               <MaterialCommunityIcons

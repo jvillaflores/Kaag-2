@@ -7,6 +7,7 @@ import {
   RefreshControl,
   ImageBackground,
   Pressable,
+  Alert
 } from "react-native";
 
 import { Title, TextInput, Text, TouchableRipple } from "react-native-paper";
@@ -24,6 +25,7 @@ import { Picker } from "@react-native-picker/picker";
 import Checkbox from "expo-checkbox";
 import { Audio } from 'expo-av';
 import * as Sharing from 'expo-sharing';
+import NetInfo from '@react-native-community/netinfo';
 
 
 function ContributionWord({ currentUser, navigation, route }) {
@@ -37,6 +39,7 @@ function ContributionWord({ currentUser, navigation, route }) {
   const [englishWord, setEnglishWord] = useState("");
   const [meaning, setMeaning] = useState("");
   const [pronunciation, setPronunciation] = useState("");
+  const [isConnected, setIsConnected] = useState(true);
   const [audio, setAudio] = useState(null);
   const [loading, setLoading] = useState(null);
   const [wordID, setWordID] = useState(makeid());
@@ -67,6 +70,28 @@ function ContributionWord({ currentUser, navigation, route }) {
 
     return unsubscribe;
   }, [navigation]);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+      if (!state.isConnected) {
+        Alert.alert(
+          'Connection Lost',
+          'Please check your internet connection.',
+          [
+            {
+              text: 'OK',
+            },
+          ]
+        );
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   function makeid() {
     var randomText = "";
     var possible =

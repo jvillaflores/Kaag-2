@@ -134,6 +134,10 @@ function MContriAll({ navigation, language }) {
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
+        maxToRenderPerBatch={10}
+        initialNumToRender={10}
+        updateCellsBatchingPeriod={50}
+        windowSize={10}
         ItemSeparatorComponent={separator}
         refreshControl={
           <RefreshControl
